@@ -92,7 +92,18 @@ static inline uint8_t char_to_color(char c) {
 }
 
 void parse_cube(Cube* restrict cube_arr, const char* cube_string) {
+   if (cube_string == NULL) {
+      fprintf(stderr, "\nERROR %d: Cube string is NULL\n", ERR_INVALID_CUBE);
+      exit(ERR_INVALID_CUBE);
+   }
+
+   if (strlen(cube_string) != CUBE_STR_LEN) {
+      fprintf(stderr, "\nERROR %d: Cube string must have exactly %d chars\n", ERR_INVALID_CUBE, CUBE_STR_LEN);
+      exit(ERR_INVALID_CUBE);
+   }
+   
    char c;
+   uint64_t color;
    uint8_t face_size = 9;
    face_t face = 0;
 
@@ -101,7 +112,13 @@ void parse_cube(Cube* restrict cube_arr, const char* cube_string) {
       for(uint8_t i=0; i<8;i++) {                  //  o meu ring só tem 8, fazer match da string no meu modelo
                                                    //  index da string face face ao displacement
          c = cube_string[map[i]+(j*face_size)];    //  vai buscar o index na string correspondente ao index do meu ring
-
+         color = (uint64_t)char_to_color(c);
+         
+         if (color == UINT8_MAX) {
+            fprintf(stderr, "\nERROR %d: Invalid cube char '%c' at position %d\n", ERR_INVALID_CUBE, c, i);
+            exit(ERR_INVALID_CUBE);
+         }
+         
          face |= ((uint64_t)char_to_color(c) << ((7-i)*8));
       }
       cube_arr[0].f[face_order[j]] = face;
@@ -188,9 +205,9 @@ int8_t get_corner_validity(const Cube* c) {
       get_corner(c,i,col);
 
       //parity check
-      if(col[0]!=cube_orientation[UP]&&col[0]!=cube_orientation[DOWN]) {//0 this case would be 0
+      if((col[0]!=cube_orientation[UP]) & (col[0]!=cube_orientation[DOWN])) {//0 this case would be 0
 
-         if(col[1]==cube_orientation[UP] || col[1]==cube_orientation[DOWN]) //Back|FRONT is yellow or white
+         if((col[1]==cube_orientation[UP]) | (col[1]==cube_orientation[DOWN])) //Back|FRONT is yellow or white
                   corner_ori+= map_ori[map_corner_ori[i]][0];
          }
          else{   //Left|Right is yellow or white
@@ -228,11 +245,11 @@ uint8_t get_edge_validity(const Cube* c) {
       get_edge(c,i,col);
 
       //parity check
-      if(col[0]==cube_orientation[UP] || col[0]==cube_orientation[DOWN]) {
+      if((col[0]==cube_orientation[UP]) | (col[0]==cube_orientation[DOWN])) {
                edge_ori++;
       }
-      else if(col[0]==cube_orientation[LEFT] || col[0]==cube_orientation[RIGHT]){
-         if(col[1]!=cube_orientation[UP]&&col[1]!=cube_orientation[DOWN]) {
+      else if(col[0]==cube_orientation[LEFT] | col[0]==cube_orientation[RIGHT]){
+         if((col[1]!=cube_orientation[UP]) & (col[1]!=cube_orientation[DOWN])) {
                edge_ori++;
          }
       }
@@ -281,7 +298,7 @@ uint8_t valid_cube_config(const Cube* c) {
       printf("------------------------------------ Checking Cube Configuration ------------------------------------\n");
    #endif
     // Fail fast: every invariant must pass for config to be trusted.
-   return validate_colors(c) && edge_parity(c) && corner_parity(c) && permutations(c);
+   return validate_colors(c) & edge_parity(c) & corner_parity(c) & permutations(c);
 }
 
 // ------------------------ ROTATE CUBE ------------------------
@@ -291,7 +308,7 @@ void rotate_x(Cube* restrict cube_arr, uint8_t new_top) {
    uint8_t new_front[] = {DOWN,UP};
 
    int8_t i = new_top == FRONT ? 0 : new_top == BACK? 1 : -1;
-   if(i==-1 || cube_orientation[new_top] == cube_orientation[UP] ) return; //Safe
+   if(i==-1 | cube_orientation[new_top] == cube_orientation[UP] ) return; //Safe
    uint8_t old_back = cube_orientation[BACK];
 
    cube_orientation = ORIENTATION_LUT[cube_orientation[new_top]][cube_orientation[new_front[i]]];
@@ -307,7 +324,7 @@ void rotate_x(Cube* restrict cube_arr, uint8_t new_top) {
 void rotate_z(Cube* restrict cube_arr, uint8_t new_top) {
 
    int8_t i = new_top==RIGHT ? 0 : new_top == LEFT? 1 : new_top == DOWN ? 2 : -1;
-   if((i==-1) || cube_orientation[new_top] == cube_orientation[UP]) return; //SAFE
+   if((i==-1) | (cube_orientation[new_top] == cube_orientation[UP])) return; //SAFE
 
    cube_orientation = ORIENTATION_LUT[cube_orientation[new_top]][cube_orientation[FRONT]];
       
@@ -324,7 +341,7 @@ void rotate_y(Cube* restrict cube_arr, uint8_t new_front) {
 
    int8_t i = new_front==RIGHT ? 0 : new_front == LEFT? 1 : new_front == BACK ? 2 : -1;
 
-   if((i==-1) || cube_orientation[new_front] == cube_orientation[FRONT]) return; //SAFE
+   if((i==-1) | (cube_orientation[new_front] == cube_orientation[FRONT])) return; //SAFE
    
    cube_orientation = ORIENTATION_LUT[cube_orientation[UP]][cube_orientation[new_front]];
    
@@ -415,7 +432,7 @@ void apply_alg(Cube* restrict c, Solution* sol, const char* alg){
       for(uint8_t k=0;k<times;k++)
          move = apply_move(c,m);
       
-      if(sol!=NULL && move!=UINT8_MAX){ //if it's just the work cube we don't want to record any of its moves
+      if((sol!=NULL) & (move!=UINT8_MAX)){ //if it's just the work cube we don't want to record any of its moves
          if(move<ROT_RIGHT) {
                move = move*3+(times-1);
          }

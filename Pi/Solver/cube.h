@@ -29,13 +29,13 @@ static inline void unpack3(face_t *f,uint8_t a,uint8_t b,uint8_t c,face_t v){
 // i numero de rotações, 1-90 2-180 3-270 4-360(identidade)
 /* Rotate face value right/left by (16 * i) bit positions. i must be in [1, 3]. */
 static inline face_t rot_cw(face_t f, uint8_t i) {
-    assert(i >= 1 && i <= 3);
+    assert((i >= 1) & (i <= 3));
     uint16_t shift = 16u * i;
     return (f >> shift) | (f << (64u - shift));
 }
 
 static inline face_t rot_ccw(face_t f, uint8_t i) {
-    assert(i >= 1 && i <= 3);
+    assert((i >= 1) & (i <= 3));
     uint16_t shift = 16u * i;
     return (f << shift) | (f >> (64u - shift));
 }
@@ -96,12 +96,12 @@ static inline uint8_t piece_dest(const uint8_t* col, uint8_t size, uint8_t (*con
 
 static inline uint8_t condition_edge_align (const uint8_t* col,uint8_t i) {
     const Edge cur_edge = edges[i];
-    return (edge_has_color(col[0],col[1],cube_orientation[cur_edge.f[0]]) && edge_has_color(col[0],col[1],cube_orientation[cur_edge.f[1]]));
+    return (edge_has_color(col[0],col[1],cube_orientation[cur_edge.f[0]]) & edge_has_color(col[0],col[1],cube_orientation[cur_edge.f[1]]));
 }
 
 static inline uint8_t condition_corner_align (const uint8_t* col,uint8_t i) {
     const Corner cur_corner = corners[i];
-    return (corner_has_color(col[0],col[1],col[2],cube_orientation[cur_corner.f[0]]) && corner_has_color(col[0],col[1],col[2],cube_orientation[cur_corner.f[1]]) && corner_has_color(col[0],col[1],col[2],cube_orientation[cur_corner.f[2]]));
+    return (corner_has_color(col[0],col[1],col[2],cube_orientation[cur_corner.f[0]]) & corner_has_color(col[0],col[1],col[2],cube_orientation[cur_corner.f[1]]) & corner_has_color(col[0],col[1],col[2],cube_orientation[cur_corner.f[2]]));
 }
 
 static inline uint8_t condition_corner_flip(const uint8_t* col,uint8_t i) {

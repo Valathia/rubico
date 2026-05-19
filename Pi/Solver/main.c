@@ -13,15 +13,15 @@ int main(int argc, char** argv) {
     }
 
     #if TEST
-        char* scramble = argv[1];
-        char* cube_string = "UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB";
+        const char* scramble = argv[1];
+        const char* cube_string = "UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB";
         parse_cube(cube_arr,cube_string);
         #ifdef SOLVE
-                print_cube(&cube_arr[0]);
+            print_cube(&cube_arr[0]);
         #endif 
         apply_alg(cube_arr,NULL,scramble);
     #else 
-        char* cube_string = argv[1];
+        const char* cube_string = argv[1];
         parse_cube(cube_arr,cube_string);
     #endif
     

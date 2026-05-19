@@ -81,7 +81,7 @@ static inline uint8_t get_wrong_edge(const Cube* cube, EdgeSearchMode mode, sear
       const uint8_t ind1 = cube_orientation[edges[e].f[0]];
       const uint8_t ind2 = cube_orientation[edges[e].f[1]];
 
-      if ((c0 != ind1) || (c1 != ind2)) {
+      if ((c0 != ind1) | (c1 != ind2)) {
          out->col[0] = c0;
          out->col[1] = c1;
          out->ind    = e;
@@ -92,7 +92,7 @@ static inline uint8_t get_wrong_edge(const Cube* cube, EdgeSearchMode mode, sear
 }
 
 static inline uint8_t get_wrong_corner(const Cube* cube, uint8_t color, search_res* out) {
-   #pragma GCC unroll N_CORNERS
+   //#pragma GCC unroll N_CORNERS
    for(uint8_t i=0;i<N_CORNERS;i++){
       uint8_t col[3];
       get_corner(cube, i, col);
@@ -164,19 +164,19 @@ void align_edges_rotate_cube(Cube* restrict cube_arr,Solution* sol) {
       printf("Who is aligned ? %d %d %d %d | count: %d\n",whoaligned[0],whoaligned[1],whoaligned[2],whoaligned[3],count);
    #endif
    if(count==2) {
-      if(whoaligned[BACK]&&whoaligned[LEFT]) {
+      if(whoaligned[BACK]&whoaligned[LEFT]) {
          apply_alg(cube_arr,sol,ROT_Y_R); // Right to Front
          #if DEBUGSOLVE3RDROW
                printf("Rotating cube to move solved edges to back & right: MOVE_RIGHT_FRONT\n");
          #endif
       }
-      else if(whoaligned[FRONT]&&whoaligned[LEFT]) {
+      else if(whoaligned[FRONT]&whoaligned[LEFT]) {
          apply_alg(cube_arr,sol,ROT_Y_B); // Back to Front
          #if DEBUGSOLVE3RDROW
                printf("Rotating cube to move solved edges to back & right: MOVE_BACK_FRONT\n");
          #endif
       }
-      else if(whoaligned[FRONT]&&whoaligned[RIGHT]) {
+      else if(whoaligned[FRONT]&whoaligned[RIGHT]) {
          apply_alg(cube_arr,sol,ROT_Y_L); //Left to Front
          #if DEBUGSOLVE3RDROW
                printf("Rotating cube to move solved edges to back & right: MOVE_LEFT_FRONT\n");
@@ -215,7 +215,7 @@ uint8_t align_edges_max_edges(Cube* cube_arr){
    //#pragma GCC unroll ROT_SIZE
    for(int i=0; i<ROT_SIZE;i++) {
       aux = how_many(&work[0],COLOREDGES);
-      if((aux%2==0) && (aux>cur_max)) {
+      if((aux%2==0) & (aux>cur_max)) {
          if(aux==4) return i;
 
          cur_max = aux;
@@ -275,15 +275,15 @@ uint8_t flip_edges(Cube* restrict cube_arr,Solution* sol) {
    const uint8_t color = cube_orientation[UP];
 
    uint8_t i = 0;
-   while(i<MAX_RECURSION && !is3rdRowEdgeFlipped(cube_arr[0])) {
-      if (check(cube_arr[0].f[color],color,POS1) && check(cube_arr[0].f[color],color,POS5)) {
+   while((i<MAX_RECURSION) & (!is3rdRowEdgeFlipped(cube_arr[0]))) {
+      if (check(cube_arr[0].f[color],color,POS1) & check(cube_arr[0].f[color],color,POS5)) {
          apply_alg(cube_arr,sol,U);
          #if DEBUGFLIPEDGES
             printf("    \t\tCase Vertical line: Applied Alg %s \n",U);
          #endif
       }   //vertical line -> change to horizontal line
       
-      if (check(cube_arr[0].f[color],color,POS7) && check(cube_arr[0].f[color],color,POS3)) {
+      if (check(cube_arr[0].f[color],color,POS7) & check(cube_arr[0].f[color],color,POS3)) {
          apply_alg(cube_arr,sol,F R_ALG F_P);
          #if DEBUGFLIPEDGES
             printf("    \t\tCase Horizontal line: Applied Alg F %s F' \n",R_ALG);
@@ -292,24 +292,24 @@ uint8_t flip_edges(Cube* restrict cube_arr,Solution* sol) {
       }  //horizontal line -> flip edges
       
       //HOOK Case
-      if( (check(cube_arr[0].f[color],color,POS7) && check(cube_arr[0].f[color],color,POS5))||
-         (check(cube_arr[0].f[color],color,POS7) && check(cube_arr[0].f[color],color,POS1))||
-         (check(cube_arr[0].f[color],color,POS3) && check(cube_arr[0].f[color],color,POS1))||
-         (check(cube_arr[0].f[color],color,POS3) && check(cube_arr[0].f[color],color,POS5))) {
+      if( (check(cube_arr[0].f[color],color,POS7) & check(cube_arr[0].f[color],color,POS5))|
+         (check(cube_arr[0].f[color],color,POS7) & check(cube_arr[0].f[color],color,POS1))|
+         (check(cube_arr[0].f[color],color,POS3) & check(cube_arr[0].f[color],color,POS1))|
+         (check(cube_arr[0].f[color],color,POS3) & check(cube_arr[0].f[color],color,POS5))) {
          
-         if(check(cube_arr[0].f[color],color,POS7) && check(cube_arr[0].f[color],color,POS5)) {
+         if(check(cube_arr[0].f[color],color,POS7) & check(cube_arr[0].f[color],color,POS5)) {
             apply_alg(cube_arr,sol,U);
             #if DEBUGFLIPEDGES
                printf("    \t\tCase Hook: Applied Alg U \n");
             #endif
          }
-         else if(check(cube_arr[0].f[color],color,POS3) && check(cube_arr[0].f[color],color,POS1)) {
+         else if(check(cube_arr[0].f[color],color,POS3) & check(cube_arr[0].f[color],color,POS1)) {
             apply_alg(cube_arr,sol,U_P);
             #if DEBUGFLIPEDGES
                printf("    \t\tCase Hook: Applied Alg U' \n");
             #endif
          }
-         else if(check(cube_arr[0].f[color],color,POS3) && check(cube_arr[0].f[color],color,POS5)) {
+         else if(check(cube_arr[0].f[color],color,POS3) & check(cube_arr[0].f[color],color,POS5)) {
             apply_alg(cube_arr,sol,U2);
             #if DEBUGFLIPEDGES
                printf("    \t\tCase Hook: Applied Alg U2 \n");
@@ -368,7 +368,7 @@ uint8_t align_edges(Cube* restrict cube_arr,Solution* sol) {
    }
 
    
-   if(i==MAX_RECURSION && !is3rdRowEdgeAligned(cube_arr[0])) {
+   if((i==MAX_RECURSION) & (!is3rdRowEdgeAligned(cube_arr[0]))) {
       print_solution(*sol);
       fprintf(stderr,"\nERROR %d: 3rd Layer Alligning Edges Solving Attempts exceeded, something went wrong \n ",ERR_MAX_REC_EXCEEDED);
       exit(ERR_MAX_REC_EXCEEDED);
@@ -381,7 +381,7 @@ uint8_t align_edges(Cube* restrict cube_arr,Solution* sol) {
 uint8_t align_corners(Cube* restrict cube_arr,Solution* sol) {
    uint8_t i = 0;
 
-   while(!check_corner_alignment(&cube_arr[0],0,4) && i<MAX_RECURSION) {
+   while(!check_corner_alignment(&cube_arr[0],0,4) & (i<MAX_RECURSION)) {
       corners_FLU_corner(cube_arr,sol,condition_corner_align); //rotate cube so that FLU corner is a correctly placed corner
       #if DEBUGALIGNCORNERS
          printf("\tRotated Cube\n");
@@ -396,7 +396,7 @@ uint8_t align_corners(Cube* restrict cube_arr,Solution* sol) {
       i++;
    }
 
-   if(i==MAX_RECURSION && (!check_corner_alignment(&cube_arr[0],0,4))) {
+   if((i==MAX_RECURSION) & (!check_corner_alignment(&cube_arr[0],0,4))) {
       print_solution(*sol);
       fprintf(stderr,"\nERROR %d: 3rd Layer Alligning Corners Solving Attempts exceeded, something went wrong \n ", ERR_MAX_REC_EXCEEDED);
       exit(ERR_MAX_REC_EXCEEDED);
@@ -470,7 +470,7 @@ uint8_t flip_corners(Cube* restrict cube_arr,Solution* sol) {
       j++;
    }
 
-   if(j==MAX_RECURSION && !isSolved(cube_arr[0])) {
+   if((j==MAX_RECURSION) & (!isSolved(cube_arr[0]))) {
       print_solution(*sol);
       fprintf(stderr,"\nERROR %d: 3rd Row Corner Flipping Solving Attempts exceeded, last step failled, something went wrong \n ",ERR_MAX_REC_EXCEEDED);
       exit(ERR_MAX_REC_EXCEEDED);
@@ -486,7 +486,7 @@ uint8_t solve_cross(Cube* restrict cube_arr,Solution* sol) {
    search_res out;
    uint8_t n = get_wrong_edge(&cube_arr[0], EDGE_TOP, &out);
    uint8_t i = 0;
-   while(n && i<MAX_RECURSION) {
+   while(n & (i<MAX_RECURSION)) {
 
       #if DEBUGSOLVECROSS
          printf(" \tSolving edge:\n");
@@ -518,7 +518,7 @@ uint8_t solve_cross(Cube* restrict cube_arr,Solution* sol) {
       i++;
    }
 
-   if(i==MAX_RECURSION && !isUpCrossSolved(cube_arr[0])) {
+   if((i==MAX_RECURSION) & (!isUpCrossSolved(cube_arr[0]))) {
       print_solution(*sol);
       fprintf(stderr,"\nERROR %d: Up Layer Cross Solving Attempts exceeded, something went wrong \n ",ERR_MAX_REC_EXCEEDED);
       exit(ERR_MAX_REC_EXCEEDED);
@@ -646,8 +646,8 @@ uint8_t solve_1st_row(Cube* restrict cube_arr,Solution* sol){
 
 //limited by max recursion
 uint8_t solve_2nd_row(Cube* restrict cube_arr,Solution* sol){
-   search_res out;
 
+   search_res out;
    uint8_t n = get_wrong_edge(&cube_arr[0],EDGE_MIDDLE,&out);
    uint16_t i = 0;
    while(n && i<MAX_RECURSION) {
@@ -819,51 +819,42 @@ uint8_t solve_3rd_row(Cube* restrict cube_arr,Solution* sol){
 }
 // ------------------------ SOLVER ------------------------
 
-void solve_(Cube* restrict cube_arr,Solution* sol){
+uint8_t solve_(Cube* restrict cube_arr,Solution* sol){
    //cube solve is already being tested at loop entrance
-   //Start checking from biggest condition to smaller.
 
-   //check if cube is solved up to 2nd row
-   if(is2ndRowSolved(cube_arr[0])) {
+   if(!is1stRowSolved(cube_arr[0])){
       #if SOLVE
-         printf("------------------------------------ Solving 3rd Row ------------------------------------\n");
-         printf("- Calling 3rd Row Solver \n");
-         printf("\n    Did 3rd Row Call Succeed? %d \n\n",solve_3rd_row(cube_arr,sol));
-      #else
-         if(!solve_3rd_row(cube_arr,sol)) {
-               fprintf(stderr,"ERROR %d: 3rd Row Call FAILED - Recheck Algorithm\n",ERR_3RD_ROW);
-               exit(ERR_3RD_ROW);
-         }
+         printf("------------------------------------ Solving 1st Row ------------------------------------\n"); 
       #endif
+      if(!solve_1st_row(cube_arr,sol)) {
+         fprintf(stderr,"ERROR %d: 1st Row Call FAILED - Recheck Algorithm\n",ERR_1ST_ROW);
+         exit(ERR_1ST_ROW);
+      }
    }
-   //check if 1st row is solved = downface + bottom row
-   //when this check is triggered, if a solved face exists it will always be flipped to the down face
-   else if(is1stRowSolved(cube_arr[0])) {
+
+   if(!is2ndRowSolved(cube_arr[0])) {
       #if SOLVE
          printf("------------------------------------ Solving 2nd Row ------------------------------------\n");
          printf("- Calling 2nd Row Solver \n");
-         printf("\n    Did 2nd Row Call Succeed? %d \n\n",solve_2nd_row(cube_arr,sol));
-      #else
-         if(!solve_2nd_row(cube_arr,sol)) {
-               fprintf(stderr,"ERROR %d: 2nd Row Call FAILED - Recheck Algorithm\n",ERR_2ND_ROW);
-               exit(ERR_2ND_ROW);
-         }
       #endif
-   }
-   else {
-      #if SOLVE
-         printf("------------------------------------ Solving 1st Row ------------------------------------\n");
-         printf("\n    Did 1st Row Call Succeed? %d \n\n",solve_1st_row(cube_arr,sol));
-         
-      #else
-         if(!solve_1st_row(cube_arr,sol)) {
-               fprintf(stderr,"ERROR %d: 1st Row Call FAILED - Recheck Algorithm\n",ERR_1ST_ROW);
-               exit(ERR_1ST_ROW);
-         }
-      #endif
+      if(!solve_2nd_row(cube_arr,sol)) {
+         fprintf(stderr,"ERROR %d: 2nd Row Call FAILED - Recheck Algorithm\n",ERR_2ND_ROW);
+         exit(ERR_2ND_ROW);
+      }
    }
 
-   return;
+   if(!isSolved(cube_arr[0])) {
+      #if SOLVE
+         printf("------------------------------------ Solving 3rd Row ------------------------------------\n");
+         printf("- Calling 3rd Row Solver \n");
+      #endif
+      if(!solve_3rd_row(cube_arr,sol)) {
+         fprintf(stderr,"ERROR %d: 3rd Row Call FAILED - Recheck Algorithm\n",ERR_3RD_ROW);
+         exit(ERR_3RD_ROW);
+      }
+   }
+
+   return isSolved(cube_arr[0]);
 }
 
 void solve(Cube* restrict cube_arr,Solution* sol){
@@ -898,19 +889,10 @@ void solve(Cube* restrict cube_arr,Solution* sol){
       exit(ERR_INVALID_CUBE);
    }
 
-   uint8_t i = 0;
    
-   while(i<MAX_SOLVE_CALL && !isSolved(cube_arr[0])) {
-      solve_(cube_arr,sol);
-      #if SOLVE
-         printf("---- Cube after Solve Call ---- ");
-         print_cube(&cube_arr[0]);
-      #endif
-      i++;
-   }
+   const uint8_t solved = solve_(cube_arr,sol);
 
    #if SOLVE
-      printf("\n Total Solve Calls? %d\n\n",i);
       print_cube(&cube_arr[0]);
       print_solution(*sol);
       printf("\n");
@@ -927,8 +909,8 @@ void solve(Cube* restrict cube_arr,Solution* sol){
    if(isSolved(cube_arr[0])) {
       return;
    }
-   else if(i==MAX_SOLVE_CALL) {
-      fprintf(stderr, "\nERROR %d: Something went wrong, only partial solution after %d calls \n",ERR_MAX_SOLVE_CALL,MAX_SOLVE_CALL);
+   else if(!solved) {
+      fprintf(stderr, "\nERROR %d: Something went wrong, only partial solution after calling solver \n",ERR_MAX_SOLVE_CALL);
       exit(ERR_MAX_SOLVE_CALL);
    }
 }

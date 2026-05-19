@@ -100,8 +100,8 @@ typedef enum {
 #define BYTE_SIZE 8
 #define ROT_SIZE 4
 #define MAX_SOLUTION 512
-#define MAX_SOLVE_CALL 3
 #define MAX_RECURSION 50
+#define CUBE_STR_LEN 54
 
 #ifndef CACHE_LINE_SIZE
     #define CACHE_LINE_SIZE 64 // Fallback caso não venha do Makefile
@@ -250,7 +250,7 @@ extern const char *const edges_names[N_EDGES];
 
 #define check(face,color,mask) (((face & mask) ^( solved_cube[color] & mask)) == 0)
 
-#define corner_has_color(a,b,c,color)   ((a)==(color) | (b)==(color) | (c)==(color))
-#define edge_has_color(a,b,color)       ((a)==(color) | (b)==(color) )
+#define corner_has_color(a,b,c,color)   (((a)==(color)) | ((b)==(color)) | ((c)==(color)))
+#define edge_has_color(a,b,color)       (((a)==(color)) | ((b)==(color)) )
 
 #endif /* CONFIG_H */

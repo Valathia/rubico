@@ -5,7 +5,13 @@
 
 // ------------------------ SOLUTION FUNCTIONS ------------------------
 
-void push_move(Solution* restrict s, Move m);
+static inline void push_move(Solution* restrict s, Move m) {
+    if (s->length < MAX_SOLUTION) {
+        s->moves[s->length] = m;
+        s->length = s->length+1;
+    }
+}
+
 Solution* optimize_sol(Solution* restrict s);
 void print_solution(Solution s);
 
