@@ -12,7 +12,7 @@ static const uint64_t down_corners_mask[ROT_SIZE]  = {POS4,POS6,POS0};
 
 // ------------------------ STATIC INLINE -----------------
 
-static inline uint8_t check_n(const Cube* cube, uint64_t mask, const uint8_t rot_arr[],uint8_t size) {
+static inline uint8_t check_n(const Cube* cube,const uint64_t mask, const uint8_t rot_arr[],const uint8_t size) {
    for(int i=0;i<size;i++) {
       if(!check(cube->f[cube_orientation[rot_arr[i]]],cube_orientation[rot_arr[i]],mask)) 
          return 0;
@@ -20,11 +20,11 @@ static inline uint8_t check_n(const Cube* cube, uint64_t mask, const uint8_t rot
    return 1;
 }
 
-static inline uint8_t orientation_edge(uint8_t edge_ind, uint8_t color) {
+static inline uint8_t orientation_edge(const uint8_t edge_ind, const uint8_t color) {
    return (!(cube_orientation[edges[edge_ind].f[0]]==color));
 }
 
-static inline uint8_t orientation_corner(uint8_t col[], Corner c,uint8_t color){
+static inline uint8_t orientation_corner(const uint8_t col[],const Corner c,const uint8_t color){
    if(col[0]==color) {
       return c.f[0];
    }
@@ -39,7 +39,7 @@ static inline uint8_t orientation_corner(uint8_t col[], Corner c,uint8_t color){
 //get first row bit and check if they are all the same for all faces
 //checking 2 faces is enough, since we know the cube isn't solved we will always check at least 2 faces
 //We can just return i when we find it as the displacement of the front color
-static inline uint8_t is_row_rotated(const Cube* cube,uint8_t bit,uint64_t mask) {
+static inline uint8_t is_row_rotated(const Cube* cube,const uint8_t bit,const uint64_t mask) {
    
    //#pragma GCC unroll ROT_SIZE
    for(int i=0; i<ROT_SIZE;i++) {
@@ -52,7 +52,7 @@ static inline uint8_t is_row_rotated(const Cube* cube,uint8_t bit,uint64_t mask)
    return 0;
 }
 
-static inline uint8_t get_wrong_edge(const Cube* cube, EdgeSearchMode mode, search_res* out) {
+static inline uint8_t get_wrong_edge(const Cube* cube, const EdgeSearchMode mode, search_res* out) {
     // Cache global lookups in local CPU registers
    const uint8_t up   = cube_orientation[UP];
    const uint8_t down = cube_orientation[DOWN];
@@ -120,7 +120,7 @@ static inline uint8_t get_wrong_corner(const Cube* cube, uint8_t color, search_r
    return 0;
 }
 
-uint8_t check_corner_alignment(const Cube* cube, uint8_t start, uint8_t end) {
+uint8_t check_corner_alignment(const Cube* cube,const uint8_t start,const uint8_t end) {
 
     //0-3 UP | 4-7 DOWN
    for(uint8_t i=start;i<end;i++){
@@ -135,12 +135,12 @@ uint8_t check_corner_alignment(const Cube* cube, uint8_t start, uint8_t end) {
 }
 // ------------------------ SOLVER AUX ------------------------
 
-uint8_t how_many(const Cube* cube,uint64_t mask) {   //just send the cube not the array
+uint8_t how_many(const Cube* cube,const uint64_t mask) {   //just send the cube not the array
    uint8_t count = 0;
 
    //#pragma GCC unroll ROT_SIZE
    for(uint8_t i=0; i<ROT_SIZE;i++) {
-      uint8_t index = side_rotation[i];
+      const uint8_t index = side_rotation[i];
       count += check(cube->f[cube_orientation[index]],cube_orientation[index],mask);
    }
    return count;
@@ -169,18 +169,21 @@ void align_edges_rotate_cube(Cube* restrict cube_arr,Solution* sol) {
          #if DEBUGSOLVE3RDROW
                printf("Rotating cube to move solved edges to back & right: MOVE_RIGHT_FRONT\n");
          #endif
+         return;
       }
       else if(whoaligned[FRONT]&whoaligned[LEFT]) {
          apply_alg(cube_arr,sol,ROT_Y_B); // Back to Front
          #if DEBUGSOLVE3RDROW
                printf("Rotating cube to move solved edges to back & right: MOVE_BACK_FRONT\n");
          #endif
+         return;
       }
       else if(whoaligned[FRONT]&whoaligned[RIGHT]) {
          apply_alg(cube_arr,sol,ROT_Y_L); //Left to Front
          #if DEBUGSOLVE3RDROW
                printf("Rotating cube to move solved edges to back & right: MOVE_LEFT_FRONT\n");
          #endif
+         return;
       }
       else {
          #if DEBUGSOLVE3RDROW
@@ -188,14 +191,7 @@ void align_edges_rotate_cube(Cube* restrict cube_arr,Solution* sol) {
          #endif
          return; //nothing to align
       }
-      count = 0;
 
-      //#pragma GCC unroll ROT_SIZE
-      for(int i=0; i<ROT_SIZE;i++) {
-         int index = side_rotation[i];
-         whoaligned[i] = check(cube_arr[0].f[cube_orientation[index]],cube_orientation[index],COLOREDGES);
-         count += whoaligned[i];
-      }
    }
 
    #if DEBUGSOLVE3RDROW
@@ -205,7 +201,7 @@ void align_edges_rotate_cube(Cube* restrict cube_arr,Solution* sol) {
 }
 
 //solver align_edges
-uint8_t align_edges_max_edges(Cube* cube_arr){
+uint8_t align_edges_max_edges(const Cube* restrict cube_arr){
    Cube work[2];
    uint8_t cur_max = 0;
    uint8_t aux;
@@ -435,7 +431,6 @@ uint8_t flip_corners(Cube* restrict cube_arr,Solution* sol) {
                   #endif
                   return isSolved(cube_arr[0]);
                }
-               
          }
       }
       #if DEBUGFLIPCORNERS 
@@ -475,8 +470,8 @@ uint8_t flip_corners(Cube* restrict cube_arr,Solution* sol) {
       fprintf(stderr,"\nERROR %d: 3rd Row Corner Flipping Solving Attempts exceeded, last step failled, something went wrong \n ",ERR_MAX_REC_EXCEEDED);
       exit(ERR_MAX_REC_EXCEEDED);
    }
-   return isSolved(cube_arr[0]);
 
+   return isSolved(cube_arr[0]);
 }
 
 //Checks edges while there are wrongly placed top edges 
@@ -876,7 +871,9 @@ void solve(Cube* restrict cube_arr,Solution* sol){
          printf("new_down: %s | old_down: %s \n",colors[cube_orientation[new_down]],colors[cube_orientation[DOWN]]);
          print_cube(&cube_arr[0]);
       #endif
+      
       apply_alg(cube_arr,sol,new_down_rot[new_down]); 
+      
       #if SOLVE 
          printf("New Orientation?: \n");
          print_cube(&cube_arr[0]);
@@ -903,6 +900,7 @@ void solve(Cube* restrict cube_arr,Solution* sol){
    if (optimized == NULL) {
       return;
    }
+
    sol = optimized;
    print_solution(*sol);
    

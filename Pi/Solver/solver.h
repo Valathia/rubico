@@ -22,8 +22,7 @@ typedef enum {
 #define is3rdRowEdgeFlipped(cube)((check(cube.f[cube_orientation[UP]],cube_orientation[UP],EDGES)))
 #define is3rdRowEdgeAligned(cube)(check_n(&cube,COLOREDGES,side_rotation,ROT_SIZE))
 
-void apply_alg(Cube* cube_arr, Solution* sol, const char* alg);
-void solve(Cube* cube_arr, Solution* sol);
+void solve(Cube* restrict cube_arr, Solution* sol);
 
 #endif /* SOLVER_H */
 

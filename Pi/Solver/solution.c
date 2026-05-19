@@ -18,7 +18,7 @@ static const uint8_t move_opt_table[3][3] = {
 
 // ------------------------ SOLUTION FUNCTIONS ------------------------
 
-const char* move_to_str(Move m)  {
+const char* move_to_str(const Move m)  {
    switch(m) {
       case MOVE_F    :     return F;
       case MOVE_F2   :     return F2;
@@ -112,7 +112,7 @@ Solution* optimize_sol(Solution* restrict s) {
    return new_sol;
 }
 
-void print_solution(Solution s) {
+void print_solution(const Solution s) {
    for(int i = 0; i < s.length; i++) {
       printf("%s", move_to_str(s.moves[i]));
    }

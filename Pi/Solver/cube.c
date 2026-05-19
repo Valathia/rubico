@@ -139,7 +139,7 @@ void print_cube(const Cube* cube) {
 
 // ------------------------ CUBE VALIDITY -----------------
 
-void get_pieces(const Cube* c,uint8_t* pieces, uint8_t size){
+void get_pieces(const Cube* c,uint8_t* pieces,const uint8_t size){
    uint8_t col[3];
 
    for(uint8_t i=0; i<size;i++) {
@@ -154,7 +154,7 @@ void get_pieces(const Cube* c,uint8_t* pieces, uint8_t size){
    }
 }
 
-uint8_t countSwaps(uint8_t *pieces, uint8_t count) // pieces[5] = 3 means piece 3 is in position 5.
+uint8_t countSwaps(uint8_t *pieces, const uint8_t count) // pieces[5] = 3 means piece 3 is in position 5.
 {   
    uint8_t swaps = 0;
    for(uint8_t pos = 0; pos < count; ++pos) {
@@ -303,7 +303,7 @@ uint8_t valid_cube_config(const Cube* c) {
 
 // ------------------------ ROTATE CUBE ------------------------
 
-void rotate_x(Cube* restrict cube_arr, uint8_t new_top) {
+void rotate_x(Cube* restrict cube_arr,const uint8_t new_top) {
 
    uint8_t new_front[] = {DOWN,UP};
 
@@ -321,7 +321,7 @@ void rotate_x(Cube* restrict cube_arr, uint8_t new_top) {
    copy_self(cube_arr);
 }
 
-void rotate_z(Cube* restrict cube_arr, uint8_t new_top) {
+void rotate_z(Cube* restrict cube_arr,const uint8_t new_top) {
 
    int8_t i = new_top==RIGHT ? 0 : new_top == LEFT? 1 : new_top == DOWN ? 2 : -1;
    if((i==-1) | (cube_orientation[new_top] == cube_orientation[UP])) return; //SAFE
@@ -337,7 +337,7 @@ void rotate_z(Cube* restrict cube_arr, uint8_t new_top) {
    copy_self(cube_arr);
 }
 
-void rotate_y(Cube* restrict cube_arr, uint8_t new_front) {
+void rotate_y(Cube* restrict cube_arr,const uint8_t new_front) {
 
    int8_t i = new_front==RIGHT ? 0 : new_front == LEFT? 1 : new_front == BACK ? 2 : -1;
 
@@ -352,7 +352,7 @@ void rotate_y(Cube* restrict cube_arr, uint8_t new_front) {
 
 // ------------------------ APPLY ALG ------------------------
 
-uint8_t apply_move(Cube* restrict c, char m){
+uint8_t apply_move(Cube* restrict c,const char m){
    switch(m){
       case 'F': 
          Fm(c); 
@@ -426,8 +426,17 @@ void apply_alg(Cube* restrict c, Solution* sol, const char* alg){
 
       uint8_t move=0;
       uint8_t times=1;
-      if(alg[i+1]=='2'){ times=2; i++; }
-      else if(alg[i+1]=='\''){ times=3; i++; }
+
+      if((i+1) < len) {
+         if(alg[i+1]=='2') { 
+            times=2;
+            i++; 
+         }
+         else if(alg[i+1]=='\''){ 
+            times=3; 
+            i++; 
+         }
+      }
 
       for(uint8_t k=0;k<times;k++)
          move = apply_move(c,m);
