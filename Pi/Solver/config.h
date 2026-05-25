@@ -97,6 +97,7 @@ typedef enum {
 #define N_FACES 6
 #define N_EDGES 12
 #define N_CORNERS 8
+#define N_MOVES (MOVE_Dp+1)
 #define BYTE_SIZE 8
 #define ROT_SIZE 4
 #define MAX_SOLUTION 512
@@ -163,8 +164,9 @@ typedef enum {
 
 #define ROW1DONE    0x00000000FFFFFF00          //same as checking ROW3 (countint top-down) - verificação nas faces laterais
 #define ROW2DONE    0x000000FFFFFFFFFF          //checking rows 1&2                         - verificação nas faces laterais
-#define TOPROWDONE  0xFFFFFF0000000000          //verifica só a row 3                       - verificação nas faces laterais
+#define ROW3DONE    0xFFFFFF0000000000          //verifica só a row 3                       - verificação nas faces laterais
 
+#define ROW2DONE_R  0xFFFFFFFF000000FF          //verifica 3&2 row
 
 #define F       "F "  
 #define F_P     "F' " 
@@ -184,14 +186,14 @@ typedef enum {
 #define D       "D "  
 #define D_P     "D' " 
 #define D2      "D2 "
-#define ROT_Y_R "a " 
-#define ROT_Y_L "b " 
-#define ROT_Y_B "c "
-#define ROT_X_B "d " 
-#define ROT_X_F "e "
-#define ROT_Z_R "f " 
-#define ROT_Z_L "g " 
-#define ROT_Z_D "h "
+#define ROT_Y_R "a "    // right to front 
+#define ROT_Y_L "b "    // left to front
+#define ROT_Y_B "c "    // back to front
+#define ROT_X_B "d "    // back to up   -- special case  -> up to front
+#define ROT_X_F "e "    // front to up  -- special case -> down to up
+#define ROT_Z_R "f "    // right to up
+#define ROT_Z_L "g "    // left to up
+#define ROT_Z_D "h "    // down to up
 
 // ------------------------ STRUCTS ------------------------
 typedef uint64_t face_t;

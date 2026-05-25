@@ -5,10 +5,15 @@
 
 // ------------------------ CONSTANTS ------------------------
 
+//em principio é igual
 static const char *const row_rotate_move[ROT_SIZE] = {"",D_P,D2,D};
+
 static const char *const new_down_rot[] = {ROT_X_B,ROT_Z_L,ROT_X_F,ROT_Z_R,ROT_Z_D};
 static const uint8_t side_rotation[ROT_SIZE] = {FRONT, RIGHT, BACK, LEFT};
 static const uint64_t down_corners_mask[ROT_SIZE]  = {POS4,POS6,POS0};
+
+//start at 0
+static const uint64_t down_corners_mask_rubico[ROT_SIZE]  = {POS2,POS4,POS6};
 
 // ------------------------ STATIC INLINE -----------------
 
@@ -52,6 +57,7 @@ static inline uint8_t is_row_rotated(const Cube* cube,const uint8_t bit,const ui
    return 0;
 }
 
+//em principio é igual
 static inline uint8_t get_wrong_edge(const Cube* cube, const EdgeSearchMode mode, search_res* out) {
     // Cache global lookups in local CPU registers
    const uint8_t up   = cube_orientation[UP];
@@ -90,6 +96,7 @@ static inline uint8_t get_wrong_edge(const Cube* cube, const EdgeSearchMode mode
    }
    return 0;
 }
+
 
 static inline uint8_t get_wrong_corner(const Cube* cube, uint8_t color, search_res* out) {
    //#pragma GCC unroll N_CORNERS
@@ -618,6 +625,8 @@ uint8_t solve_1st_row(Cube* restrict cube_arr,Solution* sol){
       #if DEBUGSOLVE1STROW
          printf(" - Rotating Cube: DOWN to UP \n");
       #endif
+      
+      
       apply_alg(cube_arr,sol,ROT_Z_D); //down up
 
       #if DEBUGSOLVE1STROW
