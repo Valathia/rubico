@@ -1,10 +1,38 @@
 
 from PIL import ImageFont
 from PIL import Image
+import serial
+from picamera import PiCamera
+import time
 import math
+
+# pode-se usar para mandar texto para o ecrã, substituir pelas nossas definições
+# from luma.core.interface.serial import i2c
+# from luma.core.render import canvas
+# from luma.oled.device import ssd1306
+#font = ImageFont.truetype(HOME + 'VCR_OSD_MONO_1.001.ttf',20)
+
 #Falta pegar rodar e tirar a foto
 
-HOME = "/home/pi/"
+#0 = U 
+#1 = R
+#2 = F 
+#3 = D
+#4 = L
+#5 = B
+
+#ele lê 1->2->4->5->3->0
+#       R->F->L->B->D->U
+                                #fico com o vermelho para cima
+#       R->y'->F->y'->L->y'->B-> x y' ->D-> y2 ->U
+#no fim queremos U em cima e verde na F do robot
+#   x2 z'
+
+#pi serial config
+PORTA_MAC = "/dev/tty.usbmodem101"  #mudar para a porta de usb do raspberry pi
+BAUD_RATE = 115200
+
+HOME = ""
 
 IMG_BREITE = 1080 
 IMG_HOEHE = 1080
@@ -24,6 +52,15 @@ pxl_locs = [[(lft_col_pxl, top_row_pxl),(mid_col_pxl, top_row_pxl),(rgt_col_pxl,
             [(lft_col_pxl, bot_row_pxl),(mid_col_pxl, bot_row_pxl),(rgt_col_pxl, bot_row_pxl)]]
 
 
+
+#Camera 
+
+#camera = PiCamera()
+#camera.resolution = (IMG_BREITE, IMG_HOEHE)
+#camera.exposure_mode = 'auto'
+#camera.start_preview()
+
+
 def pix_average(im, x,y):
     r,g,b = 0,0,0
     for i in range (0,10):
@@ -39,12 +76,12 @@ def pix_average(im, x,y):
     return r, g, b
 
 def get_sticker():
-    global solve_string
+
     col_sticker = []
     for i in range(54):
         col_sticker.append('') 
 
-#read center piece and set as color of the side
+    #read center piece and set as color of the side
 
     im = Image.open(HOME + "Cube/face1.jpg")
     im = im.convert('RGB')
@@ -63,7 +100,7 @@ def get_sticker():
     base_B_r = base_B_r / wb_r * 255
     base_B_g = base_B_g / wb_g * 255
     base_B_b = base_B_b / wb_b * 255
-      
+    
     im = Image.open(HOME + "Cube/face0.jpg")
     im = im.convert('RGB')
     base_U_r, base_U_g, base_U_b = pix_average(im,pxl_locs[1][1][0],pxl_locs[1][1][1])
@@ -100,7 +137,7 @@ def get_sticker():
     base_L_g = base_L_g / wb_g * 255
     base_L_b = base_L_b / wb_b * 255    
     
-      
+    
     masterstring = ""
     for img_iter in range(0, 6):
         img_path = HOME + "Cube/face" + str(img_iter) + ".jpg"
@@ -165,10 +202,122 @@ def get_sticker():
     col_sticker[34] = col_sticker[32]
     col_sticker[29] = dummy_1
     col_sticker[32] = dummy_2    
- 
+
     print (masterstring)    
     for i in range (54):
         masterstring = masterstring + col_sticker[i]
 
     print(masterstring)
     return masterstring
+
+
+def send_comand(arduino,cmd):
+    # 4. Envia o comando convertido em bytes (.encode())
+    cmd_prefix = '-'
+    comando = f"{cmd_prefix}{cmd}\n"
+    arduino.write(comando.encode('utf-8'))
+    print(f"Comando enviado: {comando.strip()}")
+
+    # 5. Opcional: Lê a resposta do Arduino (com os seus logs ANSI do VS Code)
+    time.sleep(5) # Aguarda o processamento do Arduino
+    while arduino.in_waiting > 0:
+        resposta = arduino.readline().decode('utf-8').strip()
+        print(f"Resposta do Arduino: {resposta}")
+
+
+def get_cube():
+
+    try:
+        # 1. Abre a porta serial
+        print(f"A abrir ligação com o Arduino em {PORTA_MAC}...")
+        arduino = serial.Serial(PORTA_MAC, BAUD_RATE, timeout=1)
+
+        # 2. CRUCIAL: O Arduino Uno reinicia sempre que a porta serial é aberta.
+        # Precisamos de esperar 2 segundos para o bootloader terminar antes de enviar dados.
+        time.sleep(7)
+        print("Ligação estabelecida! Arduino pronto.")
+
+        send_comand(arduino,"g")
+        camera.capture(HOME + 'Cube/face1.jpg')
+
+        send_comand(arduino,"y'")
+        camera.capture(HOME + 'Cube/face2.jpg')    
+
+        send_comand(arduino,"y'")
+        camera.capture(HOME + 'Cube/face4.jpg')
+
+        send_comand(arduino,"y'")
+        camera.capture(HOME + 'Cube/face5.jpg')
+
+        send_comand(arduino,"x")
+        send_comand(arduino,"y'")
+        camera.capture(HOME + 'Cube/face3.jpg')
+
+        send_comand(arduino,"y2")
+        camera.capture(HOME + 'Cube/face0.jpg')
+
+
+        #deixa o cubo com a frente no verde e o up no branco
+        send_comand(arduino,"x2")
+        send_comand(arduino,"z'")
+        # 6. Fecha a porta de forma limpa
+        arduino.close()
+        print("Ligação fechada.")
+
+    except serial.SerialException as e:
+        print(f"Erro ao aceder à porta serial: {e}")
+
+
+def scan_cube(): 
+    #global message
+    # with canvas(device) as draw:
+    #     draw.text((5, 0), "Scanning..." , fill="white")
+    
+    get_cube() 
+    
+    # with canvas(device) as draw:
+    #     draw.text((5, 0), "Analysing..." , fill="white")
+    
+    cube_string = get_sticker()
+
+    print(cube_string + "\n")
+    return cube_string
+
+
+#para estar a ligação serial
+def test_serial():
+
+    try:
+        # 1. Abre a porta serial
+        print(f"A abrir ligação com o Arduino em {PORTA_MAC}...")
+        arduino = serial.Serial(PORTA_MAC, BAUD_RATE, timeout=1)
+        
+        # 2. CRUCIAL: O Arduino Uno reinicia sempre que a porta serial é aberta.
+        # Precisamos de esperar 2 segundos para o bootloader terminar antes de enviar dados.
+        time.sleep(7)
+        print("Ligação estabelecida! Arduino pronto.")
+
+        # 3. Formato do comando: "-cmd"
+        cmd_prefix = '-'
+        cmd = "y"
+        comando = f"{cmd_prefix}{cmd}\n"
+
+        # 4. Envia o comando convertido em bytes (.encode())
+        arduino.write(comando.encode('utf-8'))
+        print(f"Comando enviado: {comando.strip()}")
+
+        # 5. Opcional: Lê a resposta do Arduino (com os seus logs ANSI do VS Code)
+        time.sleep(5) # Aguarda o processamento do Arduino
+        while arduino.in_waiting > 0:
+            resposta = arduino.readline().decode('utf-8').strip()
+            print(f"Resposta do Arduino: {resposta}")
+
+        # 6. Fecha a porta de forma limpa
+        arduino.close()
+        print("Ligação fechada.")
+
+    except serial.SerialException as e:
+        print(f"Erro ao aceder à porta serial: {e}")
+
+# if __name__ == "__main__":
+#     sys.exit(test_serial())

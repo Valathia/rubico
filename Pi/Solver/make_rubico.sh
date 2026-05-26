@@ -1,0 +1,1 @@
+make all RUBICO=1
