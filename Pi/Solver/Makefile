@@ -36,16 +36,26 @@ ifdef TEST
     CFLAGS_TEST = -DTEST
 endif 
 
+ifdef RUBICO
+	CFLAGS_SOLVER = -DRUBICO
+	SOLVER = solver_rubico.c
+	SOLVER_H = solver_rubico.h
+else 
+	SOLVER = solver.c
+	SOLVER_H = solver.h
+endif
+
+
 ifdef DEBUGALL
 	CFLAGS_DEBUG = -fsanitize=address -g -DDEBUGALL
 endif
 
-CFLAGS_CUSTOM := $(CFLAGS_TEST) $(CFLAGS_DEBUG)
+CFLAGS_CUSTOM := $(CFLAGS_TEST) $(CFLAGS_SOLVER) $(CFLAGS_DEBUG) 
 
 CFLAGS := $(CFLAGS_BASE) $(ARCH_CFLAGS) $(CFLAGS_CUSTOM)
 
 SRC := 	main.c\
-		solver.c\
+		$(SOLVER)\
 		algorithms.c\
 		cube.c\
 		solution.c\
@@ -71,8 +81,10 @@ clean:
 	-rm $(OBJFLS)
 
 # Sem esta configuração isto não vai compilar
-main.o: cube.h solver.h solution.h config.h
+#solver.h 
+main.o: cube.h $(SOLVER_H) solution.h config.h
 solver.o: solver.h cube.h algorithms.h solution.h config.h
+solver_rubico.o: $(SOLVER_H) cube.h algorithms.h solution.h config.h
 cube.o: cube.h solution.h
 solution.o: solution.h config.h 
 algorithms.o: algorithms.h

@@ -12,8 +12,6 @@ static const char *const new_down_rot[] = {ROT_X_B,ROT_Z_L,ROT_X_F,ROT_Z_R,ROT_Z
 static const uint8_t side_rotation[ROT_SIZE] = {FRONT, RIGHT, BACK, LEFT};
 static const uint64_t down_corners_mask[ROT_SIZE]  = {POS4,POS6,POS0};
 
-//start at 0
-static const uint64_t down_corners_mask_rubico[ROT_SIZE]  = {POS2,POS4,POS6};
 
 // ------------------------ STATIC INLINE -----------------
 

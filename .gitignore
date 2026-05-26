@@ -1,3 +1,4 @@
 *.o
 rubik_solver
 *.txt
+.DS_Store

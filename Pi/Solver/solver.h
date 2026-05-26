@@ -22,13 +22,6 @@ typedef enum {
 #define is3rdRowEdgeFlipped(cube)((check(cube.f[cube_orientation[UP]],cube_orientation[UP],EDGES)))
 #define is3rdRowEdgeAligned(cube)(check_n(&cube,COLOREDGES,side_rotation,ROT_SIZE))
 
-
-#define is1stRowSolved_rubico(cube)    ((check(cube.f[cube_orientation[UP]],cube_orientation[UP],ALL)) & check_n(&cube,ROW3DONE,side_rotation,ROT_SIZE))
-#define is2ndRowSolved_rubico(cube)    ((check(cube.f[cube_orientation[UP]],cube_orientation[UP],ALL)) & check_n(&cube,ROW2DONE_R,side_rotation,ROT_SIZE))
-
-#define is3rdRowEdgeFlipped_rubico(cube)((check(cube.f[cube_orientation[DOWN]],cube_orientation[UP],EDGES)))
-#define is3rdRowEdgeAligned_rubico(cube)(check_n(&cube,POS5,side_rotation,ROT_SIZE))
-
 void solve(Cube* restrict cube_arr, Solution* sol);
 
 #endif /* SOLVER_H */

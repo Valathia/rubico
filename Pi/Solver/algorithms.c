@@ -2,13 +2,16 @@
 
 // ------------------------ STD ALGS ------------------------
 
-#define SUB_MID_EDGE_RIGHT R_ALG ROT_Y_R L_ALG
-#define SUB_MID_EDGE_LEFT  L_ALG ROT_Y_L R_ALG
 
-#define SUB_MID_EDGE_LEFT_RUBICO L_ALG_P ROT_Y_R FAKE_R_ALG
-#define SUB_MID_EDGE_RIGHT_RUBICO ROT_Y_B FAKE_R_ALG ROT_Y_R L_ALG
+
 
 // ------------------------ MOVE TABLES ------------------------
+
+#ifdef RUBICO
+#define SUB_MID_EDGE_LEFT_RUBICO    L_ALG_P ROT_Y_R FAKE_R_ALG
+//#define SUB_MID_EDGE_RIGHT_RUBICO   ROT_Y_B FAKE_R_ALG ROT_Y_L L_ALG_P
+//corner to take out must be on UBL
+#define SUB_MID_EDGE_RIGHT_RUBICO   FAKE_R_ALG ROT_Y_L L_ALG_P
 
 //no rotations
 const char *const move_to_rubico[N_MOVES] = {
@@ -50,26 +53,26 @@ const char *const rubico_corners[N_CORNERS][4][3] = {
       //UFL
       {  //tirar o canto com L_ALG_P
          L_ALG_P L_ALG_P L_ALG_P L_ALG_P,   //F->D
-         L_ALG_P L_ALG_P,                   //U->F
-         L_ALG_P L_ALG_P_I                  //L->L
+         L_ALG_P L_ALG_P_I,                   //U->F
+         L_ALG_P L_ALG_P                  //L->L
       },
       //UFR
       {
          L_ALG_P D ROT_Y_R L_ALG_P L_ALG_P L_ALG_P, //F->D D para UFD preserva ori
-         L_ALG_P D ROT_Y_R L_ALG_P,                 //U->F
-         L_ALG_P D ROT_Y_R L_ALG_P_I                //L->L
+         L_ALG_P D ROT_Y_R L_ALG_P_I,                 //U->F
+         L_ALG_P D ROT_Y_R L_ALG_P                //L->L
       },
       //UBR
       {
          L_ALG_P D2 ROT_Y_B L_ALG_P L_ALG_P L_ALG_P,
-         L_ALG_P D2 ROT_Y_B L_ALG_P,
-         L_ALG_P D2 ROT_Y_B L_ALG_P_I
+         L_ALG_P D2 ROT_Y_B L_ALG_P_I,
+         L_ALG_P D2 ROT_Y_B L_ALG_P
       },
       //UBL
       {
          L_ALG_P D_P ROT_Y_L L_ALG_P L_ALG_P L_ALG_P,
-         L_ALG_P D_P ROT_Y_L L_ALG_P,
-         L_ALG_P D_P ROT_Y_L L_ALG_P_I
+         L_ALG_P D_P ROT_Y_L L_ALG_P_I,
+         L_ALG_P D_P ROT_Y_L L_ALG_P
       }
    },
 
@@ -82,26 +85,26 @@ const char *const rubico_corners[N_CORNERS][4][3] = {
       // ori: L -> F    ->D   (L->D)
       //UFL
       {
-         ROT_Y_R L_ALG_P D_P ROT_Y_L L_ALG_P_I,                   //F->L
-         ROT_Y_R L_ALG_P D_P ROT_Y_L L_ALG_P,                     //(U|D)->F
+         ROT_Y_R L_ALG_P D_P ROT_Y_L L_ALG_P,                   //F->L
+         ROT_Y_R L_ALG_P D_P ROT_Y_L L_ALG_P_I,                     //(U|D)->F
          ROT_Y_R L_ALG_P D_P ROT_Y_L L_ALG_P L_ALG_P L_ALG_P      //L->D
       },
       //UFR (UFR->UFL)
       {
-         ROT_Y_R L_ALG_P L_ALG_P_I,                //F->L
-         ROT_Y_R L_ALG_P L_ALG_P,                  //(U|D)->F
+         ROT_Y_R L_ALG_P L_ALG_P,                //F->L
+         ROT_Y_R L_ALG_P L_ALG_P_I,                  //(U|D)->F
          ROT_Y_R L_ALG_P L_ALG_P L_ALG_P L_ALG_P   //L->D
       },
       //UBR
       {
-         ROT_Y_R L_ALG_P D ROT_Y_R L_ALG_P_I,
          ROT_Y_R L_ALG_P D ROT_Y_R L_ALG_P,
+         ROT_Y_R L_ALG_P D ROT_Y_R L_ALG_P_I,
          ROT_Y_R L_ALG_P D ROT_Y_R L_ALG_P L_ALG_P L_ALG_P
       },
       //UBL
       {
-         ROT_Y_R L_ALG_P D2 ROT_Y_B L_ALG_P_I,
          ROT_Y_R L_ALG_P D2 ROT_Y_B L_ALG_P,
+         ROT_Y_R L_ALG_P D2 ROT_Y_B L_ALG_P_I,
          ROT_Y_R L_ALG_P D2 ROT_Y_B L_ALG_P L_ALG_P L_ALG_P
       }
    },
@@ -116,26 +119,26 @@ const char *const rubico_corners[N_CORNERS][4][3] = {
       //UFL
       {
          ROT_Y_B L_ALG_P D2 ROT_Y_B L_ALG_P L_ALG_P L_ALG_P,
-         ROT_Y_B L_ALG_P D2 ROT_Y_B L_ALG_P,
-         ROT_Y_B L_ALG_P D2 ROT_Y_B L_ALG_P_I
+         ROT_Y_B L_ALG_P D2 ROT_Y_B L_ALG_P_I,
+         ROT_Y_B L_ALG_P D2 ROT_Y_B L_ALG_P
       },
       //UFR
       {  //preserva ori depois da rotação
          ROT_Y_B L_ALG_P D_P ROT_Y_L L_ALG_P L_ALG_P L_ALG_P,
-         ROT_Y_B L_ALG_P D_P ROT_Y_L L_ALG_P,
-         ROT_Y_B L_ALG_P D_P ROT_Y_L L_ALG_P_I
+         ROT_Y_B L_ALG_P D_P ROT_Y_L L_ALG_P_I,
+         ROT_Y_B L_ALG_P D_P ROT_Y_L L_ALG_P
       },
       //UBR
       {
          ROT_Y_B L_ALG_P L_ALG_P L_ALG_P L_ALG_P,
-         ROT_Y_B L_ALG_P L_ALG_P,
-         ROT_Y_B L_ALG_P L_ALG_P_I
+         ROT_Y_B L_ALG_P L_ALG_P_I,
+         ROT_Y_B L_ALG_P L_ALG_P
       },
       //UBL
       {
          ROT_Y_B L_ALG_P D ROT_Y_R L_ALG_P L_ALG_P L_ALG_P,
-         ROT_Y_B L_ALG_P D ROT_Y_R L_ALG_P,
-         ROT_Y_B L_ALG_P D ROT_Y_R L_ALG_P_I
+         ROT_Y_B L_ALG_P D ROT_Y_R L_ALG_P_I,
+         ROT_Y_B L_ALG_P D ROT_Y_R L_ALG_P
       }
    },
 
@@ -148,27 +151,27 @@ const char *const rubico_corners[N_CORNERS][4][3] = {
       // ori: L -> F    ->D   (L->D)
       //UFL
       {
-         ROT_Y_L L_ALG D ROT_Y_R L_ALG_P_I,
-         ROT_Y_L L_ALG D ROT_Y_R L_ALG_P
-         ROT_Y_L L_ALG D ROT_Y_R L_ALG_P L_ALG_P L_ALG_P
+         ROT_Y_L L_ALG_P D ROT_Y_R L_ALG_P,
+         ROT_Y_L L_ALG_P D ROT_Y_R L_ALG_P_I,
+         ROT_Y_L L_ALG_P D ROT_Y_R L_ALG_P L_ALG_P L_ALG_P
       },
       //UFR
       {
-         ROT_Y_L L_ALG D2 ROT_Y_B L_ALG_P_I,
-         ROT_Y_L L_ALG D2 ROT_Y_B L_ALG_P,
-         ROT_Y_L L_ALG D2 ROT_Y_B L_ALG_P L_ALG_P L_ALG_P
+         ROT_Y_L L_ALG_P D2 ROT_Y_B L_ALG_P,
+         ROT_Y_L L_ALG_P D2 ROT_Y_B L_ALG_P_I,
+         ROT_Y_L L_ALG_P D2 ROT_Y_B L_ALG_P L_ALG_P L_ALG_P
       },
       //UBR
       {
-         ROT_Y_L L_ALG D_P ROT_Y_L L_ALG_P_I,
-         ROT_Y_L L_ALG D_P ROT_Y_L L_ALG_P,
-         ROT_Y_L L_ALG D_P ROT_Y_L L_ALG_P L_ALG_P L_ALG_P
+         ROT_Y_L L_ALG_P D_P ROT_Y_L L_ALG_P,
+         ROT_Y_L L_ALG_P D_P ROT_Y_L L_ALG_P_I,
+         ROT_Y_L L_ALG_P D_P ROT_Y_L L_ALG_P L_ALG_P L_ALG_P
       },
       //UBL
       {
-         ROT_Y_L L_ALG L_ALG_P_I,
-         ROT_Y_L L_ALG L_ALG_P,
-         ROT_Y_L L_ALG L_ALG_P L_ALG_P L_ALG_P
+         ROT_Y_L L_ALG_P L_ALG_P,
+         ROT_Y_L L_ALG_P L_ALG_P_I,
+         ROT_Y_L L_ALG_P L_ALG_P L_ALG_P L_ALG_P
       },
    },
    
@@ -177,54 +180,54 @@ const char *const rubico_corners[N_CORNERS][4][3] = {
    {  
       //UFL 
       {
-         L_ALG_P,                   //F                   
+         L_ALG_P_I,                   //F                   
          L_ALG_P L_ALG_P L_ALG_P,   //D
-         L_ALG_P_I                  //L
+         L_ALG_P                  //L
       },
       //UFR
       {
-         D ROT_Y_R L_ALG_P, // F->F
+         D ROT_Y_R L_ALG_P_I, // F->F
          D ROT_Y_R L_ALG_P L_ALG_P L_ALG_P, // D->D
-         D ROT_Y_R L_ALG_P_I, // L->L
+         D ROT_Y_R L_ALG_P // L->L
       },
       //UBR
       {
-         D2 ROT_Y_B L_ALG_P,                    //F->F
+         D2 ROT_Y_B L_ALG_P_I,                    //F->F
          D2 ROT_Y_B L_ALG_P L_ALG_P L_ALG_P,    //D->D
-         D2 ROT_Y_B L_ALG_P_I                   //L->L
+         D2 ROT_Y_B L_ALG_P                   //L->L
       },
       //UBL
       {
-         D_P ROT_Y_L L_ALG_P,
+         D_P ROT_Y_L L_ALG_P_I,
          D_P ROT_Y_L L_ALG_P L_ALG_P L_ALG_P,
-         D_P ROT_Y_L L_ALG_P_I
+         D_P ROT_Y_L L_ALG_P
       }
    },
-   //DFR
+   //DFR - fixed swapped
    {
       //UFL
       {
-         D_P L_ALG_P_I,                //F->L
+         D_P L_ALG_P,                //F->L
          D_P L_ALG_P L_ALG_P L_ALG_P,  //D->D
-         D_P L_ALG_P                   //L->F
+         D_P L_ALG_P_I                   //L->F
       },
       //UFR
       {
-         ROT_Y_R L_ALG_P_I,
+         ROT_Y_R L_ALG_P,
          ROT_Y_R L_ALG_P L_ALG_P L_ALG_P,                           
-         ROT_Y_R L_ALG_P
+         ROT_Y_R L_ALG_P_I
       },
       //UBR
       {
-         D_P ROT_Y_B L_ALG_P_I,
+         D_P ROT_Y_B L_ALG_P,
          D_P ROT_Y_B L_ALG_P L_ALG_P L_ALG_P,
-         D_P ROT_Y_B L_ALG_P
+         D_P ROT_Y_B L_ALG_P_I
       },
       //UBL
       {
-         D2 ROT_Y_L L_ALG_P_I,
-         D2 ROT_Y_L L_ALG_P L_ALG_P L_ALG_P,
-         D2 ROT_Y_L L_ALG_P
+         D2 ROT_Y_L L_ALG_P,                  //F->L
+         D2 ROT_Y_L L_ALG_P L_ALG_P L_ALG_P,    //D->D
+         D2 ROT_Y_L L_ALG_P_I                     //L->F
       }
    },
 
@@ -232,504 +235,730 @@ const char *const rubico_corners[N_CORNERS][4][3] = {
    {       
       //UFL
       {
-         D2 L_ALG_P,                   //F->F
+         D2 L_ALG_P_I,                   //F->F
          D2 L_ALG_P L_ALG_P L_ALG_P,   //D->D
-         D2 L_ALG_P_I                  //L->L
+         D2 L_ALG_P                  //L->L
       },
       //UFR 
       {
-         D_P ROT_Y_R L_ALG_P,
+         D_P ROT_Y_R L_ALG_P_I,
          D_P ROT_Y_R L_ALG_P L_ALG_P L_ALG_P,
-         D_P ROT_Y_R L_ALG_P_I
+         D_P ROT_Y_R L_ALG_P
       },
       //UBR
       {
-         ROT_Y_B L_ALG_P,
+         ROT_Y_B L_ALG_P_I,
          ROT_Y_B L_ALG_P L_ALG_P L_ALG_P,
-         ROT_Y_B L_ALG_P_I
+         ROT_Y_B L_ALG_P
       },
       //UBL
       {
-         D ROT_Y_L L_ALG_P,
+         D ROT_Y_L L_ALG_P_I,
          D ROT_Y_L L_ALG_P L_ALG_P L_ALG_P,
-         D ROT_Y_L L_ALG_P_I
+         D ROT_Y_L L_ALG_P
       }
    },
    //DBL
    {   
       //UFL 
       {
-         D ROT_Y_L L_ALG_P_I,                  //F->L
+         D ROT_Y_L L_ALG_P,                  //F->L
          D ROT_Y_L L_ALG_P L_ALG_P L_ALG_P,    //D->D
-         D ROT_Y_L L_ALG_P                     //L->F
+         D ROT_Y_L L_ALG_P_I                     //L->F
       },
       //UFR 
       {
-         D2 ROT_Y_R L_ALG_P_I,
+         D2 ROT_Y_R L_ALG_P,
          D2 ROT_Y_R L_ALG_P L_ALG_P L_ALG_P,
-         D2 ROT_Y_R L_ALG_P
+         D2 ROT_Y_R L_ALG_P_I
       },
       //UBR 
       {
-         D_P ROT_Y_B L_ALG_P_I,
+         D_P ROT_Y_B L_ALG_P,
          D_P ROT_Y_B L_ALG_P L_ALG_P L_ALG_P,
-         D_P ROT_Y_B L_ALG_P
+         D_P ROT_Y_B L_ALG_P_I
       },
       //UBL
       {
-         ROT_Y_L L_ALG_P_I,
+         ROT_Y_L L_ALG_P,
          ROT_Y_L L_ALG_P L_ALG_P L_ALG_P,                                  // trivialmente certo
-         ROT_Y_L L_ALG_P
+         ROT_Y_L L_ALG_P_I
       }
    }
 };
 
 const char *const rubico_middle_edges[8][4][2] = {
-   //UB
-   {  
-      //FR
-      {
-         //U B
-         
-         ROT_Y_R SUB_MID_EDGE_LEFT,  //Front color to up
-         "U' " SUB_MID_EDGE_RIGHT //Front color to back
+      //DF
+      {  
+         //FR
+         {
+            //D F
+            D2 ROT_Y_R SUB_MID_EDGE_LEFT_RUBICO,      //Front color to Down
+            D_P ROT_Y_B SUB_MID_EDGE_RIGHT_RUBICO       //Front color to Front
+         },
+         //FL
+         {
+            //D F
+            //ROT_Y_L ROT_Y_B --> confirmar se isto não devia ser só BACK
+            D2 ROT_Y_R SUB_MID_EDGE_RIGHT_RUBICO,   //Front color to Down
+            D SUB_MID_EDGE_LEFT_RUBICO             //Front color to Front
+         },
+         //BR
+         {
+            //D F
+            ROT_Y_L SUB_MID_EDGE_RIGHT_RUBICO,       //Back color to down --added
+            D_P ROT_Y_B SUB_MID_EDGE_LEFT_RUBICO    //back color to front
+         },
+         //BL  <- verificar
+         {
+            //D F
+            ROT_Y_L SUB_MID_EDGE_LEFT_RUBICO, //Back color to up
+            D SUB_MID_EDGE_RIGHT_RUBICO  //Back color to back ... to go to Left "U L' U' L U a R U R' U'"
+         }
+      },    
+      //DR
+      {   
+         //FR
+         {
+            //D R
+            D ROT_Y_R SUB_MID_EDGE_LEFT_RUBICO,    //front color to up //added
+            D2 ROT_Y_B SUB_MID_EDGE_RIGHT_RUBICO      //front color toright
+         },
+         //FL
+         {
+            //D R
+            D ROT_Y_R SUB_MID_EDGE_RIGHT_RUBICO,   //front color to up //Addeed
+            SUB_MID_EDGE_LEFT_RUBICO         //front color to right
+         },
+         //BR
+         {
+            //D R
+            D_P ROT_Y_L SUB_MID_EDGE_RIGHT_RUBICO,      //back color to up     --added
+            D2 ROT_Y_B SUB_MID_EDGE_LEFT_RUBICO      //back color to right   --added
+         },
+         //BL
+         {
+            //D R
+            D_P ROT_Y_L SUB_MID_EDGE_LEFT_RUBICO,    //back color to up      --added
+            SUB_MID_EDGE_RIGHT_RUBICO         //back color to right   --added
+         }
+      }, 
+      //DB
+      {   
+         //FR
+         {
+            //U F
+            ROT_Y_R SUB_MID_EDGE_LEFT_RUBICO,   //Front color to up  -- da match ao centro da direita added
+            D ROT_Y_B SUB_MID_EDGE_RIGHT_RUBICO       //Front color to front
+         },
+         //FL
+         {
+            //U F
+            ROT_Y_R SUB_MID_EDGE_RIGHT_RUBICO,   //Front color to up  -- da match ao centro da esquerda added
+            D_P SUB_MID_EDGE_LEFT_RUBICO      //Front color to front
+         },
+         //BR
+         {
+            //U F
+            D2 ROT_Y_L SUB_MID_EDGE_RIGHT_RUBICO,        //Back color to up -- match centro da direita --added
+            D ROT_Y_B SUB_MID_EDGE_LEFT_RUBICO       //Back color to front -- match cenntro de tras --added
+         },
+         //BL
+         {
+            //U F
+            D2 ROT_Y_L SUB_MID_EDGE_LEFT_RUBICO,         //Back color to up -- match centro da esquerda
+            D_P SUB_MID_EDGE_RIGHT_RUBICO       //Back color to front -- match cenntro de tras --added
+         }
       },
-      //FL
-      {
-         //U B
-         ROT_Y_L SUB_MID_EDGE_RIGHT, //Front color to up
-         "U " SUB_MID_EDGE_LEFT   //Front color to back
-      },
-      //BR
-      {
-         //U B
-         "U2 a " SUB_MID_EDGE_RIGHT, //Back color to up --added
-         "U' c " SUB_MID_EDGE_LEFT    //back color to back
-      },
-      //BL
-      {
-         //U B
-         "U2 b " SUB_MID_EDGE_LEFT, //Back color to up
-         "U c " SUB_MID_EDGE_RIGHT  //Back color to back ... to go to Left "U L' U' L U a R U R' U'"
-      }
-   },    
-   //UR
-   {   
-      //FR
-      {
-         //U R
-         "U' a " SUB_MID_EDGE_LEFT,  //front color to up //added
-         "U2 " SUB_MID_EDGE_RIGHT      //front color toright
-      },
-      //FL
-      {
-         //U R
-         "U' b " SUB_MID_EDGE_RIGHT,   //front color to up //Addeed
-         SUB_MID_EDGE_LEFT         //front color to right
-      },
-      //BR
-      {
-         //U R
-         "U a " SUB_MID_EDGE_RIGHT,      //back color to up     --added
-         "U2 c " SUB_MID_EDGE_LEFT      //back color to right   --added
-      },
-      //BL
-      {
-         //U R
-         "U b " SUB_MID_EDGE_LEFT,    //back color to up      --added
-         ROT_Y_B SUB_MID_EDGE_RIGHT         //back color to right   --added
-      }
-   }, 
-   //UF
-   {   
-      //FR
-      {
-         //U F
-         "U2 a " SUB_MID_EDGE_LEFT,   //Front color to up  -- da match ao centro da direita added
-         "U " SUB_MID_EDGE_RIGHT       //Front color to front
-      },
-      //FL
-      {
-         //U F
-         "U2 b " SUB_MID_EDGE_RIGHT,   //Front color to up  -- da match ao centro da esquerda added
-         "U' " SUB_MID_EDGE_LEFT      //Front color to front
-      },
-      //BR
-      {
-         //U F
-         ROT_Y_R SUB_MID_EDGE_RIGHT,        //Back color to up -- match centro da direita --added
-         "U c " SUB_MID_EDGE_LEFT       //Back color to front -- match cenntro de tras --added
-      },
-      //BL
-      {
-         //U F
-         ROT_Y_L SUB_MID_EDGE_LEFT,         //Back color to up -- match centro da esquerda
-         "U' c " SUB_MID_EDGE_RIGHT       //Back color to front -- match cenntro de tras --added
-      }
-   },
-   //UL
-   {  
-      //FR
-      {
-         //U L 
-         "U a " SUB_MID_EDGE_LEFT,    //Front color to up -- match centro da direita  --added
-         SUB_MID_EDGE_RIGHT         //Front color to left -- match centro da frente
-      },
-      //FL
-      {
-         //U L
-         "U b " SUB_MID_EDGE_RIGHT, //--added
-         "U2 " SUB_MID_EDGE_LEFT
-      },
-      //BR
-      {
-         //U L
-         "U' a " SUB_MID_EDGE_RIGHT, //--added
-         ROT_Y_B SUB_MID_EDGE_LEFT   //--added
-      },
-      //BL
-      {
-         //U L
-         "U' b " SUB_MID_EDGE_LEFT,
-         "U2 c " SUB_MID_EDGE_RIGHT
-      }
-   },
-   
-   //FR
-   {   
-      //FR
-      {
-         //F R
-         "",             //trivialmente resolvido
-         SUB_MID_EDGE_RIGHT //cor trocada tirar fora
+      //DL
+      {  
+         //FR
+         {
+            //U L 
+            D_P ROT_Y_R SUB_MID_EDGE_LEFT_RUBICO,    //Front color to up -- match centro da direita  --added
+            ROT_Y_B SUB_MID_EDGE_RIGHT_RUBICO         //Front color to left -- match centro da frente
+         },
+         //FL
+         {
+            //U L
+            D_P ROT_Y_R SUB_MID_EDGE_RIGHT_RUBICO, //--added
+            D2 SUB_MID_EDGE_LEFT_RUBICO
+         },
+         //BR
+         {
+            //U L
+            D ROT_Y_L SUB_MID_EDGE_RIGHT_RUBICO, //--added
+            ROT_Y_B SUB_MID_EDGE_LEFT_RUBICO   //--added
+         },
+         //BL
+         {
+            //U L
+            D ROT_Y_L SUB_MID_EDGE_LEFT_RUBICO,
+            D2 SUB_MID_EDGE_RIGHT_RUBICO
+         }
       },
       
-      //FL
-      {
-         //F R
-         SUB_MID_EDGE_RIGHT,
-         SUB_MID_EDGE_RIGHT
-      },
-      //BR
-      {
-         //F R
-         SUB_MID_EDGE_RIGHT,
-         SUB_MID_EDGE_RIGHT
-      },
-      //BL
-      {
-         //F R
-         SUB_MID_EDGE_RIGHT,
-         SUB_MID_EDGE_RIGHT
-      }
-   },
-   //FL
-   {   
       //FR
-      {
-         //F L
-         SUB_MID_EDGE_LEFT,
-         SUB_MID_EDGE_LEFT
-      },        
-      //FL
-      {
-         //F L
-         "",         //solved
-         SUB_MID_EDGE_LEFT
-      },
-      //BR
-      {
-         //F L
-         SUB_MID_EDGE_LEFT,
-         SUB_MID_EDGE_LEFT
-      },
-      //BL
-      {
-         //F L
-         SUB_MID_EDGE_LEFT,
-         SUB_MID_EDGE_LEFT
-      }
-   },
-   //BR
-   {  
-      //FR
-      {
-         //B R
-         ROT_Y_B SUB_MID_EDGE_LEFT,
-         ROT_Y_B SUB_MID_EDGE_LEFT
+      {   
+         //FR
+         {
+            //F R
+            "",             //trivialmente resolvido
+            ROT_Y_B SUB_MID_EDGE_RIGHT_RUBICO //cor trocada tirar fora
+         },
+         
+         //FL
+         {
+            //F R
+            ROT_Y_B SUB_MID_EDGE_RIGHT_RUBICO,
+            ROT_Y_B SUB_MID_EDGE_RIGHT_RUBICO
+         },
+         //BR
+         {
+            //F R
+            ROT_Y_B SUB_MID_EDGE_RIGHT_RUBICO,
+            ROT_Y_B SUB_MID_EDGE_RIGHT_RUBICO
+         },
+         //BL
+         {
+            //F R
+            ROT_Y_B SUB_MID_EDGE_RIGHT_RUBICO,
+            ROT_Y_B SUB_MID_EDGE_RIGHT_RUBICO
+         }
       },
       //FL
-      {
-         //B R
-         ROT_Y_B SUB_MID_EDGE_LEFT,
-         ROT_Y_B SUB_MID_EDGE_LEFT
+      {   
+         //FR
+         {
+            //F L
+            SUB_MID_EDGE_LEFT_RUBICO,
+            SUB_MID_EDGE_LEFT_RUBICO
+         },        
+         //FL
+         {
+            //F L
+            "",         //solved
+            SUB_MID_EDGE_LEFT_RUBICO
+         },
+         //BR
+         {
+            //F L
+            SUB_MID_EDGE_LEFT_RUBICO,
+            SUB_MID_EDGE_LEFT_RUBICO
+         },
+         //BL
+         {
+            //F L
+            SUB_MID_EDGE_LEFT_RUBICO,
+            SUB_MID_EDGE_LEFT_RUBICO
+         }
       },
       //BR
-      {
-         //B R
-         "",
-         ROT_Y_B SUB_MID_EDGE_LEFT
+      {  
+         //FR
+         {
+            //B R
+            ROT_Y_B SUB_MID_EDGE_LEFT_RUBICO,
+            ROT_Y_B SUB_MID_EDGE_LEFT_RUBICO
+         },
+         //FL
+         {
+            //B R
+            ROT_Y_B SUB_MID_EDGE_LEFT_RUBICO,
+            ROT_Y_B SUB_MID_EDGE_LEFT_RUBICO
+         },
+         //BR
+         {
+            //B R
+            "",
+            ROT_Y_B SUB_MID_EDGE_LEFT_RUBICO
+         },
+         //BL
+         {
+            //U F
+            ROT_Y_B SUB_MID_EDGE_LEFT_RUBICO,
+            ROT_Y_B SUB_MID_EDGE_LEFT_RUBICO
+         }
       },
       //BL
-      {
-         //U F
-         ROT_Y_B SUB_MID_EDGE_LEFT,
-         ROT_Y_B SUB_MID_EDGE_LEFT
+      {  
+         //FR
+         {
+            //B L
+            SUB_MID_EDGE_RIGHT_RUBICO,
+            SUB_MID_EDGE_RIGHT_RUBICO
+         },
+         //FL
+         {
+            //B L
+            SUB_MID_EDGE_RIGHT_RUBICO,
+            SUB_MID_EDGE_RIGHT_RUBICO
+         },
+         //BR
+         {
+            //B L_RSUB_MID_EDGE_RIGHT_RUBICO
+            SUB_MID_EDGE_RIGHT_RUBICO,
+            SUB_MID_EDGE_RIGHT_RUBICO
+         },
+         //BL
+         {
+            //B L
+            "",
+            SUB_MID_EDGE_RIGHT_RUBICO
+         }
       }
-   },
-   //BL
-   {  
-      //FR
-      {
-         //B L
-         ROT_Y_B SUB_MID_EDGE_RIGHT,
-         ROT_Y_B SUB_MID_EDGE_RIGHT
-      },
-      //FL
-      {
-         //B L
-         ROT_Y_B SUB_MID_EDGE_RIGHT,
-         ROT_Y_B SUB_MID_EDGE_RIGHT
-      },
-      //BR
-      {
-         //B L
-         ROT_Y_B SUB_MID_EDGE_RIGHT,
-         ROT_Y_B SUB_MID_EDGE_RIGHT
-      },
-      //BL
-      {
-         //B L
-         "",
-         ROT_Y_B SUB_MID_EDGE_RIGHT
-      }
-   }
 };
 
+#else
+   #define SUB_MID_EDGE_RIGHT R_ALG ROT_Y_R L_ALG
+   #define SUB_MID_EDGE_LEFT  L_ALG ROT_Y_L R_ALG
+   //move tables are organized as: Origin Piece | Destination Piece | Target Color Orientation
+   const char *const corner_move_table[N_CORNERS][4][3] = {
+      //UFL
+      {
+         //DFL
+         {
+            ROT_Y_L R_ALG,
+            L_ALG L_ALG L_ALG,
+            L_ALG
+         },
+         //DFR
+         {
+            "U' " R_ALG,
+            "U' " R_ALG R_ALG R_ALG,
+            "U' a " L_ALG
+         },
+         //DBR
+         {
+            "U2 a " R_ALG,
+            "U2 c " L_ALG L_ALG L_ALG,
+            "U2 c " L_ALG
+         },
+         //DBL
+         {
+            "U c " R_ALG,
+            "U c " R_ALG R_ALG R_ALG,
+            "U b " L_ALG
+         }
+      },
 
-//move tables are organized as: Origin Piece | Destination Piece | Target Color Orientation
-const char *const corner_move_table[N_CORNERS][4][3] = {
-   //UFL
-   {
-      //DFL
+      //UFR
       {
-         ROT_Y_L R_ALG,
-         L_ALG L_ALG L_ALG,
-         L_ALG
+         //DFL
+         {
+            "U " L_ALG,
+            "U " L_ALG L_ALG L_ALG,
+            "U b " R_ALG
+         },
+         //DFR
+         {
+            ROT_Y_R L_ALG,
+            R_ALG R_ALG R_ALG,
+            R_ALG
+         },
+         //DBR
+         {
+            "U' c " L_ALG,
+            "U' c " L_ALG L_ALG L_ALG,
+            "U' a " R_ALG
+         },
+         //DBL
+         {
+            "U2 b " L_ALG,
+            "U2 c " R_ALG R_ALG R_ALG,
+            "U2 c " R_ALG
+         }
       },
-      //DFR
-      {
-         "U' " R_ALG,
-         "U' " R_ALG R_ALG R_ALG,
-         "U' a " L_ALG
-      },
-      //DBR
-      {
-         "U2 a " R_ALG,
-         "U2 c " L_ALG L_ALG L_ALG,
-         "U2 c " L_ALG
-      },
-      //DBL
-      {
-         "U c " R_ALG,
-         "U c " R_ALG R_ALG R_ALG,
-         "U b " L_ALG
-      }
-   },
 
-   //UFR
-   {
-      //DFL
+      //UBR
       {
-         "U " L_ALG,
-         "U " L_ALG L_ALG L_ALG,
-         "U b " R_ALG
+         //DFL
+         {
+            U2 ROT_Y_L R_ALG,
+            U2 L_ALG L_ALG L_ALG,
+            U2 L_ALG
+         },
+         //DFR
+         {
+            U R_ALG,
+            U R_ALG R_ALG R_ALG,
+            U ROT_Y_R L_ALG
+         },
+         //DBR
+         {
+            ROT_Y_R R_ALG,
+            ROT_Y_B L_ALG L_ALG L_ALG,
+            ROT_Y_B L_ALG
+         },
+         //DBL
+         {
+            "U' c " R_ALG,
+            "U' c " R_ALG R_ALG R_ALG,
+            "U' b " L_ALG
+         }
       },
-      //DFR
-      {
-         ROT_Y_R L_ALG,
-         R_ALG R_ALG R_ALG,
-         R_ALG
-      },
-      //DBR
-      {
-         "U' c " L_ALG,
-         "U' c " L_ALG L_ALG L_ALG,
-         "U' a " R_ALG
-      },
-      //DBL
-      {
-         "U2 b " L_ALG,
-         "U2 c " R_ALG R_ALG R_ALG,
-         "U2 c " R_ALG
-      }
-   },
 
-   //UBR
-   {
-      //DFL
+      //UBL
       {
-         U2 ROT_Y_L R_ALG,
-         U2 L_ALG L_ALG L_ALG,
-         U2 L_ALG
+         //DFL
+         {
+            U_P L_ALG,
+            U_P L_ALG L_ALG L_ALG,
+            "U' b " R_ALG
+         },
+         //DFR
+         {
+            "U2 a " L_ALG,
+            U2 R_ALG R_ALG R_ALG,
+            U2 R_ALG
+         },
+         //DBR
+         {
+            "U c " L_ALG,
+            "U c " L_ALG L_ALG L_ALG,
+            "U a " R_ALG
+         },
+         //DBL
+         {
+            ROT_Y_L L_ALG,
+            ROT_Y_B R_ALG R_ALG R_ALG,
+            ROT_Y_B R_ALG
+         },
+      },
+      //DFL if in the down corner position and wrong, we need to take them out and re-insert them -- DOWN CORNERS added algorithms to finish table
+      {  
+         //DFL -- taking them out means they go to the UFL pos (for FL)
+         {
+            L_ALG L_ALG L_ALG L_ALG,   //se F em D -> U em U
+            "",      //trivialmente correcto, se branco para baixo e target é DFL
+            L_ALG L_ALG    // se L -> L
+         },
+         //DFR
+         {
+            L_ALG U_P R_ALG R_ALG R_ALG,
+            L_ALG U_P R_ALG,
+            L_ALG U_P ROT_Y_R L_ALG
+         },
+         //DBR
+         {
+            L_ALG U2 ROT_Y_B L_ALG L_ALG L_ALG,
+            L_ALG U2 ROT_Y_R R_ALG,
+            L_ALG U2 ROT_Y_B L_ALG
+         },
+         //DBL
+         {
+            L_ALG U ROT_Y_B R_ALG R_ALG R_ALG,
+            L_ALG U ROT_Y_B R_ALG,
+            L_ALG U ROT_Y_L L_ALG
+         }
       },
       //DFR
       {
-         U R_ALG,
-         U R_ALG R_ALG R_ALG,
-         U ROT_Y_R L_ALG
+         //DFL
+         {
+            R_ALG U L_ALG L_ALG L_ALG,
+            R_ALG U L_ALG,
+            R_ALG U ROT_Y_L R_ALG
+         },
+         //DFR
+         {
+            R_ALG R_ALG R_ALG R_ALG,
+            "",                           //trivialmente correcto
+            R_ALG R_ALG
+         },
+         //DBR
+         {
+            R_ALG U_P ROT_Y_B L_ALG L_ALG L_ALG,
+            R_ALG U_P ROT_Y_B L_ALG,
+            R_ALG U_P ROT_Y_R R_ALG
+         },
+         //DBL
+         {
+            R_ALG U2 ROT_Y_B R_ALG R_ALG R_ALG,
+            R_ALG U2 ROT_Y_L L_ALG,
+            R_ALG U2 ROT_Y_B R_ALG
+         }
       },
-      //DBR
-      {
-         ROT_Y_R R_ALG,
-         ROT_Y_B L_ALG L_ALG L_ALG,
-         ROT_Y_B L_ALG
-      },
-      //DBL
-      {
-         "U' c " R_ALG,
-         "U' c " R_ALG R_ALG R_ALG,
-         "U' b " L_ALG
-      }
-   },
 
-   //UBL
-   {
-      //DFL
-      {
-         U_P L_ALG,
-         U_P L_ALG L_ALG L_ALG,
-         "U' b " R_ALG
-      },
-      //DFR
-      {
-         "U2 a " L_ALG,
-         U2 R_ALG R_ALG R_ALG,
-         U2 R_ALG
-      },
       //DBR
-      {
-         "U c " L_ALG,
-         "U c " L_ALG L_ALG L_ALG,
-         "U a " R_ALG
+      {     //After taking corner out, we have UFL case 
+         //DFL Same as UFL -> DBR after rot and L_ALG
+         {
+            ROT_Y_B U2 ROT_Y_B L_ALG L_ALG L_ALG,
+            ROT_Y_B U2 ROT_Y_R R_ALG,
+            ROT_Y_B U2 ROT_Y_B L_ALG
+         },
+         //DFR  (UFL -> DBL)
+         {
+            ROT_Y_B L_ALG U ROT_Y_B R_ALG R_ALG R_ALG,
+            ROT_Y_B L_ALG U ROT_Y_B R_ALG,
+            ROT_Y_B L_ALG U ROT_Y_L L_ALG
+         },
+         //DBR (UFL -> DFL)
+         {
+            ROT_Y_B L_ALG L_ALG L_ALG L_ALG,
+            "",
+            ROT_Y_B L_ALG L_ALG
+         },
+         //DBL (UFL -> DFR)
+         {
+            ROT_Y_B L_ALG U_P R_ALG R_ALG R_ALG,
+            ROT_Y_B L_ALG U_P R_ALG,
+            ROT_Y_B L_ALG U_P ROT_Y_R L_ALG
+         }
       },
       //DBL
-      {
-         ROT_Y_L L_ALG,
-         ROT_Y_B R_ALG R_ALG R_ALG,
-         ROT_Y_B R_ALG
-      },
-   },
-   //DFL if in the down corner position and wrong, we need to take them out and re-insert them -- DOWN CORNERS added algorithms to finish table
-   {  
-      //DFL -- taking them out means they go to the UFL pos (for FL)
-      {
-         L_ALG L_ALG L_ALG L_ALG,   //se F em D -> U em U
-         "",      //trivialmente correcto, se branco para baixo e target é DFL
-         L_ALG L_ALG    // se L -> L
-      },
-      //DFR
-      {
-         L_ALG U_P R_ALG R_ALG R_ALG,
-         L_ALG U_P R_ALG,
-         L_ALG U_P ROT_Y_R L_ALG
-      },
-      //DBR
-      {
-         L_ALG U2 ROT_Y_B L_ALG L_ALG L_ALG,
-         L_ALG U2 ROT_Y_R R_ALG,
-         L_ALG U2 ROT_Y_B L_ALG
-      },
-      //DBL
-      {
-         L_ALG U ROT_Y_B R_ALG R_ALG R_ALG,
-         L_ALG U ROT_Y_B R_ALG,
-         L_ALG U ROT_Y_L L_ALG
+      {     //After taking corner out, we have UFR case 
+         //DFL (UFR -> DBR)
+         {
+            ROT_Y_B R_ALG U_P ROT_Y_B L_ALG L_ALG L_ALG,
+            ROT_Y_B R_ALG U_P ROT_Y_B L_ALG,
+            ROT_Y_B R_ALG U_P ROT_Y_R R_ALG
+         },
+         //DFR  (UFR -> DBL)
+         {
+            ROT_Y_B R_ALG U2 ROT_Y_B R_ALG R_ALG R_ALG,
+            ROT_Y_B R_ALG U2 ROT_Y_L L_ALG,
+            ROT_Y_B R_ALG U2 ROT_Y_B R_ALG
+         },
+         //DBR  (UFR -> DFL)
+         {
+            ROT_Y_B R_ALG U L_ALG L_ALG L_ALG,
+            ROT_Y_B R_ALG U L_ALG,
+            ROT_Y_B R_ALG U ROT_Y_L R_ALG
+         },
+         //DBL (UFR -> UFR)
+         {
+            ROT_Y_B R_ALG R_ALG R_ALG R_ALG,
+            "",                                  // trivialmente certo
+            ROT_Y_B R_ALG R_ALG
+         }
       }
-   },
-   //DFR
-   {
-      //DFL
-      {
-         R_ALG U L_ALG L_ALG L_ALG,
-         R_ALG U L_ALG,
-         R_ALG U ROT_Y_L R_ALG
-      },
-      //DFR
-      {
-         R_ALG R_ALG R_ALG R_ALG,
-         "",                           //trivialmente correcto
-         R_ALG R_ALG
-      },
-      //DBR
-      {
-         R_ALG U_P ROT_Y_B L_ALG L_ALG L_ALG,
-         R_ALG U_P ROT_Y_B L_ALG,
-         R_ALG U_P ROT_Y_R R_ALG
-      },
-      //DBL
-      {
-         R_ALG U2 ROT_Y_B R_ALG R_ALG R_ALG,
-         R_ALG U2 ROT_Y_L L_ALG,
-         R_ALG U2 ROT_Y_B R_ALG
-      }
-   },
+   };
 
-   //DBR
-   {     //After taking corner out, we have UFL case 
-      //DFL Same as UFL -> DBR after rot and L_ALG
-      {
-         ROT_Y_B U2 ROT_Y_B L_ALG L_ALG L_ALG,
-         ROT_Y_B U2 ROT_Y_R R_ALG,
-         ROT_Y_B U2 ROT_Y_B L_ALG
+   const char *const midle_edge_move_table[8][4][2] = {
+      //UB
+      {  
+         //FR
+         {
+            //U B
+            
+            ROT_Y_R SUB_MID_EDGE_LEFT,  //Front color to up
+            "U' " SUB_MID_EDGE_RIGHT //Front color to back
+         },
+         //FL
+         {
+            //U B
+            ROT_Y_L SUB_MID_EDGE_RIGHT, //Front color to up
+            "U " SUB_MID_EDGE_LEFT   //Front color to back
+         },
+         //BR
+         {
+            //U B
+            "U2 a " SUB_MID_EDGE_RIGHT, //Back color to up --added
+            "U' c " SUB_MID_EDGE_LEFT    //back color to back
+         },
+         //BL
+         {
+            //U B
+            "U2 b " SUB_MID_EDGE_LEFT, //Back color to up
+            "U c " SUB_MID_EDGE_RIGHT  //Back color to back ... to go to Left "U L' U' L U a R U R' U'"
+         }
+      },    
+      //UR
+      {   
+         //FR
+         {
+            //U R
+            "U' a " SUB_MID_EDGE_LEFT,  //front color to up //added
+            "U2 " SUB_MID_EDGE_RIGHT      //front color toright
+         },
+         //FL
+         {
+            //U R
+            "U' b " SUB_MID_EDGE_RIGHT,   //front color to up //Addeed
+            SUB_MID_EDGE_LEFT         //front color to right
+         },
+         //BR
+         {
+            //U R
+            "U a " SUB_MID_EDGE_RIGHT,      //back color to up     --added
+            "U2 c " SUB_MID_EDGE_LEFT      //back color to right   --added
+         },
+         //BL
+         {
+            //U R
+            "U b " SUB_MID_EDGE_LEFT,    //back color to up      --added
+            ROT_Y_B SUB_MID_EDGE_RIGHT         //back color to right   --added
+         }
+      }, 
+      //UF
+      {   
+         //FR
+         {
+            //U F
+            "U2 a " SUB_MID_EDGE_LEFT,   //Front color to up  -- da match ao centro da direita added
+            "U " SUB_MID_EDGE_RIGHT       //Front color to front
+         },
+         //FL
+         {
+            //U F
+            "U2 b " SUB_MID_EDGE_RIGHT,   //Front color to up  -- da match ao centro da esquerda added
+            "U' " SUB_MID_EDGE_LEFT      //Front color to front
+         },
+         //BR
+         {
+            //U F
+            ROT_Y_R SUB_MID_EDGE_RIGHT,        //Back color to up -- match centro da direita --added
+            "U c " SUB_MID_EDGE_LEFT       //Back color to front -- match cenntro de tras --added
+         },
+         //BL
+         {
+            //U F
+            ROT_Y_L SUB_MID_EDGE_LEFT,         //Back color to up -- match centro da esquerda
+            "U' c " SUB_MID_EDGE_RIGHT       //Back color to front -- match cenntro de tras --added
+         }
       },
-      //DFR  (UFL -> DBL)
-      {
-         ROT_Y_B L_ALG U ROT_Y_B R_ALG R_ALG R_ALG,
-         ROT_Y_B L_ALG U ROT_Y_B R_ALG,
-         ROT_Y_B L_ALG U ROT_Y_L L_ALG
+      //UL
+      {  
+         //FR
+         {
+            //U L 
+            "U a " SUB_MID_EDGE_LEFT,    //Front color to up -- match centro da direita  --added
+            SUB_MID_EDGE_RIGHT         //Front color to left -- match centro da frente
+         },
+         //FL
+         {
+            //U L
+            "U b " SUB_MID_EDGE_RIGHT, //--added
+            "U2 " SUB_MID_EDGE_LEFT
+         },
+         //BR
+         {
+            //U L
+            "U' a " SUB_MID_EDGE_RIGHT, //--added
+            ROT_Y_B SUB_MID_EDGE_LEFT   //--added
+         },
+         //BL
+         {
+            //U L
+            "U' b " SUB_MID_EDGE_LEFT,
+            "U2 c " SUB_MID_EDGE_RIGHT
+         }
       },
-      //DBR (UFL -> DFL)
-      {
-         ROT_Y_B L_ALG L_ALG L_ALG L_ALG,
-         "",
-         ROT_Y_B L_ALG L_ALG
+      
+      //FR
+      {   
+         //FR
+         {
+            //F R
+            "",             //trivialmente resolvido
+            SUB_MID_EDGE_RIGHT //cor trocada tirar fora
+         },
+         
+         //FL
+         {
+            //F R
+            SUB_MID_EDGE_RIGHT,
+            SUB_MID_EDGE_RIGHT
+         },
+         //BR
+         {
+            //F R
+            SUB_MID_EDGE_RIGHT,
+            SUB_MID_EDGE_RIGHT
+         },
+         //BL
+         {
+            //F R
+            SUB_MID_EDGE_RIGHT,
+            SUB_MID_EDGE_RIGHT
+         }
       },
-      //DBL (UFL -> DFR)
-      {
-         ROT_Y_B L_ALG U_P R_ALG R_ALG R_ALG,
-         ROT_Y_B L_ALG U_P R_ALG,
-         ROT_Y_B L_ALG U_P ROT_Y_R L_ALG
+      //FL
+      {   
+         //FR
+         {
+            //F L
+            SUB_MID_EDGE_LEFT,
+            SUB_MID_EDGE_LEFT
+         },        
+         //FL
+         {
+            //F L
+            "",         //solved
+            SUB_MID_EDGE_LEFT
+         },
+         //BR
+         {
+            //F L
+            SUB_MID_EDGE_LEFT,
+            SUB_MID_EDGE_LEFT
+         },
+         //BL
+         {
+            //F L
+            SUB_MID_EDGE_LEFT,
+            SUB_MID_EDGE_LEFT
+         }
+      },
+      //BR
+      {  
+         //FR
+         {
+            //B R
+            ROT_Y_B SUB_MID_EDGE_LEFT,
+            ROT_Y_B SUB_MID_EDGE_LEFT
+         },
+         //FL
+         {
+            //B R
+            ROT_Y_B SUB_MID_EDGE_LEFT,
+            ROT_Y_B SUB_MID_EDGE_LEFT
+         },
+         //BR
+         {
+            //B R
+            "",
+            ROT_Y_B SUB_MID_EDGE_LEFT
+         },
+         //BL
+         {
+            //U F
+            ROT_Y_B SUB_MID_EDGE_LEFT,
+            ROT_Y_B SUB_MID_EDGE_LEFT
+         }
+      },
+      //BL
+      {  
+         //FR
+         {
+            //B L
+            ROT_Y_B SUB_MID_EDGE_RIGHT,
+            ROT_Y_B SUB_MID_EDGE_RIGHT
+         },
+         //FL
+         {
+            //B L
+            ROT_Y_B SUB_MID_EDGE_RIGHT,
+            ROT_Y_B SUB_MID_EDGE_RIGHT
+         },
+         //BR
+         {
+            //B L
+            ROT_Y_B SUB_MID_EDGE_RIGHT,
+            ROT_Y_B SUB_MID_EDGE_RIGHT
+         },
+         //BL
+         {
+            //B L
+            "",
+            ROT_Y_B SUB_MID_EDGE_RIGHT
+         }
       }
-   },
-   //DBL
-   {     //After taking corner out, we have UFR case 
-      //DFL (UFR -> DBR)
-      {
-         ROT_Y_B R_ALG U_P ROT_Y_B L_ALG L_ALG L_ALG,
-         ROT_Y_B R_ALG U_P ROT_Y_B L_ALG,
-         ROT_Y_B R_ALG U_P ROT_Y_R R_ALG
-      },
-      //DFR  (UFR -> DBL)
-      {
-         ROT_Y_B R_ALG U2 ROT_Y_B R_ALG R_ALG R_ALG,
-         ROT_Y_B R_ALG U2 ROT_Y_L L_ALG,
-         ROT_Y_B R_ALG U2 ROT_Y_B R_ALG
-      },
-      //DBR  (UFR -> DFL)
-      {
-         ROT_Y_B R_ALG U L_ALG L_ALG L_ALG,
-         ROT_Y_B R_ALG U L_ALG,
-         ROT_Y_B R_ALG U ROT_Y_L R_ALG
-      },
-      //DBL (UFR -> UFR)
-      {
-         ROT_Y_B R_ALG R_ALG R_ALG R_ALG,
-         "",                                  // trivialmente certo
-         ROT_Y_B R_ALG R_ALG
-      }
-   }
-};
+   };
+
+#endif
 
 const char *const edge_move_table[N_EDGES][4][2] = {
     //UB
@@ -1061,224 +1290,3 @@ const char *const edge_move_table[N_EDGES][4][2] = {
    },
 };
 
-const char *const midle_edge_move_table[8][4][2] = {
-   //UB
-   {  
-      //FR
-      {
-         //U B
-         
-         ROT_Y_R SUB_MID_EDGE_LEFT,  //Front color to up
-         "U' " SUB_MID_EDGE_RIGHT //Front color to back
-      },
-      //FL
-      {
-         //U B
-         ROT_Y_L SUB_MID_EDGE_RIGHT, //Front color to up
-         "U " SUB_MID_EDGE_LEFT   //Front color to back
-      },
-      //BR
-      {
-         //U B
-         "U2 a " SUB_MID_EDGE_RIGHT, //Back color to up --added
-         "U' c " SUB_MID_EDGE_LEFT    //back color to back
-      },
-      //BL
-      {
-         //U B
-         "U2 b " SUB_MID_EDGE_LEFT, //Back color to up
-         "U c " SUB_MID_EDGE_RIGHT  //Back color to back ... to go to Left "U L' U' L U a R U R' U'"
-      }
-   },    
-   //UR
-   {   
-      //FR
-      {
-         //U R
-         "U' a " SUB_MID_EDGE_LEFT,  //front color to up //added
-         "U2 " SUB_MID_EDGE_RIGHT      //front color toright
-      },
-      //FL
-      {
-         //U R
-         "U' b " SUB_MID_EDGE_RIGHT,   //front color to up //Addeed
-         SUB_MID_EDGE_LEFT         //front color to right
-      },
-      //BR
-      {
-         //U R
-         "U a " SUB_MID_EDGE_RIGHT,      //back color to up     --added
-         "U2 c " SUB_MID_EDGE_LEFT      //back color to right   --added
-      },
-      //BL
-      {
-         //U R
-         "U b " SUB_MID_EDGE_LEFT,    //back color to up      --added
-         ROT_Y_B SUB_MID_EDGE_RIGHT         //back color to right   --added
-      }
-   }, 
-   //UF
-   {   
-      //FR
-      {
-         //U F
-         "U2 a " SUB_MID_EDGE_LEFT,   //Front color to up  -- da match ao centro da direita added
-         "U " SUB_MID_EDGE_RIGHT       //Front color to front
-      },
-      //FL
-      {
-         //U F
-         "U2 b " SUB_MID_EDGE_RIGHT,   //Front color to up  -- da match ao centro da esquerda added
-         "U' " SUB_MID_EDGE_LEFT      //Front color to front
-      },
-      //BR
-      {
-         //U F
-         ROT_Y_R SUB_MID_EDGE_RIGHT,        //Back color to up -- match centro da direita --added
-         "U c " SUB_MID_EDGE_LEFT       //Back color to front -- match cenntro de tras --added
-      },
-      //BL
-      {
-         //U F
-         ROT_Y_L SUB_MID_EDGE_LEFT,         //Back color to up -- match centro da esquerda
-         "U' c " SUB_MID_EDGE_RIGHT       //Back color to front -- match cenntro de tras --added
-      }
-   },
-   //UL
-   {  
-      //FR
-      {
-         //U L 
-         "U a " SUB_MID_EDGE_LEFT,    //Front color to up -- match centro da direita  --added
-         SUB_MID_EDGE_RIGHT         //Front color to left -- match centro da frente
-      },
-      //FL
-      {
-         //U L
-         "U b " SUB_MID_EDGE_RIGHT, //--added
-         "U2 " SUB_MID_EDGE_LEFT
-      },
-      //BR
-      {
-         //U L
-         "U' a " SUB_MID_EDGE_RIGHT, //--added
-         ROT_Y_B SUB_MID_EDGE_LEFT   //--added
-      },
-      //BL
-      {
-         //U L
-         "U' b " SUB_MID_EDGE_LEFT,
-         "U2 c " SUB_MID_EDGE_RIGHT
-      }
-   },
-   
-   //FR
-   {   
-      //FR
-      {
-         //F R
-         "",             //trivialmente resolvido
-         SUB_MID_EDGE_RIGHT //cor trocada tirar fora
-      },
-      
-      //FL
-      {
-         //F R
-         SUB_MID_EDGE_RIGHT,
-         SUB_MID_EDGE_RIGHT
-      },
-      //BR
-      {
-         //F R
-         SUB_MID_EDGE_RIGHT,
-         SUB_MID_EDGE_RIGHT
-      },
-      //BL
-      {
-         //F R
-         SUB_MID_EDGE_RIGHT,
-         SUB_MID_EDGE_RIGHT
-      }
-   },
-   //FL
-   {   
-      //FR
-      {
-         //F L
-         SUB_MID_EDGE_LEFT,
-         SUB_MID_EDGE_LEFT
-      },        
-      //FL
-      {
-         //F L
-         "",         //solved
-         SUB_MID_EDGE_LEFT
-      },
-      //BR
-      {
-         //F L
-         SUB_MID_EDGE_LEFT,
-         SUB_MID_EDGE_LEFT
-      },
-      //BL
-      {
-         //F L
-         SUB_MID_EDGE_LEFT,
-         SUB_MID_EDGE_LEFT
-      }
-   },
-   //BR
-   {  
-      //FR
-      {
-         //B R
-         ROT_Y_B SUB_MID_EDGE_LEFT,
-         ROT_Y_B SUB_MID_EDGE_LEFT
-      },
-      //FL
-      {
-         //B R
-         ROT_Y_B SUB_MID_EDGE_LEFT,
-         ROT_Y_B SUB_MID_EDGE_LEFT
-      },
-      //BR
-      {
-         //B R
-         "",
-         ROT_Y_B SUB_MID_EDGE_LEFT
-      },
-      //BL
-      {
-         //U F
-         ROT_Y_B SUB_MID_EDGE_LEFT,
-         ROT_Y_B SUB_MID_EDGE_LEFT
-      }
-   },
-   //BL
-   {  
-      //FR
-      {
-         //B L
-         ROT_Y_B SUB_MID_EDGE_RIGHT,
-         ROT_Y_B SUB_MID_EDGE_RIGHT
-      },
-      //FL
-      {
-         //B L
-         ROT_Y_B SUB_MID_EDGE_RIGHT,
-         ROT_Y_B SUB_MID_EDGE_RIGHT
-      },
-      //BR
-      {
-         //B L
-         ROT_Y_B SUB_MID_EDGE_RIGHT,
-         ROT_Y_B SUB_MID_EDGE_RIGHT
-      },
-      //BL
-      {
-         //B L
-         "",
-         ROT_Y_B SUB_MID_EDGE_RIGHT
-      }
-   }
-};

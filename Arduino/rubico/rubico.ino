@@ -11,20 +11,15 @@ Servo R_ROT;    // rodar direita  // fica flat nos 86 ?
 //posso encolher o código com um método get_grip
 //que ao dar o endereço de memória do L_ROT ou R_ROT devolve L_GRIP ou R_GRIP
 //posso unificar y e yp tendo em conta a posição de inicio da rotação
-//voltar a ver os moves do z para não fazer cenas parvas
+//voltar a ver os moves do z,f,u,r,b para não fazer moves desnecessários
 uint8_t pinos[] = {5, 6, 10, 11};
 Servo* servos[] = {&L_GRIP, &L_ROT, &R_GRIP, &R_ROT};
-
-// constexpr uint8_t L_GRIP = 5;
-// constexpr uint8_t L_ROT = 6;
-// constexpr uint8_t R_GRIP = 10;
-// constexpr uint8_t R_ROT = 11;
 
 constexpr uint8_t NUM_SERVOS = 4;
 constexpr uint8_t POS_INICIAL = 90;
 constexpr uint8_t ROT_MAX = 180;
 constexpr uint8_t ROT_MIN = 0;
-constexpr uint8_t ROT_MIN_ROLL = 10;
+constexpr uint8_t ROT_MIN_ROLL = 0;
 
 constexpr uint8_t GRIP_MAX = 15;
 constexpr uint8_t GRIP_MIN = 90;
@@ -37,28 +32,15 @@ constexpr uint8_t GRIP_RIGHT_IDLE = 35;
 constexpr uint8_t GRIP_MOVE_LEFT = 20;
 constexpr uint8_t GRIP_MOVE_RIGHT = 25;
 
-
-// constexpr uint8_t GRIP_LEFT_SOLO = 20;  //bem       //20/25 nos moves direitod ta bom
-// uint8_t GRIP_RIGHT_SOLO = 20; //esforço   //25/20 nos moves esquerdos não
-// uint8_t GRIP_LEFT_MOVE = 25;  //esforço
-// constexpr uint8_t GRIP_RIGHT_MOVE = 25; //bem
 constexpr uint16_t MOVE_TIME = 500;
 constexpr uint16_t GRIP_TIME = 300;
 
-// constexpr uint8_t GRIP      = 15;
-// constexpr uint8_t UNGRIP    = 90;
-// constexpr uint8_t IDLEGRIP  = 30;
-
-// constexpr uint8_t L         = 180;
-// constexpr uint8_t L_P       = 0;
-// constexpr uint8_t D         = 180;
-// constexpr uint8_t D_P       = 0;
-
+//não funciona no terminal do arduino, mas funciona no do vscode e outros
 constexpr char COR_RESET[]   = "\033[0m";  // Volta à cor padrão
 constexpr char COR_VERMELHO[] = "\033[31m"; // Texto Vermelho
 constexpr char COR_VERDE[]    = "\033[32m"; // Texto Verde
 constexpr char COR_AMARELO[]  = "\033[93m"; // Texto Amarelo
-constexpr char COR_LARANJA[]  = "\033[38;5;208m"; // Texto Laranja Vivo (Garantido no VS Code)
+constexpr char COR_LARANJA[]  = "\033[38;5;208m"; // Texto Laranja 
 
 const char* cores[4] = {COR_VERDE,COR_AMARELO,COR_LARANJA,COR_VERMELHO};
 
@@ -95,7 +77,11 @@ void setup() {
   Serial.print(COR_VERDE);
   Serial.print("Pronto! ");
   Serial.print(COR_RESET);
-  Serial.println("Formato esperado: <pino>,<graus>");
+  #ifdef TEST
+    Serial.println("Formato esperado: <pino>,<graus>");
+  #else 
+    Serial.println("Formato esperado: -<move>  Ex: -L -L' -L2 ");
+  #endif
 }
 
 void loop() {
@@ -103,15 +89,15 @@ void loop() {
     String comando = Serial.readStringUntil('\n');
     comando.trim(); 
 
-    // Filtrar o "lixo" da UART
-    // Se a string for muito curta (menor que "5,0") ignora silenciosamente
-    if (comando.length() < 3) {
-      return; 
-    }
-
-    int indiceVirgula = comando.indexOf(',');
-    
     #ifdef TEST
+      // Filtrar o "lixo" da UART
+      // Se a string for muito curta (menor que "5,0") ignora silenciosamente
+
+      if (comando.length() < 3) {
+        return; 
+      }
+      int indiceVirgula = comando.indexOf(',');
+
       // Só processa se existir uma vírgula
       if (indiceVirgula > 0) {
         int pinoAlvo = comando.substring(0, indiceVirgula).toInt();
@@ -150,11 +136,16 @@ void loop() {
         }
       } 
     #else
-      if (indiceVirgula > 0) {
-        String move = comando.substring(indiceVirgula + 1);
+      if (comando.length() < 2) {
+        return; 
+      }
+      int indx = comando.indexOf('-');
+
+      if (indx == 0) {
+        String move = comando.substring(indx + 1);
 
         switch (move[0]) {
-          case 'd':
+          case 'D':
             switch(move[1]){
               case '\'':
                 move_dp();
@@ -167,7 +158,7 @@ void loop() {
                 break;            
             }
             break;
-          case 'l':
+          case 'L':
             switch(move[1]){
               case '\'':
                 move_lp();
@@ -180,7 +171,7 @@ void loop() {
                 break;            
             }
             break;
-          case 'f':
+          case 'F':
             rot_y();
             switch(move[1]){
               case '\'':
@@ -195,7 +186,7 @@ void loop() {
             }
             rot_yp();
             break;
-          case 'b':
+          case 'B':
             rot_yp();
             switch(move[1]){
               case '\'':
@@ -210,9 +201,8 @@ void loop() {
             }
             rot_y();
             break;
-          case 'r':
-            rot_y();
-            rot_y();
+          case 'R':
+            rot_y2();
             switch(move[1]){
               case '\'':
                 move_lp();
@@ -224,10 +214,9 @@ void loop() {
                 move_l();
                 break;            
             }
-            rot_yp();
-            rot_yp();
+            rot_y2();
             break;
-          case 'u':
+          case 'U':
             rot_xp();
             rot_y();
             switch(move[1]){
@@ -248,16 +237,12 @@ void loop() {
             switch(move[1]) {
               case '\'':
                 rot_yp();
-                iddle_grip_cube();
-                grip_cube();
                 break;
               case '2':
                 rot_y2();
                 break;
               default:
                 rot_y();
-                iddle_grip_cube();
-                grip_cube();
                 break;
             }
             break;
@@ -265,8 +250,6 @@ void loop() {
             switch(move[1]) {
               case '\'':
                 rot_xp();
-                iddle_grip_cube();
-                grip_cube();
                 break;
               case '2':
                 rot_x2();
@@ -283,8 +266,6 @@ void loop() {
                 break;
               case '2':
                 rot_z2();
-                iddle_grip_cube();
-                grip_cube();
                 break;
               default:
                 rot_z();
@@ -300,34 +281,17 @@ void loop() {
                 grip_cube();
                 break;
             }
-          // case 'e': 
-          //   switch (move[1])
-          //   {
-          //   case 'l':
-          //     //uint16_t grip_s = 
-          //     GRIP_LEFT_MOVE = comando.substring(indiceVirgula+3).toInt();
-          //     Serial.print("Set GRIP_LEFT_MOVE Strength to: ");
-          //     Serial.println(GRIP_LEFT_MOVE);
-          //     /* code */
-          //     break;
-          //   case 'r':
-          //     //uint16_t grip_s = comando.substring(2).toInt();
-          //     GRIP_RIGHT_SOLO = comando.substring(indiceVirgula+3).toInt();
-          //     Serial.print("Set GRIP_RIGHT_SOLO Strength to: ");
-          //     Serial.println(GRIP_RIGHT_SOLO);
-          //     break;
-          //   default:
-          //     break;
-          //   }
             break;
           default:
             break;
         }
+        
       }
     #endif
 
   }
 }
+
 
 void print_aviso(){
     Serial.print(COR_AMARELO);
@@ -395,20 +359,22 @@ void ungrip(Servo &g){
   delay(MOVE_TIME);
 }
 
-// void idlegrip(Servo &s) {
-//   if(&s==&L_GRIP ){
-//     s.write(GRIP_LEFT_IDLE);
-//     delay(MOVE_TIME);
-//   }
-//   else if(&s==&R_GRIP) {
-//     s.write(GRIP_RIGHT_IDLE);
-//     delay(MOVE_TIME);
-//   }
-//   // if(&s==&L_GRIP | &s==&R_GRIP) {
-//   //   s.write(30);
-//   //   delay(MOVE_TIME);
-//   // }
-// }
+void grip_cube(){
+  grip(R_GRIP,GRIP_MOVE_LEFT);
+  grip(L_GRIP,GRIP_MOVE_RIGHT);
+}
+
+void iddle_grip_cube(){
+  grip(L_GRIP,GRIP_LEFT_IDLE);
+  grip(R_GRIP,GRIP_RIGHT_IDLE);
+}
+
+void regrip(){
+  if((R_ROT.read()==POS_INICIAL) & (L_ROT.read()==POS_INICIAL)) {
+    iddle_grip_cube();
+    grip_cube();
+  }
+}
 
 /*  Wrapper around write for rotating servos
     checks rot_angle to see if it's inside range before turning
@@ -507,7 +473,9 @@ void move_l() {
     */ 
     reposition(L_GRIP,L_ROT,GRIP_MOVE_LEFT,ROT_MIN,true);
     move_l();
+    return;
   }
+  regrip();
 }
 
 void move_lp(){
@@ -526,8 +494,9 @@ void move_lp(){
     Serial.println("Repositioning...");
     reposition(L_GRIP,L_ROT,GRIP_MOVE_LEFT,ROT_MAX,true);
     move_lp();
+    return;
   }
-
+  regrip();
 }
 
 void move_l2(){
@@ -548,6 +517,7 @@ void move_l2(){
     
     write_rotation(L_ROT,ROT_MAX);
   }
+  regrip();
 }
 
 void move_d() {
@@ -568,6 +538,7 @@ void move_d() {
     reposition(R_GRIP,R_ROT,GRIP_MOVE_RIGHT,ROT_MIN,true);
     move_d();
   }
+  regrip();
 }
 
 void move_dp() {
@@ -588,7 +559,7 @@ void move_dp() {
     reposition(R_GRIP,R_ROT,GRIP_MOVE_RIGHT,ROT_MAX,true);
     move_dp();
   }
-  //meter erro aqui
+  regrip();
 }
 
 void move_d2(){
@@ -610,16 +581,7 @@ void move_d2(){
     
     write_rotation(R_ROT,ROT_MAX);
   }
-}
-
-void grip_cube(){
-  grip(R_GRIP,GRIP_MOVE_LEFT);
-  grip(L_GRIP,GRIP_MOVE_RIGHT);
-}
-
-void iddle_grip_cube(){
-  grip(L_GRIP,GRIP_LEFT_IDLE);
-  grip(R_GRIP,GRIP_RIGHT_IDLE);
+  regrip();
 }
 
 
@@ -628,7 +590,7 @@ void rot_y() {
   /*
     se for 180, é só largar o esquerdo e mover
     se for se for 0 é meter a 180, largar o esquerdo e mover
-    se for 90 pre_move no l 1º porque não sabe onde ele está
+    se for 90 pre_move no L 1º porque não sabe onde ele está
     no caso de ser 180 ou 0 sabemos que a outra garra está a 90º
   */
   uint8_t r_pos =  R_ROT.read();
@@ -649,7 +611,7 @@ void rot_y() {
   
   Serial.println("Grip Left");
   grip(L_GRIP,GRIP_MOVE_LEFT);
-
+  regrip();
 }
 
 //left to front
@@ -657,7 +619,7 @@ void rot_yp() {
   /*
     se for 0, é só largar o esquerdo e mover
     se for se for 180 é meter a 0, largar o esquerdo e mover
-    se for 90 pre_move no l 1º porque não sabe onde ele está
+    se for 90 pre_move no L 1º porque não sabe onde ele está
     no caso de ser 180 ou 0 sabemos que a outra garra está a 90º
   */
   uint8_t r_pos =  R_ROT.read();
@@ -678,8 +640,8 @@ void rot_yp() {
   
   Serial.println("Grip Left");
   grip(L_GRIP,GRIP_MOVE_LEFT);
+  regrip();
 }
-
 
 void rot_y2(){
   /*
@@ -712,6 +674,7 @@ void rot_y2(){
 
   Serial.println("Reposition Right...");
   reposition(R_GRIP,R_ROT,GRIP_MOVE_RIGHT,POS_INICIAL,true);
+  regrip();
 }
 
 //front to up
@@ -719,7 +682,7 @@ void rot_x(){
   /*
     se for 180, é só largar o esquerdo e mover
     se for se for 0 é meter a 180, largar o esquerdo e mover
-    se for 90 pre_move no l 1º porque não sabe onde ele está
+    se for 90 pre_move no L 1º porque não sabe onde ele está
     no caso de ser 180 ou 0 sabemos que a outra garra está a 90º
   */
   uint8_t l_pos = L_ROT.read();
@@ -740,34 +703,36 @@ void rot_x(){
   
   Serial.println("Grip Right");
   grip(R_GRIP,GRIP_MOVE_RIGHT);
+  regrip();
 }
 
 //back to up
 void rot_xp(){
-      /*
-      se for 180, é só largar o esquerdo e mover
-      se for se for 0 é meter a 180, largar o esquerdo e mover
-      se for 90 pre_move no l 1º porque não sabe onde ele está
-      no caso de ser 180 ou 0 sabemos que a outra garra está a 90º
-    */
-    uint8_t l_pos = L_ROT.read();
-    if(l_pos==POS_INICIAL) {
-      pre_move(L_ROT,true);
-    }
+    /*
+    se for 180, é só largar o esquerdo e mover
+    se for se for 0 é meter a 180, largar o esquerdo e mover
+    se for 90 pre_move no L 1º porque não sabe onde ele está
+    no caso de ser 180 ou 0 sabemos que a outra garra está a 90º
+  */
+  uint8_t l_pos = L_ROT.read();
+  if(l_pos==POS_INICIAL) {
+    pre_move(L_ROT,true);
+  }
 
-    if(l_pos!=ROT_MIN_ROLL) {
-      Serial.println("Repositioning Left...");
-      reposition(L_GRIP,L_ROT,GRIP_SOLO_LEFT,ROT_MIN_ROLL,true);  //right is gripped at the end
-    }
+  if(l_pos!=ROT_MIN_ROLL) {
+    Serial.println("Repositioning Left...");
+    reposition(L_GRIP,L_ROT,GRIP_SOLO_LEFT,ROT_MIN_ROLL,true);  //right is gripped at the end
+  }
 
-    Serial.println("Ungrip Right");
-    ungrip(R_GRIP);
+  Serial.println("Ungrip Right");
+  ungrip(R_GRIP);
 
-    Serial.println("Rotating Left: Front face to Up");
-    write_rotation(L_ROT,POS_INICIAL);
-    
-    Serial.println("Grip Right");
-    grip(R_GRIP,GRIP_MOVE_RIGHT);
+  Serial.println("Rotating Left: Front face to Up");
+  write_rotation(L_ROT,POS_INICIAL);
+  
+  Serial.println("Grip Right");
+  grip(R_GRIP,GRIP_MOVE_RIGHT);
+  regrip();
 }
 
 //down to up
@@ -802,6 +767,7 @@ void rot_x2(){
 
   Serial.println("Reposition Left...");
   reposition(L_GRIP,L_ROT,GRIP_MOVE_LEFT,POS_INICIAL,true);
+  regrip();
 }
 
 //left to up
@@ -821,115 +787,6 @@ void rot_zp(){
 //down to up 
 void rot_z2(){
   rot_x2();
+  regrip();
   rot_y2();
 }
-
-//left to up
-// void rot_z() {
-//   //rot_xp();
-//   Serial.println("Ungrip Right");
-//   ungrip(R_GRIP);
-//   Serial.println("Rotating Left - Back face to Up");
-  
-//   move_l();
-
-//   Serial.println("Grip Right");
-//   grip(R_GRIP,GRIP_SOLO);
-//   //reposition left
-//   Serial.println("Reposition Left");
-//   ungrip(L_GRIP);
-//   L_ROT.write(POS_INICIAL);
-//   delay(MOVE_TIME);
-
-//   //rot_yp 1st move é ungrip left
-//   move_d();
-  
-//   Serial.println("Grip Left");
-//   grip(L_GRIP,GRIP_SOLO);
-//   Serial.println("Reposition Right");
-//   ungrip(R_GRIP);
-//   R_ROT.write(POS_INICIAL);
-//   delay(MOVE_TIME);
-  
-//   // rot_x(); 1º move é ungrip right
-//   move_lp();
-//   //delay(MOVE_TIME);
-  
-//   Serial.println("Grip Right");
-//   grip(R_GRIP,GRIP_SOLO);
-//   Serial.println("Reposition Left");
-//   reposition(L_GRIP,L_ROT,GRIP_MOVE_LEFT);
-// }
-
-// //right to up
-// void rot_zp() {
-//   //rot_xp();
-//   Serial.println("Ungrip Right");
-//   ungrip(R_GRIP);
-//   Serial.println("Rotating Left - Back face to Up");
-//   move_l();
-//   Serial.println("Grip Right");
-//   grip(R_GRIP,GRIP_SOLO);
-//   //reposition left
-//   Serial.println("Reposition Left");
-//   ungrip(L_GRIP);
-//   L_ROT.write(POS_INICIAL);
-//   delay(MOVE_TIME);
-//   //rot_y();
-//   move_dp();
-//   Serial.println("Grip Left");
-//   grip(L_GRIP,GRIP_SOLO);
-//   Serial.println("Reposition Right");
-//   ungrip(R_GRIP);
-//   R_ROT.write(POS_INICIAL);
-//   delay(MOVE_TIME);
-//   //rot_x();
-//   move_lp();
-//   //delay(MOVE_TIME);
-//   Serial.println("Grip Right");
-//   grip(R_GRIP,GRIP_SOLO);
-//   Serial.println("Reposition Left");
-//   reposition(L_GRIP,L_ROT,GRIP_MOVE_LEFT);
-// }
-
-// //down to up (cube flip)
-// void rot_z2(){
-//   //rot_x()twice;
-//   ungrip(L_GRIP);
-//   L_ROT.write(180);
-//   delay(MOVE_TIME);
-
-//   grip(L_GRIP,GRIP_SOLO);
-//   ungrip(R_GRIP);
-//   L_ROT.write(0);
-//   delay(MOVE_TIME);
-  
-//   Serial.println("Grip Right");
-//   grip(R_GRIP,GRIP_SOLO);
-  
-//   Serial.println("Reposition Left");
-//   reposition(L_GRIP,L_ROT,GRIP_SOLO);
-
-//   //rot_y(); twice
-//   Serial.println("Ungrip Right");
-//   ungrip(R_GRIP);
-//   R_ROT.write(0);
-//   delay(MOVE_TIME);
-
-//   Serial.println("Grip Right");
-//   grip(R_GRIP,GRIP_SOLO);
-
-//   Serial.println("Ungrip Left");
-//   ungrip(L_GRIP);
-
-//   R_ROT.write(180);
-//   delay(MOVE_TIME);
-//   Serial.println("Grip Left");
-//   grip(L_GRIP,GRIP_SOLO);
-//   Serial.println("Reposition Right");
-//   reposition(R_GRIP,R_ROT,GRIP_MOVE_RIGHT);
-// }
-
-//y L' U' L 
-//já tenho a face esquerda na esquerda
-//
