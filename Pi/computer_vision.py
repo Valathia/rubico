@@ -14,6 +14,7 @@ import math
 
 #Falta pegar rodar e tirar a foto
 
+#definição usada pelo computer vision. a numeração no nosso bit-board não é esta
 #0 = U 
 #1 = R
 #2 = F 

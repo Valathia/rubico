@@ -15,6 +15,15 @@ MAKE_RUBICO = "./Solver/make_rubico.sh"
 PORTA = "/dev/tty.usbmodem101"  #mudar para a porta de usb do raspberry pi
 BAUD_RATE = 115200
 
+seta_cima = "\u2191"
+seta_baixo = "\u2193"
+seta_dupla_vert = "\u2195"
+seta_esquerda = "\u2190"
+seta_direita = "\u2192"
+seta_dupla_hor = "\u2194"
+seta_curva_c = "\u21BB"
+seta_curva_cc = "\u21BA"
+
 back_moves = {
     "L":    "L'",
     "L'":   "L" ,
@@ -45,6 +54,35 @@ back_moves = {
     "z2":   "z2",     
 }
 
+move_to_human = {
+    "L":    "L",
+    "L'":   "L'" ,
+    "L2":   "L2",
+    "D":    "D",
+    "D'":   "D'" ,
+    "D2":   "D2",
+    "U":    "U",    
+    "U'":   "U'" ,
+    "U2":   "U2",
+    "R":    "R",  
+    "R'":   "R'" ,
+    "R2":   "R2",
+    "B":    "B",   
+    "B'":   "B'" ,
+    "B2":   "B2",
+    "F":    "F",   
+    "F'":   "F'" ,
+    "F2":   "F2",
+    "y":    f"Rotate Right Face to Front {seta_esquerda}",
+    "y'":   f"Rotate Left Face to Front {seta_direita}" ,
+    "y2":   f"Rotate Back Face to Front {seta_dupla_hor}",
+    "x":    f"Rotate Front Face to Up {seta_cima}",
+    "x'":   f"Rotate Back Face to Up {seta_baixo}" ,
+    "x2":   f"Rotate Down Face to Up {seta_dupla_vert}",
+    "z":    f"Rotate Left Face to Up {seta_curva_c}",      
+    "z'":   f"Rotate Right Face to Up {seta_curva_cc}" ,     
+    "z2":   f"Rotate Down Face to Up {seta_curva_c}{seta_curva_c}",     
+}
 
 COR_RESET    = "\033[0m"           #Volta à cor padrão
 COR_VERMELHO = "\033[31m"          #Texto Vermelho
