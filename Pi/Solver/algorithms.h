@@ -3,20 +3,19 @@
 
 #include "config.h"
                //F R U R' U' F'
-               //F D L D_P L_P F'
+               //F D L D_P L_P F'.    u'
 #define L_ALG_P         L D L_P D_P 
 #define L_ALG_P_I       D L D_P L_P
 #define FAKE_R_ALG      L_P D_P L D 
 
 #define HOOK            "F U R U' R' F' "
-#define HOOK_RUBICO     ROT_Y_R L ROT_Y_L L_ALG_P_I ROT_Y_R L_P ROT_Y_L
+#define HOOK_RUBICO     F L_ALG_P_I F_P
 #define R_ALG           "R U R' U' "
 #define L_ALG           "L' U' L U "
 #define NIKLAS          "R U' L' U R' U' L U "
 #define SONE            "R U R' U R U2 R' "
 #define SONE_RUBICO      L D L_P D L D2 L_P
-//#define NIKLAS_RUBICO   ROT_Y_L ROT_Y_L L_P ROT_Y_R ROT_Y_R D L D_P ROT_Y_L ROT_Y_L L ROT_Y_R ROT_Y_R D L_P D_P
-#define NIKLAS_RUBICO  L D_P ROT_Y_R ROT_Y_R L_P ROT_Y_L ROT_Y_L  D L_P D_P ROT_Y_R ROT_Y_R L ROT_Y_L ROT_Y_L D
+#define NIKLAS_RUBICO    L D_P R_P D L_P D_P R D
 
 //L D' R' D L' D' R D
 
