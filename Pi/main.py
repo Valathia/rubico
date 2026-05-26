@@ -17,7 +17,8 @@ BAUD_RATE = 115200
 
 
 def compile_rubico():
-    subprocess.run(MAKE_RUBICO)
+    subprocess.run([MAKE_RUBICO],capture_output=True,
+        text=True)
 
 def run_solver(cube_string):
 
@@ -54,7 +55,7 @@ def main():
         print("verificar porta de conexão do Arduino\n")
 
 
-    arduino.close_serial()
+    # arduino.close_serial()
 
 if __name__ == "__main__":
     sys.exit(main())
