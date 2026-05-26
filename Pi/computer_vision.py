@@ -1,5 +1,5 @@
 
-import arduino_interface 
+from arduino_interface import arduino_connection as con
 from PIL import ImageFont
 from PIL import Image
 from picamera import PiCamera
@@ -206,12 +206,12 @@ def get_sticker():
     print(masterstring)
     return masterstring
 
-def get_cube(arduino:arduino_connection):
+def get_cube(arduino:con):
 
     arduino.send_comand("g")
     camera.capture(HOME + 'Cube/face1.jpg')
 
-    arduino.send_comand(arduino,"y'")
+    arduino.send_comand("y'")
     camera.capture(HOME + 'Cube/face2.jpg')    
 
     arduino.send_comand("y'")
@@ -233,7 +233,7 @@ def get_cube(arduino:arduino_connection):
     arduino.send_comand("z'")
 
 
-def scan_cube(arduino:arduino_connection): 
+def scan_cube(arduino:con): 
     #global message
     # with canvas(device) as draw:
     #     draw.text((5, 0), "Scanning..." , fill="white")

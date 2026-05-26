@@ -1,5 +1,5 @@
 import computer_vision as cv
-import arduino_interface
+from arduino_interface import arduino_connection as ard_con
 import sys
 import subprocess
 
@@ -42,7 +42,7 @@ def run_solver(cube_string):
 
 def main():
     compile_rubico()
-    arduino = arduino_interface.arduino_connection(PORTA,BAUD_RATE)
+    arduino = ard_con(PORTA,BAUD_RATE)
     
     if(arduino.conn!=None):
         cube_string:str = cv.scan_cube(arduino)
