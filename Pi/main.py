@@ -45,6 +45,14 @@ back_moves = {
     "z2":   "z2",     
 }
 
+
+COR_RESET    = "\033[0m"           #Volta à cor padrão
+COR_VERMELHO = "\033[31m"          #Texto Vermelho
+COR_VERDE    = "\033[32m"          #Texto Verde
+COR_AMARELO  = "\033[93m"          #Texto Amarelo
+COR_LARANJA  = "\033[38;5;208m"    #Texto Laranja 
+COR_CIANO    = "\033[36m"
+
 class solve_state:
     def __init__(self,arduino_con:ard_con,cube_string:str,solution:str) -> None:
         self.conn = arduino_con
@@ -100,7 +108,7 @@ def run_solver(cube_string):
     
     if result.returncode != 0:
         
-        print("\nFail: ")
+        print(f"\n{COR_VERMELHO}Fail:{COR_RESET}")
         print(result.stderr.strip())
         sys.exit(result.returncode)
 
@@ -129,7 +137,7 @@ def main():
 
         arduino.close_serial()
     else:
-        print("verificar porta de conexão do Arduino\n")
+        print(f"Verificar {COR_VERMELHO}porta de conexão{COR_RESET} do Arduino\n")
 
 
 if __name__ == "__main__":
