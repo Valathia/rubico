@@ -1,8 +1,7 @@
 
-import arduino_interface
+import arduino_interface 
 from PIL import ImageFont
 from PIL import Image
-import serial
 from picamera import PiCamera
 import time
 import math
@@ -28,10 +27,6 @@ import math
 #       R->y'->F->y'->L->y'->B-> x y' ->D-> y2 ->U
 #no fim queremos U em cima e verde na F do robot
 #   x2 z'
-
-PORTA_MAC = arduino_interface.PORTA_MAC
-BAUD_RATE = arduino_interface.BAUD_RATE
-
 
 HOME = ""
 
@@ -211,54 +206,39 @@ def get_sticker():
     print(masterstring)
     return masterstring
 
-def get_cube():
+def get_cube(arduino:arduino_connection):
 
-    try:
-        # 1. Abre a porta serial
-        print(f"A abrir ligação com o Arduino em {PORTA_MAC}...")
-        arduino = serial.Serial(PORTA_MAC, BAUD_RATE, timeout=1)
+    arduino.send_comand("g")
+    camera.capture(HOME + 'Cube/face1.jpg')
 
-        # 2. CRUCIAL: O Arduino Uno reinicia sempre que a porta serial é aberta.
-        # Precisamos de esperar 2 segundos para o bootloader terminar antes de enviar dados.
-        time.sleep(7)
-        print("Ligação estabelecida! Arduino pronto.")
+    arduino.send_comand(arduino,"y'")
+    camera.capture(HOME + 'Cube/face2.jpg')    
 
-        arduino_interface.send_comand(arduino,"g")
-        camera.capture(HOME + 'Cube/face1.jpg')
+    arduino.send_comand("y'")
+    camera.capture(HOME + 'Cube/face4.jpg')
 
-        arduino_interface.send_comand(arduino,"y'")
-        camera.capture(HOME + 'Cube/face2.jpg')    
+    arduino.send_comand("y'")
+    camera.capture(HOME + 'Cube/face5.jpg')
 
-        arduino_interface.send_comand(arduino,"y'")
-        camera.capture(HOME + 'Cube/face4.jpg')
+    arduino.send_comand("x")
+    arduino.send_comand("y'")
+    camera.capture(HOME + 'Cube/face3.jpg')
 
-        arduino_interface.send_comand(arduino,"y'")
-        camera.capture(HOME + 'Cube/face5.jpg')
-
-        arduino_interface.send_comand(arduino,"x")
-        arduino_interface.send_comand(arduino,"y'")
-        camera.capture(HOME + 'Cube/face3.jpg')
-
-        arduino_interface.send_comand(arduino,"y2")
-        camera.capture(HOME + 'Cube/face0.jpg')
+    arduino.send_comand("y2")
+    camera.capture(HOME + 'Cube/face0.jpg')
 
 
-        #deixa o cubo com a frente no verde e o up no branco
-        arduino_interface.send_comand(arduino,"x2")
-        arduino_interface.send_comand(arduino,"z'")
-        # 6. Fecha a porta de forma limpa
-        arduino.close()
-        print("Ligação fechada.")
+    #deixa o cubo com a frente no verde e o up no branco
+    arduino.send_comand("x2")
+    arduino.send_comand("z'")
 
-    except serial.SerialException as e:
-        print(f"Erro ao aceder à porta serial: {e}")
 
-def scan_cube(): 
+def scan_cube(arduino:arduino_connection): 
     #global message
     # with canvas(device) as draw:
     #     draw.text((5, 0), "Scanning..." , fill="white")
     
-    get_cube() 
+    get_cube(arduino) 
     
     # with canvas(device) as draw:
     #     draw.text((5, 0), "Analysing..." , fill="white")
@@ -267,41 +247,3 @@ def scan_cube():
 
     print(cube_string + "\n")
     return cube_string
-
-#para estar a ligação serial
-def test_serial():
-
-    try:
-        # 1. Abre a porta serial
-        print(f"A abrir ligação com o Arduino em {PORTA_MAC}...")
-        arduino = serial.Serial(PORTA_MAC, BAUD_RATE, timeout=1)
-        
-        # 2. CRUCIAL: O Arduino Uno reinicia sempre que a porta serial é aberta.
-        # Precisamos de esperar 2 segundos para o bootloader terminar antes de enviar dados.
-        time.sleep(7)
-        print("Ligação estabelecida! Arduino pronto.")
-
-        # 3. Formato do comando: "-cmd"
-        cmd_prefix = '-'
-        cmd = "y"
-        comando = f"{cmd_prefix}{cmd}\n"
-
-        # 4. Envia o comando convertido em bytes (.encode())
-        arduino.write(comando.encode('utf-8'))
-        print(f"Comando enviado: {comando.strip()}")
-
-        # 5. Opcional: Lê a resposta do Arduino (com os seus logs ANSI do VS Code)
-        time.sleep(5) # Aguarda o processamento do Arduino
-        while arduino.in_waiting > 0:
-            resposta = arduino.readline().decode('utf-8').strip()
-            print(f"Resposta do Arduino: {resposta}")
-
-        # 6. Fecha a porta de forma limpa
-        arduino.close()
-        print("Ligação fechada.")
-
-    except serial.SerialException as e:
-        print(f"Erro ao aceder à porta serial: {e}")
-
-# if __name__ == "__main__":
-#     sys.exit(test_serial())

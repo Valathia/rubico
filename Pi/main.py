@@ -9,8 +9,12 @@ import subprocess
 # from luma.oled.device import ssd1306
 
 SOLVER = "./Solver/rubik_solver"
-
 MAKE_RUBICO = "./Solver/make_rubico.sh"
+
+#pi serial config
+PORTA = "/dev/tty.usbmodem101"  #mudar para a porta de usb do raspberry pi
+BAUD_RATE = 115200
+
 
 def compile_rubico():
     subprocess.run(MAKE_RUBICO)
@@ -38,13 +42,19 @@ def run_solver(cube_string):
 
 def main():
     compile_rubico()
-    cube_string:str = cv.scan_cube()
-
-    # with canvas(device) as draw:
-    #     draw.text((5, 0), "Running Solver..." , fill="white")
+    arduino = arduino_interface.arduino_connection(PORTA,BAUD_RATE)
     
-    solution = run_solver(cube_string)
+    if(arduino.conn!=None):
+        cube_string:str = cv.scan_cube(arduino)
 
+        # with canvas(device) as draw:
+        #     draw.text((5, 0), "Running Solver..." , fill="white")
+        solution = run_solver(cube_string)
+    else:
+        print("verificar porta de conexão do Arduino\n")
+
+
+    arduino.close_serial()
 
 if __name__ == "__main__":
     sys.exit(main())
