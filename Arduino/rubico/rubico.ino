@@ -402,7 +402,8 @@ void write_rotation(Servo &rot, uint8_t rot_angle) {
   Serial.println("Rotação Ignorada - Servo escolhido não corresponde a um servo de rotação ");
 }
 
-/* reposition sem grip final*/
+/* reposition grip: se ismove->regrip no fim, se não, 
+  no caso de rots especiais não faz grip à outra garra no fim*/
 void reposition(Servo &g, Servo &rot,uint8_t grip_strength,uint8_t rot_angle,boolean ismove){
   ungrip(g);
   write_rotation(rot,rot_angle);
@@ -411,6 +412,8 @@ void reposition(Servo &g, Servo &rot,uint8_t grip_strength,uint8_t rot_angle,boo
   }
 }
 
+/* Garante que a outra garra está a 90 graus
+  antes de rodar a garra actual */
 boolean pre_move(Servo &s,boolean ismove){
   if(&s==&R_ROT) {
     if(ismove) {

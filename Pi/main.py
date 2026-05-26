@@ -1,6 +1,6 @@
 import computer_vision as cv
+import arduino_interface
 import sys
-import time
 import subprocess
 
 # pode-se usar para mandar texto para o ecrã, substituir pelas nossas definições

@@ -1,4 +1,5 @@
 
+import arduino_interface
 from PIL import ImageFont
 from PIL import Image
 import serial
@@ -28,9 +29,9 @@ import math
 #no fim queremos U em cima e verde na F do robot
 #   x2 z'
 
-#pi serial config
-PORTA_MAC = "/dev/tty.usbmodem101"  #mudar para a porta de usb do raspberry pi
-BAUD_RATE = 115200
+PORTA_MAC = arduino_interface.PORTA_MAC
+BAUD_RATE = arduino_interface.BAUD_RATE
+
 
 HOME = ""
 
@@ -210,21 +211,6 @@ def get_sticker():
     print(masterstring)
     return masterstring
 
-
-def send_comand(arduino,cmd):
-    # 4. Envia o comando convertido em bytes (.encode())
-    cmd_prefix = '-'
-    comando = f"{cmd_prefix}{cmd}\n"
-    arduino.write(comando.encode('utf-8'))
-    print(f"Comando enviado: {comando.strip()}")
-
-    # 5. Opcional: Lê a resposta do Arduino (com os seus logs ANSI do VS Code)
-    time.sleep(5) # Aguarda o processamento do Arduino
-    while arduino.in_waiting > 0:
-        resposta = arduino.readline().decode('utf-8').strip()
-        print(f"Resposta do Arduino: {resposta}")
-
-
 def get_cube():
 
     try:
@@ -237,36 +223,35 @@ def get_cube():
         time.sleep(7)
         print("Ligação estabelecida! Arduino pronto.")
 
-        send_comand(arduino,"g")
+        arduino_interface.send_comand(arduino,"g")
         camera.capture(HOME + 'Cube/face1.jpg')
 
-        send_comand(arduino,"y'")
+        arduino_interface.send_comand(arduino,"y'")
         camera.capture(HOME + 'Cube/face2.jpg')    
 
-        send_comand(arduino,"y'")
+        arduino_interface.send_comand(arduino,"y'")
         camera.capture(HOME + 'Cube/face4.jpg')
 
-        send_comand(arduino,"y'")
+        arduino_interface.send_comand(arduino,"y'")
         camera.capture(HOME + 'Cube/face5.jpg')
 
-        send_comand(arduino,"x")
-        send_comand(arduino,"y'")
+        arduino_interface.send_comand(arduino,"x")
+        arduino_interface.send_comand(arduino,"y'")
         camera.capture(HOME + 'Cube/face3.jpg')
 
-        send_comand(arduino,"y2")
+        arduino_interface.send_comand(arduino,"y2")
         camera.capture(HOME + 'Cube/face0.jpg')
 
 
         #deixa o cubo com a frente no verde e o up no branco
-        send_comand(arduino,"x2")
-        send_comand(arduino,"z'")
+        arduino_interface.send_comand(arduino,"x2")
+        arduino_interface.send_comand(arduino,"z'")
         # 6. Fecha a porta de forma limpa
         arduino.close()
         print("Ligação fechada.")
 
     except serial.SerialException as e:
         print(f"Erro ao aceder à porta serial: {e}")
-
 
 def scan_cube(): 
     #global message
@@ -282,7 +267,6 @@ def scan_cube():
 
     print(cube_string + "\n")
     return cube_string
-
 
 #para estar a ligação serial
 def test_serial():
