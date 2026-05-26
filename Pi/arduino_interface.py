@@ -77,9 +77,9 @@ class arduino_connection:
 
     def send_comand(self,cmd:str):
         #Envia o comando convertido em bytes (.encode())
-        cmd_prefix = '-'
-        comando = f"{cmd_prefix}{cmd}\n"
         if self.conn != None:
+            cmd_prefix = '-'
+            comando = f"{cmd_prefix}{cmd}\n"
             self.conn.write(comando.encode('utf-8'))
             print(f"Comando enviado: {comando.strip()} \n")
 

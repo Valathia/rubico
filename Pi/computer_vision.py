@@ -52,10 +52,10 @@ pxl_locs = [[(lft_col_pxl, top_row_pxl),(mid_col_pxl, top_row_pxl),(rgt_col_pxl,
 
 #Camera 
 
-#camera = PiCamera()
-#camera.resolution = (IMG_BREITE, IMG_HOEHE)
-#camera.exposure_mode = 'auto'
-#camera.start_preview()
+camera = PiCamera()
+camera.resolution = (IMG_BREITE, IMG_HOEHE)
+camera.exposure_mode = 'auto'
+camera.start_preview()
 
 
 def pix_average(im, x,y):
@@ -176,7 +176,7 @@ def get_sticker():
 
                 col_sticker[img_iter * 9 + 3*y_iter + x_iter] = color
         
-#Korrektur oben      //sticker are not in correct order due to movements at reading the cube
+    #Korrektur oben      //sticker are not in correct order due to movements at reading the cube
     dummy_1 = col_sticker[0]   
     dummy_2 = col_sticker[1]
     col_sticker[0] = col_sticker[6]
@@ -188,7 +188,7 @@ def get_sticker():
     col_sticker[2] = dummy_1
     col_sticker[5] = dummy_2  
  
-# Korrektur unten
+    # Korrektur unten
     dummy_1 = col_sticker[27]   
     dummy_2 = col_sticker[28]
     col_sticker[27] = col_sticker[33]
