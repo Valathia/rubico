@@ -18,7 +18,7 @@ static inline face_t pack3r(face_t f,uint8_t a,uint8_t b,uint8_t c){
     return BYTE(f,c) | (BYTE(f,b)<<8) | (BYTE(f,a)<<16);
 }
 
-static inline void unpack3(face_t *f,uint8_t a,uint8_t b,uint8_t c,face_t v){
+static inline void unpack3(face_t * restrict f,uint8_t a,uint8_t b,uint8_t c,face_t v){
     SETB(*f,a,(v&0xFF)<<((7-a)*8));
     SETB(*f,b,((v>>8)&0xFF)<<((7-b)*8));
     SETB(*f,c,((v>>16)&0xFF)<<((7-c)*8));
@@ -65,7 +65,7 @@ static inline void cycle_edges(
 
 // ------------------------ STATIC INLINES - Getters ------------------------
 
-static inline void get_corner(const Cube* c, uint8_t id, uint8_t* out) {
+static inline void get_corner(const Cube* restrict c, uint8_t id, uint8_t* restrict out) {
     // Copia a estrutura pequena do canto para os registos do CPU de uma vez
     const Corner cur_corner = corners[id]; 
 
@@ -75,7 +75,7 @@ static inline void get_corner(const Cube* c, uint8_t id, uint8_t* out) {
     }
 }
 
-static inline void get_edge(const Cube* c,const uint8_t id, uint8_t* out) {
+static inline void get_edge(const Cube* restrict c,const uint8_t id, uint8_t* restrict out) {
     const Edge cur_edge = edges[id];
 
     #pragma GCC unroll 2
@@ -83,7 +83,7 @@ static inline void get_edge(const Cube* c,const uint8_t id, uint8_t* out) {
         out[k] = BYTE(c->f[cube_orientation[cur_edge.f[k]]], cur_edge.i[k]);
 }
 
-static inline uint8_t piece_dest(const uint8_t* col, const uint8_t size, uint8_t (*cond)(const uint8_t*, uint8_t) ) {
+static inline uint8_t piece_dest(const uint8_t* restrict col, const uint8_t size, uint8_t (*cond)(const uint8_t*, uint8_t) ) {
     for(uint8_t i=0;i<size;i++) {
         if(cond(col,i)) {
             return i;
@@ -94,17 +94,17 @@ static inline uint8_t piece_dest(const uint8_t* col, const uint8_t size, uint8_t
 
 // ------------------------ STATIC INLINES - Checkers ------------------------
 
-static inline uint8_t condition_edge_align (const uint8_t* col,const uint8_t i) {
+static inline uint8_t condition_edge_align (const uint8_t* restrict col,const uint8_t i) {
     const Edge cur_edge = edges[i];
     return (edge_has_color(col[0],col[1],cube_orientation[cur_edge.f[0]]) & edge_has_color(col[0],col[1],cube_orientation[cur_edge.f[1]]));
 }
 
-static inline uint8_t condition_corner_align (const uint8_t* col,const uint8_t i) {
+static inline uint8_t condition_corner_align (const uint8_t* restrict col,const uint8_t i) {
     const Corner cur_corner = corners[i];
     return (corner_has_color(col[0],col[1],col[2],cube_orientation[cur_corner.f[0]]) & corner_has_color(col[0],col[1],col[2],cube_orientation[cur_corner.f[1]]) & corner_has_color(col[0],col[1],col[2],cube_orientation[cur_corner.f[2]]));
 }
 
-static inline uint8_t condition_corner_flip(const uint8_t* col,const uint8_t i) {
+static inline uint8_t condition_corner_flip(const uint8_t* restrict col,const uint8_t i) {
     const Corner cur_corner = corners[i];
     return (col[0]!=cube_orientation[cur_corner.f[0]]);
 }
@@ -189,9 +189,9 @@ static inline void Bm(Cube* restrict cube_arr) {
     copy_self(cube_arr);
 }
 
-void parse_cube(Cube* cube_arr, const char* cube_string);
-uint8_t valid_cube_config(const Cube* c);
-void print_cube(const Cube* c);
+void parse_cube(Cube* restrict cube_arr, const char* cube_string);
+uint8_t valid_cube_config(const Cube* restrict c);
+void print_cube(const Cube* restrict c);
 void apply_alg(Cube* restrict c, Solution* sol, const char* alg);
 
 #endif /* CUBE_H */

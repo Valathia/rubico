@@ -17,7 +17,7 @@ static const uint64_t down_corners_mask[ROT_SIZE] = {POS0, POS2, POS4};
 
 // ------------------------ STATIC INLINE -----------------
 
-static inline uint8_t check_n(const Cube *cube, const uint64_t mask, const uint8_t rot_arr[], const uint8_t size)
+static inline uint8_t check_n(const Cube * restrict cube, const uint64_t mask, const uint8_t rot_arr[], const uint8_t size)
 {
     for (int i = 0; i < size; i++)
     {
@@ -51,7 +51,7 @@ static inline uint8_t orientation_corner(const uint8_t col[], const Corner c, co
 // get first row bit and check if they are all the same for all faces
 // checking 2 faces is enough, since we know the cube isn't solved we will always check at least 2 faces
 // We can just return i when we find it as the displacement of the front color
-static inline uint8_t is_row_rotated(const Cube *cube, const uint8_t bit, const uint64_t mask)
+static inline uint8_t is_row_rotated(const Cube * restrict cube, const uint8_t bit, const uint64_t mask)
 {
 
     // #pragma GCC unroll ROT_SIZE
@@ -68,7 +68,7 @@ static inline uint8_t is_row_rotated(const Cube *cube, const uint8_t bit, const 
 }
 
 // em principio é igual
-static inline uint8_t get_wrong_edge(const Cube *cube, const EdgeSearchMode mode, search_res *out)
+static inline uint8_t get_wrong_edge(const Cube * restrict cube, const EdgeSearchMode mode, search_res * restrict out)
 {
     // Cache global lookups in local CPU registers
     const uint8_t up = cube_orientation[UP];
@@ -114,7 +114,7 @@ static inline uint8_t get_wrong_edge(const Cube *cube, const EdgeSearchMode mode
     return 0;
 }
 
-static inline uint8_t get_wrong_corner(const Cube *cube, uint8_t color, search_res *out)
+static inline uint8_t get_wrong_corner(const Cube * restrict cube, uint8_t color, search_res * restrict out)
 {
     // #pragma GCC unroll N_CORNERS
     for (uint8_t i = 0; i < N_CORNERS; i++)
@@ -147,7 +147,7 @@ static inline uint8_t get_wrong_corner(const Cube *cube, uint8_t color, search_r
     return 0;
 }
 
-uint8_t check_corner_alignment(const Cube *cube, const uint8_t start, const uint8_t end)
+uint8_t check_corner_alignment(const Cube * restrict cube, const uint8_t start, const uint8_t end)
 {
 
     // 0-3 UP | 4-7 DOWN
@@ -165,7 +165,7 @@ uint8_t check_corner_alignment(const Cube *cube, const uint8_t start, const uint
 }
 // ------------------------ SOLVER AUX ------------------------
 
-uint8_t how_many(const Cube *cube, const uint64_t mask)
+uint8_t how_many(const Cube * restrict cube, const uint64_t mask)
 { // just send the cube not the array
     uint8_t count = 0;
 
@@ -966,41 +966,35 @@ uint8_t solve_(Cube *restrict cube_arr, Solution *sol)
     return isSolved(cube_arr[0]);
 }
 
-void solve(Cube *restrict cube_arr, Solution *sol)
-{
-    if (isSolved(cube_arr[0]))
-    {
+void solve(Cube *restrict cube_arr, Solution *sol) {
+    if (isSolved(cube_arr[0])){
         print_solution(*sol);
         return;
     }
 
     // check if there is already a solved face we can use
     uint8_t new_down = DOWN; // default is the already down face
-    for (int i = 0; i < N_FACES; i++)
-    {
-        if (check(cube_arr[0].f[cube_orientation[i]], cube_orientation[i], ALL))
-        {
+    for (int i = 0; i < N_FACES; i++) {
+        if (check(cube_arr[0].f[cube_orientation[i]], cube_orientation[i], ALL)) {
             new_down = i; // before it was cube_orientation[i]
         }
     }
 
-    if (new_down < 5)
-    {
-#if SOLVE
-        printf("new_down: %s | old_down: %s \n", colors[cube_orientation[new_down]], colors[cube_orientation[DOWN]]);
-        print_cube(&cube_arr[0]);
-#endif
+    if (new_down < 5) {
+        #if SOLVE
+            printf("new_down: %s | old_down: %s \n", colors[cube_orientation[new_down]], colors[cube_orientation[DOWN]]);
+            print_cube(&cube_arr[0]);
+        #endif
 
         apply_alg(cube_arr, sol, new_down_rot[new_down]);
 
-#if SOLVE
-        printf("New Orientation?: \n");
-        print_cube(&cube_arr[0]);
-#endif
+        #if SOLVE
+            printf("New Orientation?: \n");
+            print_cube(&cube_arr[0]);
+        #endif
     }
 
-    if (!valid_cube_config(&cube_arr[0]))
-    {
+    if (!valid_cube_config(&cube_arr[0])) {
         print_solution(*sol);
         fprintf(stderr, "ERROR %d: Invalid Cube Configuration after Rotation Move %s\n", ERR_INVALID_CUBE, new_down_rot[new_down]);
         exit(ERR_INVALID_CUBE);
@@ -1008,27 +1002,24 @@ void solve(Cube *restrict cube_arr, Solution *sol)
 
     const uint8_t solved = solve_(cube_arr, sol);
 
-#if SOLVE
-    print_cube(&cube_arr[0]);
-    print_solution(*sol);
-    printf("\n");
-#endif
+    #if SOLVE
+        print_cube(&cube_arr[0]);
+        print_solution(*sol);
+        printf("\n");
+    #endif
 
     Solution *optimized = optimize_sol(sol);
-    if (optimized == NULL)
-    {
+    if (optimized == NULL) {
         return;
     }
 
     sol = optimized;
     print_solution(*sol);
 
-    if (isSolved(cube_arr[0]))
-    {
+    if (isSolved(cube_arr[0])) {
         return;
     }
-    else if (!solved)
-    {
+    else if (!solved) {
         fprintf(stderr, "\nERROR %d: Something went wrong, only partial solution after calling solver \n", ERR_MAX_SOLVE_CALL);
         exit(ERR_MAX_SOLVE_CALL);
     }

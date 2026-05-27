@@ -213,8 +213,8 @@ typedef struct __attribute__ ((aligned(CACHE_LINE_SIZE))) corner {
 } Corner;
 
 typedef struct __attribute__ ((aligned(CACHE_LINE_SIZE))) search_res {
-    uint8_t ind;
     uint8_t col[3];
+    uint8_t ind;
 }search_res;
 
 typedef struct solution {

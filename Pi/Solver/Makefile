@@ -7,15 +7,15 @@ CFLAGS_BASE= -std=c11 -Wall -Wextra -Wpedantic
 
 ifeq ($(ARCH), arm64)
     # Configuração para o Mac M1 (Apple Silicon) - 64-bit nativo
-	ARCH_CFLAGS = -O2 -mcpu=apple-m1
+	ARCH_CFLAGS = -O3 -mcpu=apple-m1
 	CACHE_LINE_SIZE := 64
 else ifeq ($(ARCH), aarch64) 
     # Configuração para a Raspberry Pi 3 B+ para OS 64-bits -> se não correr direito ou compilar, deixar só -O2
-    ARCH_CFLAGS = -O2 -march=armv8-a+crc -mcpu=cortex-a53 -mtune=cortex-a53 -ftree-vectorize -flto
+    ARCH_CFLAGS = -O3 -march=armv8-a+crc -mcpu=cortex-a53 -mtune=cortex-a53 -ftree-vectorize -flto
 	CACHE_LINE_SIZE := 64
 else 
     # Configuração genérica de fallback (ex: se compilar num PC Intel/AMD normal)
-    ARCH_CFLAGS = -O2
+    ARCH_CFLAGS = -O3
 	CACHE_LINE_SIZE := $(shell cat /sys/devices/system/cpu/cpu0/cache/index0/coherency_line_size 2>/dev/null || echo 64)
 endif
 

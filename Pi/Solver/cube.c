@@ -128,7 +128,7 @@ void parse_cube(Cube* restrict cube_arr, const char* cube_string) {
 
 // ------------------------ PRINT CUBE ------------------------
 
-void print_cube(const Cube* cube) {
+void print_cube(const Cube* restrict cube) {
 
    printf("Cube State: \n");
    for(int i=0; i<N_FACES;i++) {
@@ -139,7 +139,7 @@ void print_cube(const Cube* cube) {
 
 // ------------------------ CUBE VALIDITY -----------------
 
-void get_pieces(const Cube* c,uint8_t* pieces,const uint8_t size){
+void get_pieces(const Cube* restrict c,uint8_t* restrict pieces,const uint8_t size){
    uint8_t col[3];
 
    for(uint8_t i=0; i<size;i++) {
@@ -154,7 +154,7 @@ void get_pieces(const Cube* c,uint8_t* pieces,const uint8_t size){
    }
 }
 
-uint8_t countSwaps(uint8_t *pieces, const uint8_t count) // pieces[5] = 3 means piece 3 is in position 5.
+uint8_t countSwaps(uint8_t * restrict pieces, const uint8_t count) // pieces[5] = 3 means piece 3 is in position 5.
 {   
    uint8_t swaps = 0;
    for(uint8_t pos = 0; pos < count; ++pos) {
@@ -169,19 +169,19 @@ uint8_t countSwaps(uint8_t *pieces, const uint8_t count) // pieces[5] = 3 means 
    return swaps;
 }
 
-uint8_t corner_perms(const Cube* c){
+uint8_t corner_perms(const Cube* restrict c){
    uint8_t pieces[N_CORNERS];
    get_pieces(c,pieces,N_CORNERS);
    return countSwaps(pieces,N_CORNERS);
 }
 
-uint8_t edge_perms(const Cube* c){
+uint8_t edge_perms(const Cube* restrict c){
    uint8_t pieces[N_EDGES];
    get_pieces(c,pieces,N_EDGES);
    return countSwaps(pieces,N_EDGES);
 }
 
-uint8_t permutations(const Cube* c){
+uint8_t permutations(const Cube* restrict c){
    uint8_t edge_swaps = edge_perms(c);
    uint8_t corner_swaps = corner_perms(c);
    #if VALID
@@ -196,7 +196,7 @@ uint8_t permutations(const Cube* c){
    return 1;
 }
 
-int8_t get_corner_validity(const Cube* c) {
+int8_t get_corner_validity(const Cube* restrict c) {
    int8_t corner_ori = 0;
    uint8_t map_corner_ori[] = {0,1,2,3,3,2,1,0};
    int8_t map_ori[4][2] = {{1,-1},{-1,1},{1,-1},{-1,1}};
@@ -218,7 +218,7 @@ int8_t get_corner_validity(const Cube* c) {
 }
 
 //There should be a mod3 number of "wrong edges"
-uint8_t corner_parity(const Cube* c) {
+uint8_t corner_parity(const Cube* restrict c) {
    int8_t par = get_corner_validity(c);
    #if VALID
       printf(" \tCorner Parity: %d Parity: %d\n",par,par%3);
@@ -238,7 +238,7 @@ uint8_t corner_parity(const Cube* c) {
    Any Pieces that have yellow/white (up/down color) in those positions
    Any pieces that have Red or Orange (R/L color) in those positions that are NOT attached to yellow/white
 */
-uint8_t get_edge_validity(const Cube* c) {
+uint8_t get_edge_validity(const Cube* restrict c) {
    uint8_t edge_ori = 0;
    for(uint8_t i=0; i<N_EDGES;i++) {
       uint8_t col[2];
@@ -258,7 +258,7 @@ uint8_t get_edge_validity(const Cube* c) {
    return edge_ori;
 }
 //There should be an even number of "wrong edges"
-uint8_t edge_parity(const Cube* c) {
+uint8_t edge_parity(const Cube* restrict c) {
    uint8_t par = get_edge_validity(c);
       
    #if VALID
@@ -272,7 +272,7 @@ uint8_t edge_parity(const Cube* c) {
    return 1;
 }
 
-uint8_t validate_colors(const Cube* c) {
+uint8_t validate_colors(const Cube* restrict c) {
    uint8_t count[N_FACES] = {0};
    for(uint8_t face=0; face<6; face++) {   
       for(uint8_t i=0; i<8; i++) {
@@ -292,7 +292,7 @@ uint8_t validate_colors(const Cube* c) {
    return 1;
 }
 
-uint8_t valid_cube_config(const Cube* c) {
+uint8_t valid_cube_config(const Cube* restrict c) {
 
    #if VALID 
       printf("------------------------------------ Checking Cube Configuration ------------------------------------\n");
@@ -428,24 +428,16 @@ void apply_alg(Cube* restrict c, Solution* sol, const char* alg){
       uint8_t times=1;
 
       if((i+1) < len) {
-         if(alg[i+1]=='2') { 
-            times=2;
-            i++; 
-         }
-         else if(alg[i+1]=='\''){ 
-            times=3; 
-            i++; 
-         }
+         times = (alg[i+1]=='2') ? 2 :( (alg[i+1]=='\'')? 3 : 1);
+         i++;
       }
 
       for(uint8_t k=0;k<times;k++)
          move = apply_move(c,m);
       
       if((sol!=NULL) & (move!=UINT8_MAX)){ //if it's just the work cube we don't want to record any of its moves
-         if(move<ROT_RIGHT) {
-               move = move*3+(times-1);
-         }
-         push_move(sol, move);
+            move = (move<ROT_RIGHT) ? (move*3+(times-1)) : move;
+            push_move(sol, move);
       }   
 
    }

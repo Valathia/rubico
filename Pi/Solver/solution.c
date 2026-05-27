@@ -69,7 +69,6 @@ Solution* optimize_sol(Solution* restrict s) {
    push_move(new_sol,cur_move);
 
    #if OPTSOL
-      uint8_t rot = 0;
       printf("\t\tPushed move %s \n",move_to_str(s->moves[0]));
       printf("\t\tMove on top of Stack: %s \n",move_to_str(new_sol->moves[0]));
    #endif
@@ -85,9 +84,6 @@ Solution* optimize_sol(Solution* restrict s) {
          push_move(new_sol,cur_move);
 
          #if OPTSOL
-            if(cur_move>MOVE_Dp) {
-               rot++;
-            }
             printf("\t\tTop move: %s Cur_move: %s \n",move_to_str(top),move_to_str(cur_move));
             printf("\t\tPushed move %s into stack \n",move_to_str(cur_move));
          #endif
