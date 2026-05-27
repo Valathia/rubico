@@ -48,8 +48,8 @@ typedef enum {
     MOVE_U, MOVE_U2, MOVE_Up,
     MOVE_D, MOVE_D2, MOVE_Dp,
     ROT_RIGHT,ROT_BACK,ROT_LEFT,    //18-20 0-2
-    ROL_RIGHT,ROL_DOWN,ROL_LEFT,    //21-23 3-5 FRONT   18+color
-    ROL_UP,ROL_FRONT                //24-25 special cases where up goes to front, and front goes to up
+    ROL_LEFT,ROL_DOWN,ROL_RIGHT,    //21-23 3-5 FRONT   18+color
+    ROL_FRONT,ROL_DOWN_X,ROL_UP,                //24-25 special cases where up goes to front, and front goes to up
 } Move;
 
 enum corner_ind{

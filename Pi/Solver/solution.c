@@ -46,6 +46,7 @@ const char* move_to_str(const Move m)  {
       case ROL_LEFT  :     return "z ";  //"RLU" ;
       case ROL_UP    :     return "x' "; //"RUF" ;
       case ROL_FRONT :     return "x ";  //"RFU" ;
+      case ROL_DOWN_X:     return "x2";
       default: return "?";
    }   
 }
@@ -80,7 +81,7 @@ Solution* optimize_sol(Solution* restrict s) {
       const uint8_t cur_move_i = cur_move/3;
 
 
-      if((top>MOVE_Dp) | (cur_move>MOVE_Dp) | (top_i!=cur_move_i)) {
+      if((top_i!=cur_move_i)) {
          push_move(new_sol,cur_move);
 
          #if OPTSOL
