@@ -2,7 +2,6 @@ MAKNAM = Makefile
 CC ?= gcc
 TARGET := rubik_solver
 ARCH := $(shell uname -m)
-CACHE_LINE_SIZE := $(shell cat /sys/devices/system/cpu/cpu0/cache/index0/coherency_line_size 2>/dev/null || echo 64)
 
 CFLAGS_BASE= -std=c11 -Wall -Wextra -Wpedantic
 
@@ -27,6 +26,7 @@ else ifeq ($(ARCH), aarch64)
 else 
     # Configuração genérica de fallback (ex: se compilar num PC Intel/AMD normal)
     ARCH_CFLAGS = -O2
+	CACHE_LINE_SIZE := $(shell cat /sys/devices/system/cpu/cpu0/cache/index0/coherency_line_size 2>/dev/null || echo 64)
 endif
 
 CFLAGS_BASE += -DCACHE_LINE_SIZE=$(CACHE_LINE_SIZE)

@@ -12,7 +12,6 @@ import math
 # from luma.oled.device import ssd1306
 #font = ImageFont.truetype(HOME + 'VCR_OSD_MONO_1.001.ttf',20)
 
-#Falta pegar rodar e tirar a foto
 
 #definição usada pelo computer vision. a numeração no nosso bit-board não é esta
 #0 = U 
@@ -187,7 +186,7 @@ def get_sticker():
     col_sticker[7] = col_sticker[5]
     col_sticker[2] = dummy_1
     col_sticker[5] = dummy_2  
- 
+
     # Korrektur unten
     dummy_1 = col_sticker[27]   
     dummy_2 = col_sticker[28]
