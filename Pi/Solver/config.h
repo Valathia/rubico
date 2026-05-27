@@ -202,17 +202,17 @@ typedef struct __attribute__ ((aligned(CACHE_LINE_SIZE))) cube {
     face_t f[N_FACES];
 }Cube;
 
-typedef struct edge {
+typedef struct __attribute__ ((aligned(CACHE_LINE_SIZE))) edge {
     uint8_t f[2];
     uint8_t i[2];
 } Edge;
 
-typedef struct corner {
+typedef struct __attribute__ ((aligned(CACHE_LINE_SIZE))) corner {
     uint8_t f[3]; // faces
     uint8_t i[3]; // indices
 } Corner;
 
-typedef struct search_res {
+typedef struct __attribute__ ((aligned(CACHE_LINE_SIZE))) search_res {
     uint8_t ind;
     uint8_t col[3];
 }search_res;
