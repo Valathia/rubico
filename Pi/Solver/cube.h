@@ -40,23 +40,22 @@ static inline face_t rot_ccw(face_t f, uint8_t i) {
     return (f << shift) | (f >> (64u - shift));
 }
 
-static inline void copy_self(Cube* restrict cube_arr){
+static inline void copy_self(Cube* restrict cube_arr) {
     cube_arr[0] = cube_arr[1];    
 }
 
-static inline void copy_cube(Cube* restrict cube_dest, const Cube* restrict cube_origin,const int8_t size){
+static inline void copy_cube(Cube* restrict cube_dest, const Cube* restrict cube_origin,const int8_t size) {
     for(uint8_t i = 0; i<size;i++) {
         cube_dest[i] = cube_origin[i];      
     }
 }
 
-static inline void cycle_edges(
+static inline void cycle_edges (
     Cube* restrict cube_arr,
     uint8_t f1, uint8_t a1, uint8_t b1, uint8_t c1, face_t val1,
     uint8_t f2, uint8_t a2, uint8_t b2, uint8_t c2, face_t val2,
     uint8_t f3, uint8_t a3, uint8_t b3, uint8_t c3, face_t val3,
-    uint8_t f4, uint8_t a4, uint8_t b4, uint8_t c4, face_t val4) 
-{
+    uint8_t f4, uint8_t a4, uint8_t b4, uint8_t c4, face_t val4)  {
     unpack3(&cube_arr[1].f[cube_orientation[f1]], a1, b1, c1, val1);
     unpack3(&cube_arr[1].f[cube_orientation[f2]], a2, b2, c2, val2);
     unpack3(&cube_arr[1].f[cube_orientation[f3]], a3, b3, c3, val3);

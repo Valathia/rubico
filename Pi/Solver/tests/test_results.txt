@@ -21,3 +21,385 @@ Scramble: U2 F' L' F2 R' L2 F D R U2 L2 D2 R F2 U2 B2 R2 U2 D2 L' U
 Solution: R B' D' B R2 F' L D2 F2 D2 L2 F D2 B2 F' y L D L' D y2 L D L' D' y2 L D L' y L D L' y' L D L' D y' D L D' L' D y' L' D' L D y' L D L' D2 y2 L D L' D' y L' D' L2 D L' D' y L' D' L D y L D L' D' y L' D' L D y L y' L D L' D' y L' y' D' y2 L D L' D L D2 L' D L D' R' D L' D' R D y2 L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U'
 Success!
 === Test 6/100 ===
+Scramble: R U2 R2 B2 U' F' U' R' F' B2 U2 B2 U R2 F2 B2 D' R2 D L2 D2
+Solution: B2 D' R2 F2 B2 L' y L D L' y L D L' D y2 L D L' D2 y L D L' D' L D L' D' L D L' D2 y2 D L D' L' D2 L D' L2 D' L D y' L D L2 D' L D y' L D L' D y2 L D L' D' y L' D' L D L D L' D' y L' D' L D' y' L D L' D' y L' D' L D2 y L y' L D L' D' y L' y L D L' D L D2 L' D y2 L D' R' D L' D' R D L D' R' D L' D' R D z2 y L D L' D' L D L' D' L D L' D' L D L' D' U2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 7/100 ===
+Scramble: U' D' F' R' U' D2 B' L' F2 D' R2 D B2 U' B2 U' R2 D2 B2 D B'
+Solution: F L' F' B R' B L D L' F2 B' L D L' D y2 L D L' D' L D L' D' L D L' D' y L D L' y L D L' y' D L D' L' D' y2 L D L' D' L D L' D' L D2 L' y2 L D L' D' y L' D' L2 D L' D' y L' D' L D y L' D' L D y' L D L' D' y L D L' D' y L' D' L D2 F D L D' L' F' D' L D L' D L D2 L' D y' L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U
+Success!
+=== Test 8/100 ===
+Scramble: B' L2 D2 F2 D' F2 D' R2 U2 F2 D R2 B' L F2 R2 F2 R F'
+Solution: L' B D' B' R2 L2 F B' L D L' D y2 L D L' D' L D L' D' L D L' D' y L D L' D y2 L D L' D y' D L D' L' D2 y' D L D' L' D' y' L D L' D' y L' D' L D L D L' D' y L' D' L D' L D L' D' y L' D' L2 D L' D' y L' D' L D' F D L D' L' F' D' y2 L D L' D L D2 L' D z2 y L D L' D' L D L' D' U2 L D L' D' L D L' D' L D L' D' L D L' D' U2
+Success!
+=== Test 9/100 ===
+Scramble: U' F R U' D B R L2 B R2 F2 U' L2 B2 R2 B2 U' B2 U F2 L2
+Solution: F2 D2 B2 R2 L D L' F2 L2 D L' y L D L' D y' L D L' D2 y2 L D L' D' L D L' D' L D L' D' L D L' y D L D' L' y' L D L' y' L' D' L D y' L D L' D2 y2 L D L' D' y L' D' L D L D L' D' y L' D' L D2 y2 L' D' L D y' L D L' D' y' L' D' L D y' L D L' y L y' L D L' D' y L' y' D2 y' L D' R' D L' D' R D z2 y L D L' D' L D L' D' U2 L D L' D' L D L' D' U' L D L' D' L D L' D' U'
+Success!
+=== Test 10/100 ===
+Scramble: L' F U' B' D' R U L F2 U R2 B' R2 U2 R2 F L2 U2 F L2 F2
+Solution: L2 D' B2 L' B D' B' R D2 L2 R2 D2 R' F2 D F2 L D L' D' L D L' D' y2 L D L' y L D L' D2 y' D L D' L' D y' D L D' L' y' L D L' D' y L' D' L D2 y2 L' D' L D y' L D L' D y L D L' D' y L' D' L D y L D L' D' y L' D' L D2 F D L D' L' F' L D L' D L D2 L' D2 y' L D L' D L D2 L' D y2 L D' R' D L' D' R D L D' R' D L' D' R D z2 y L D L' D' L D L' D' L D L' D' L D L' D' U L D L' D' L D L' D' U'
+Success!
+=== Test 11/100 ===
+Scramble: D' R' D2 L2 U2 F D' B' U' B2 R2 B2 L' B2 R' F2 B2 D2 R D2 R
+Solution: R B R B' D B L2 D R F' R' F D F' R2 y2 L D L' D2 y' L D L' D' L D L' D' L D L' D' y L D L' D' L D L' D' L D L' D2 y2 D' y' L D L' D' L D L' D' L D L' D y L D L' D' L D L' D' L D L2 D' L D y' L D L' D' L' D' L D y' L D L2 D' L D y' L D L' D2 L' D' L D y' L D L' y L y' L D L' D' y L' y' D' y2 L D L' D L D2 L' D L D' R' D L' D' R D L D' R' D L' D' R D z2 y2 L D L' D' L D L' D' U L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 12/100 ===
+Scramble: D2 L' B U' F' B L F2 U' F2 L2 U F2 B2 R2 F2 U2 L2 U
+Solution: L2 D' B2 F2 D F' R F D2 L' D L' D y2 D L D' L' y2 L D L' D' L D L' D' L D L' D' L D L' D y' L D L' D2 y2 L D L' D' L D L' D' L D2 L' D' y2 L' D' L D y' L D L' D2 y2 L' D' L D y' L D L' D' y' L' D' L D y' L D L' D' L' D' L D y' L D L' D y L' D' L D y' L D L' D' F D L D' L' F' D y L y' L D L' D' y L' y' D y2 L D L' D L D2 L' D L D' R' D L' D' R D y2 L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U'
+Success!
+=== Test 13/100 ===
+Scramble: L' D' B' L2 U2 R B2 R2 D F U2 L2 U' R2 D2 F2 B2 R2 U F2 U'
+Solution: R2 D' F2 R2 L B' y L D L' D' L D L' D' y L D L' D' L D L' D' L D L' D y L D L' D y2 L' D' L D y' L D L2 D' L D y' L D L' D y' L D L' D' y L' D' L D y2 L D L' D' y L' D' L D' y' L D L' D' y L' D' L D y2 L D L' D L D2 L' D y' L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 14/100 ===
+Scramble: U B' D' L B' R2 L D2 R' D' R2 U' L2 B2 U' L2 F2 D' R2 B2 U
+Solution: R2 D B2 D' L2 D' R2 L' D L F2 y' L D L' D y2 L D L' D' L D L' D' L D L' D2 y2 L D L' D' L D L' D' L D L' D' L D L' D2 y' L D L' D' L D L' D' L D L' D' y2 D L D' L' D2 y' D L D' L' D' y' L D L' D' y L' D' L D2 y L' D' L D y' L D L' y2 L' D' L D y' L D L' D2 y2 L' D' L D y' L D L' D' F D L D' L' F' D' y' L D L' D L D2 L' D y L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' U L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 15/100 ===
+Scramble: F2 R' L' U L2 B' D R2 D2 R' L2 B2 R2 D2 F2 U2 F2 R' D2 F' D'
+Solution: R2 D' F2 D R' B R D R2 B' L B y' L D L' y L D L' D' y' L D L' D2 y' D L D' L' y L D L' D y2 L D L' D2 y2 L D L' y' L D L' D' L D L' D' L D L' D' L D L' D' L D L' D' L D L' D' y L D L' D' L D L' D' L D L' D y2 L' D' L D y' L D L' D y' L D L' D' y L' D' L D2 y2 L D L' D' y L' D' L D' L D L' D L D2 L' D y2 L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' U2
+Success!
+=== Test 16/100 ===
+Scramble: B' U2 L2 D2 L' D2 F2 L D2 L2 B2 D2 L D' R D F U B L' F
+Solution: B L F R L' D' L B2 L D L' D y2 L D L' D' L D L' D' L D L' D' y2 L D L' y D L D' L' y' L D L' D2 y' L D L' D' y D L D' L' D' y2 L D L' D' y L' D' L D2 L D L' D' y L' D' L y2 L' D' L D y' L D L' y L y' L D L' D' y L' y' L D L' D L D2 L' D2 y' L D L' D L D2 L' D L D' R' D L' D' R D y' L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U
+Success!
+=== Test 17/100 ===
+Scramble: D R2 B R2 F2 D2 L U' R' U2 F L2 D2 F' D2 F L2 F2 D2 R2 U2
+Solution: B2 D2 F2 B L D R' B R F D F' R2 L D L' D2 y' L D L' D' y L D L' D y2 D L D' L' D' y2 L D L' D' L D L' D' L D L' D2 y L D L' D' L D L' D' L D L' D y' L D L' D' y' L D L' D' y L' D' L D y L D L' D' y L' D' L D L D L' D' y L' D' L D y L D L' D' y L' D' L D2 y2 L' D' L D y' L D L' D' y L y' L D L' D' y L' y' D2 y' L D L' D L D2 L' D y' L D' R' D L' D' R D z2 y2 L D L' D' L D L' D' U L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 18/100 ===
+Scramble: F U2 L2 U L F' R2 B' R2 B2 R' D2 R U2 D2 L B2 D2 L
+Solution: B' R' F2 B' D B L' D2 B2 L' D B2 D y L D L' D' L D L' D' L D L' D' y D L D' L' y D L D' L' D2 y L D L' D' y L' D' L D y L' D' L D y' L D L' D2 y2 L' D' L D y' L D L' D y L D L' D' y L' D' L D2 F D L D' L' F' D y' L D L' D L D2 L' D y2 L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' U2 L D L' D' L D L' D' U' L D L' D' L D L' D' U'
+Success!
+=== Test 19/100 ===
+Scramble: L U2 B' U R U' R2 F B2 U L2 F2 U2 F2 U2 R2 U F2 U2 B2 R'
+Solution: L' B D2 B' F2 R' D' R2 B F L' D2 B2 F' y2 L D L' y D L D' L' y' L D L' D y2 L D L' D' L D L' D' L D L' D' y2 L D L' D' L D L' D y' L D L' D' y' L D L' D' y L' D' L y2 L D L' D' y L' D' L D y' L' D' L D y' L D L' D2 F D L D' L' F' L D L' D L D2 L' D2 y' L D L' D L D2 L' D
+Success!
+=== Test 20/100 ===
+Scramble: R D2 F' R2 B' L D L F2 R B2 U' F2 U L2 B2 D2 L2 U' B2
+Solution: R' F' R2 L D' L B2 y L D L' D2 y' L D L' D' y L D L' D y2 L D L' D y' D L D' L' D2 y' L D L' D' L D L' D' L D L' D' y' L' D' L D y' L D L' D y2 L D L' D' y L' D' L D2 y2 L D L' D' y L' D' L D F D L D' L' F' D2 y L D L' D L D2 L' D L D' R' D L' D' R D z2 L D L' D' L D L' D' U2 L D L' D' L D L' D' U' L D L' D' L D L' D' U'
+Success!
+=== Test 21/100 ===
+Scramble: B L' B2 L2 F' L B U' R' F2 L2 F' B2 U2 B' L2 F2 R2 D2 R2 D2
+Solution: L' B D B' L2 F D F' R2 F D2 B2 F' L D L' F2 L D L' D y2 L D L' D' L D L' D' L D L' D' y L D L' D' L D L' D' L D L' D' L D L' D' y2 L D L' D2 y' D L D' L' y L D L' D' L D L' D' L D L' D' y L' D' L D2 y L' D' L D y' L D L' y2 L' D' L D y' L D L' D y L D L' D' y L' D' L D F D L D' L' F' D L D L' D L D2 L' y L D L' D L D2 L' D L D' R' D L' D' R D z2 y L D L' D' L D L' D' L D L' D' L D L' D' U2 L D L' D' L D L' D' U2
+Success!
+=== Test 22/100 ===
+Scramble: F' L2 B' L2 U F2 U' F2 R D2 R U2 R D2 R B2 U2 F2 R D' L
+Solution: B2 D2 F2 R' B R D2 R2 D L' D y2 D L D' L' y' L D L' D2 y' D L D' L' y L D L' D' L D L' D' L D L' D' L D L' D' y2 L D L' D' L D L' D' L D L' y' L' D' L D y' L D L2 D' L D y' L D L' D2 y2 L D L' D' y L' D' L D y L' D' L D y' L D L' D F D L D' L' F' D2 L D L' D L D2 L' D y2 L D' R' D L' D' R D L D' R' D L' D' R D z2 y L D L' D' L D L' D' U L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 23/100 ===
+Scramble: U F L' D2 L' D2 R B2 L D2 R2 B2 U2 R2 U R2 F D U' L F'
+Solution: F R L2 D F2 L' B D B' L2 y L D L' D y2 L D L' D' L D L' D' L D L' D' y2 L D L' D' L D L' D' y D L D' L' D' y2 L D L' D' L D L' D' L D2 L' D y2 L' D' L D y' L D L' D' y' L' D' L D y' L D L' D y L D L' D' y L' D' L D2 y L D L' D' y L' D' L F D L D' L' F' y L D L' D L D2 L' D y' L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 24/100 ===
+Scramble: R2 F L F2 L' D2 R F2 R' D2 L' D2 B2 U B2 R2 D F' L2 D'
+Solution: F D F' R D2 L2 R B D2 B' F2 y L D L' D y2 L D L' D y2 L D L' D' L D L' D' L D L' y' L D L' D' L D L' D' y L' D' L D y2 L' D' L D y' L D L' D' y2 L' D' L D y' L D L' D2 y2 L D L' D' y L' D' L D y L D L' D' y L' D' L D' F D L D' L' F' D y' L D' R' D L' D' R D L D' R' D L' D' R D z2 y L D L' D' L D L' D' L D L' D' L D L' D' U L D L' D' L D L' D' U'
+Success!
+=== Test 25/100 ===
+Scramble: B2 R2 L2 D' F U R' U L U2 F U2 L2 U2 F2 U2 B' R2 U2
+Solution: R B' D' B R2 L' B D2 B' F2 R F D' L2 F' R' B y2 L D L' D2 y' D L D' L' D2 y' L D L' D' L D L' D' L D L' D2 y2 L D L' D2 y2 L' D' L D y' L D L' D' y' L' D' L D y' L D L' D y2 L' D' L D y' L D L' D' y2 L D L' D' y L' D' L D' y' L D L' D' y L' D' L D2 y L y' L D L' D' y L' y' D2 L D L' D L D2 L' D L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U2 L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 26/100 ===
+Scramble: F2 D R U' R' U L2 B' L' R2 F2 D' L2 D' B2 D2 F2 L2 U2
+Solution: L2 D F2 L2 D2 R2 F D2 B2 F' L2 D L' y L D L' D' y' L D L' D y2 L D L' D' L D L' D' L D L' D2 y2 L D L' D2 y2 L' D' L D y' L D L' y L D L' D' y L' D' L y L' D' L D y' L D L' D' F D L D' L' F' D y L y' L D L' D' y L' y' L D L' D L D2 L' y L D L' D L D2 L' D L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U2
+Success!
+=== Test 27/100 ===
+Scramble: B R U2 R F2 B R' U' L' F2 U' R2 U' R2 F2 R2 D2 R2 D' B2
+Solution: R' F' R B' D B L2 D2 B2 L D R2 L D R2 D' L2 y L D L' D' L D L' D' L D L' D' L D L' D' y2 L D L' D' L D L' D' L D L' D' L D L' D2 y' L D L' D' y2 D L D' L' y' L D L' D' y L' D' L D' y L' D' L D y' L D L' y2 L D L' D' y L' D' L D y2 L D L' D' y L' D' L D2 F D L D' L' F' D y' L D L' D L D2 L' D L D' R' D L' D' R D y' L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U
+Success!
+=== Test 28/100 ===
+Scramble: L' U2 F' L' B U B R2 F2 U R2 B2 U R2 D R2 D B2 U2 R F
+Solution: F R D F2 R' D2 L2 R L D2 B2 L' D B2 L D L' D2 y2 L D L' D' L D L' y L D L' D' L D L' D' L D L' D' y2 D L D' L' y L D L2 D' L D y' L D L' D y2 L D L' D' y L' D' L y' L' D' L D y' L D L' y2 L D L' D' y L' D' L F D L D' L' F' D' y2 L D L' D L D2 L' D y' L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U
+Success!
+=== Test 29/100 ===
+Scramble: U' F R D' R2 D' U2 R2 F2 L2 R2 D2 B2 F' L' B' R U L2 D
+Solution: B2 D L2 B' R' L D2 B2 L' D B2 D R F' R' L D L' y L D L' D' y2 L D L' y L D L' D' L D L' D' L D L' D2 y' L D L' D' L D L' D' L D L' y' L D L' D' L D L' D' L D L' D' y' L' D' L D y' L D L' D y2 L' D' L D y' L D L' y L D L' D' y L' D' L2 D L' D' y L' D' L D y L y' L D L' D' y L' y' L D L' D L D2 L' D2 y' L D L' D L D2 L' D y' L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' U L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 30/100 ===
+Scramble: F B' U' F U' L D' L F2 D B2 L2 B2 L2 U R2 D F2 D2 R2 F
+Solution: F2 D' L2 D' R D' R F' D2 B2 F' L D L' y L D L' D' y2 L D L' D' L D L' D' y L D L' D y2 L D L' D' L D L' D' L D L' D' y2 L D L' D' L D L' D L' D' L D y' L D L' D' y2 L' D' L D y' L D L' D y L' D' L D y' L D L' D' y2 L' D' L D y' L D L' D2 y2 L' D' L D y' L D L' D' y' L D L' D' y L' D' L D2 y L y' L D L' D' y L' y' D y L D L' D L D2 L' D L D' R' D L' D' R D y L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U2
+Success!
+=== Test 31/100 ===
+Scramble: R' F D2 B' U D B U B2 R2 F' D2 B L2 B' U2 L2 B2 R2 B2
+Solution: B2 D L2 B2 R F L D L' D2 y' L D L' D' y2 L D L' D2 y' L D L' D2 y2 D L D' L' D2 L D' L' y' L D L' D' y L' D' L D' y2 L' D' L D y' L D L' D' y' L D L' D' y L' D' L D' y2 L' D' L D y' L D L' F D L D' L' F' D y2 L D L' D L D2 L' D y2 L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U
+Success!
+=== Test 32/100 ===
+Scramble: D' B' L2 D2 F2 L2 B' D2 B' D2 U2 B2 R2 D' R F L U' L2 D2 U
+Solution: R' F' R2 D2 L2 R' D2 B2 R D' B2 L D R2 L D R2 D' L2 y2 L D L' y D L D' L' D' y' L D L' D' L D L' D' L D L' y' L D L' D' L D L' D' L D L' D' y2 L D L' D' y L' D' L D L D L' D' y L' D' L D2 y2 L' D' L D y' L D L' D2 y2 L D L' D' y L' D' L D' y2 L D L' D L D2 L' D y2 L D' R' D L' D' R D z2 y L D L' D' L D L' D' L D L' D' L D L' D' U L D L' D' L D L' D' U'
+Success!
+=== Test 33/100 ===
+Scramble: R L' B D' B' R D F L R2 U2 F U2 R2 D2 F2 R2 B R2 D2
+Solution: B2 D L2 F2 D R2 B D2 F2 L D L' y D L D' L' y2 L D L' y L D L' D2 y2 D L D' L' D' y D L D' L' D2 y' D L D' L' y2 L' D' L D y' L D L' D2 y2 L D L' D' y L' D' L D' y' L' D' L D y' L D L' D2 y2 L D L' D' y L' D' L D F D L D' L' F' L D' R' D L' D' R D y' L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 34/100 ===
+Scramble: L B D2 R2 F2 U' R2 F2 D' B2 R2 F2 U2 B2 L F' R F' R2 D' U
+Solution: F2 D' L2 F R' D' R F2 R' B R' L D L' D y2 L D L' D' L D L' D' L D L' D y' D L D' L' D2 y' L D L' D' L D L' D' L D L' D' y' L D L' D2 y2 L' D' L D y' L D L' D2 y2 L D L' D' y L' D' L y' L' D' L D y' L D L' D2 y2 L D L' D' y L' D' L D y L y' L D L' D' y L' y' D' y' L D L' D L D2 L' D L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' U'
+Success!
+=== Test 35/100 ===
+Scramble: D' L2 F2 R D2 R' B2 R F2 R2 U2 L2 F2 D' B' F' L' B' R2 B D
+Solution: R2 D B2 R B' D' B R2 F' L D R D' L2 F' R' y2 L D L' D y2 L D L' D' L D L' D' L D L' D' y' L D L' D y2 L D L' D2 y D L D' L' y L D L' D' L D L' D' L D L2 D' L D y' L D L' D2 y2 L' D' L D y' L D L' D y2 L D L' D' y L' D' L D' y' L' D' L D y' L D L' y L y' L D L' D' y L' y' D2 y' L D L' D L D2 L' D y2 L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 36/100 ===
+Scramble: D B D2 R B2 U' B' R2 D L2 U B2 R2 L2 U B2 U2 R2 F2 R U2
+Solution: R2 D' F2 D L2 D2 B D' B R2 L D L' y L D L' D' y2 L D L' D' L D L' D' L D L' D' L D L' y L D L' D' y2 D L D' L' y L' D' L D y' L D L' D y L D L' D' y L' D' L D' y2 L' D' L D y' L D L' D2 F D L D' L' F' L D L' D L D2 L' D2 y' L D L' D L D2 L' D L D' R' D L' D' R D z2 y2 L D L' D' L D L' D' L D L' D' L D L' D' U L D L' D' L D L' D' U'
+Success!
+=== Test 37/100 ===
+Scramble: F L F' B' R2 U2 D R L' U L2 F2 D2 F D2 B2 L2 B' U2 F' D2
+Solution: B2 D L2 D F2 L D2 B2 L' D B D' B R2 y2 L D L' D2 y' L D L' D' L D L' D' L D L' D' y L D L' D y2 D L D' L' y' L D L' D2 y' L D L' D' L D L' D' L D L' D2 y D L D' L' D' y2 L D L' D' y L' D' L D2 y2 L' D' L D y' L D L' D2 y2 L' D' L D y' L D L' D2 y2 L D L' D' y L' D' L F D L D' L' F' y L D L' D L D2 L' D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 38/100 ===
+Scramble: R' F U' D' R' U2 D R B' U2 L2 D2 F2 R B2 L2 D2 B2 R' U2 D2
+Solution: B L' D' L B D' R2 D F L' D2 B2 F' L' D L F2 y L D L' D y2 L D L' D' y' L D L' D' L D L' D' L D L' D' L D L' D2 y' D L D' L' D2 y' L D L' D' L D L' D' L D L' D y L' D' L D y' L D L' y' L' D' L D y' L D L' D' L' D' L D y' L D L' D y L' D' L D y' L D L' F D L D' L' F' D' y L D L' D L D2 L' D y L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 39/100 ===
+Scramble: F R B' L2 D B' L' D B U D F2 B2 U R2 U' F2 R2 F2 U2
+Solution: D R F' R' D R2 L D L' D2 y' L D L' D' y' L D L' D y2 D L D' L' D' y2 L D L' D' L D L' D2 y' L D L' D y D L D' L' D y L' D' L D y' L D L' D' L' D' L D y' L D L2 D' L D y' L D L' D2 y' L D L' D L D2 L' D L D' R' D L' D' R D y' L D' R' D L' D' R D z2 y L D L' D' L D L' D' U L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 40/100 ===
+Scramble: R' D2 B2 D R' B U R2 F L R2 B2 D' F2 B2 R2 U2 D B2 D' B2
+Solution: R D' R F2 L' D' L B2 L D L' D y2 L D L' D' L D L' D' L D L' D y2 D L D' L' D2 y' L D L' D' L D L' D' L D L' D2 y2 L D L' D' L D L' D' L D2 L' D' y' L D L' D' y L' D' L D' y L D L' D' y L' D' L D' y' L' D' L D y' L D L' D' y2 L D L' D' y L' D' L D' y' L D L' D' y L' D' L D2 F D L D' L' F' D2 y' L D L' D L D2 L' D y L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' U2
+Success!
+=== Test 41/100 ===
+Scramble: F D' L B L2 U L D2 F' L B U2 F D2 R2 B2 D2 R2 F' U2 F
+Solution: F' L R' B' D' R2 B D R F' R' D2 B' D B' L2 y L D L' y D L D' L' D y L D L' D' L D L' D' L D L' D2 y2 L D L' D' L D L' D2 y' L D L' D y D L D' L' D' y' L D L' D' y L' D' L D2 y' L' D' L D y' L D L' D' y' L' D' L D y' L D L' D y L D L' D' y L' D' L D F D L D' L' F' D y L y' L D L' D' y L' y' D2 y2 L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U
+Success!
+=== Test 42/100 ===
+Scramble: U F R D2 L2 D L2 D' L' F R2 U' F2 D2 F2 L2 U2 F2 D R2 B2
+Solution: L' B D2 B' F2 L2 D' B2 L' B D' B' R2 L' B D B' L2 y2 L D L' D2 y' L D L' D' y L D L' D' L D L' D' L D L' D' L D L' D y2 D L D' L' D2 y' D L D' L' D y2 L D L' D' y L' D' L D y L' D' L D y' L D L' D' y' L' D' L D y' L D L' D' L' D' L D y' L D L' D F D L D' L' F' D2 y L D L' D L D2 L' D L D' R' D L' D' R D y' L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U L D L' D' L D L' D' U'
+Success!
+=== Test 43/100 ===
+Scramble: L' D' B R' L B2 D' F U' F' L2 U F2 L2 D2 R2 D L2 F2 D2 F2
+Solution: R2 D' F2 R B' D B L' D2 B2 L' D B2 L D L' D' L D L' D' L D L' D' L D L' D' y L D L' D' L D L' D' L D L' D' L D L' D y L D L' D' L D L' D' L D L2 D' L D y' L D L' D2 y2 L D L' D' y L' D' L D y L' D' L D y' L D L' D' y' L' D' L D y' L D L' D2 F D L D' L' F' D L D L' D L D2 L' D y' L D' R' D L' D' R D z2 y L D L' D' L D L' D' U L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 44/100 ===
+Scramble: L' B' D' L2 D2 F B2 L' B R2 U' B2 U L2 U R2 U' B2 U' R2 D
+Solution: U' R U L B2 R' B' L' F L y L D L' y L D L' D' y L D L' y L D L' D' L D L' D' L D L' D' y' L D L' D' L D L' D' L D L' D' L D L' D y' L' D' L D y' L D L' D' y' L' D' L D y' L D L2 D' L D y' L D L' D' F D L D' L' F' D y L y' L D L' D' y L' y' D2 L D L' D L D2 L' D L D' R' D L' D' R D y L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U L D L' D' L D L' D' U'
+Success!
+=== Test 45/100 ===
+Scramble: B U2 R U' F' D B F2 R2 F2 U' D' F2 R2 F2 D B2 U L F'
+Solution: B L D R F' R' D B D' B R2 L D L' y D L D' L' y' L D L' D2 y' L D L' D' L D L' D' L D L' D' y L D L' D2 y2 D L D' L' D2 L D L' D' y L' D' L2 D L' D' y L' D' L2 D L' D' y L' D' L2 D L' D' y L' D' L D F D L D' L' F' D y L y' L D L' D' y L' y' D2 y L D L' D L D2 L' D y2 L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U2 L D L' D' L D L' D' U2
+Success!
+=== Test 46/100 ===
+Scramble: F2 L2 D2 R D2 B2 L2 B2 R B2 R' F2 D F R D2 B' L R F2
+Solution: L2 D2 R2 B' L B F' L' D' L B2 L D L' D2 y' L D L' D' L D L' D' L D L' D' y' L D L' D2 y' D L D' L' y L D L' D y2 L D L' D' L D L' D' L D L' D' y2 L D L' D' L D L' D' L D L' D' L D L' D2 L' D' L D y' L D L' y2 L D L' D' y L' D' L D2 y2 L D L' D' y L' D' L D y2 L' D' L D y' L D L' D y L' D' L D y' L D L' D F D L D' L' F' D' L D' R' D L' D' R D y2 L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 47/100 ===
+Scramble: U F2 D2 R2 F2 L2 B2 U L2 U' B2 L' F R U' L U2 F' U2
+Solution: B L' D' L B D L2 B2 D' R D' R F2 B' y L D L' y L D L' D' L D L' D' L D L' D' y' L D L' D2 y' L D L' D' L D L' D' L D L' D' y L D L' D' L D L' D' y2 L D L' D' y' L' D' L D y' L D L' D' L' D' L D y' L D L' D y' L D L' D' y L' D' L D' F D L D' L' F' D y2 L D L' D L D2 L' D y' L D' R' D L' D' R D z2 y L D L' D' L D L' D' L D L' D' L D L' D' U L D L' D' L D L' D' U'
+Success!
+=== Test 48/100 ===
+Scramble: U2 D2 L2 F' B' U' L' D' F' B2 U2 R2 D B2 U' F2 U F2 D' L2 U2
+Solution: U' R U B F' R F' R F D' L2 F' R' y L D L' D y2 L D L' D' L D L' D' L D L' D' y2 L D L' D' L D L' D' L D L' D' L D L' y' L D L' D' L D L' D' L D L' D2 y2 L D L' D' L D L' D' L D2 L2 D' L D y' L D L' y L D L' D' y L' D' L D y L' D' L D y' L D L' D2 y2 L' D' L D y' L D L' D' F D L D' L' F' D y L y' L D L' D' y L' y2 L D L' D L D2 L' D L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' U L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 49/100 ===
+Scramble: R L2 D' F2 U R' F B' L' R2 U2 B2 D' F2 U B2 U' L2 D2 F
+Solution: R' F' L' B' R' B' D' R2 B D L2 F D2 B2 F' y L D L' D2 y' L D L' D' L D L' D' L D L' D' y2 L D L' D2 y' L D L' D' L D L' D' L D L' D' y L D L' y L D L' y' L D L' D y L' D' L D y' L D L' D2 y' L D L' D' y L' D' L D y2 L' D' L D y' L D L' D y L' D' L D y' L D L' D2 F D L D' L' F' D L D L' D L D2 L' D L D' R' D L' D' R D y L D' R' D L' D' R D z2 y L D L' D' L D L' D' U L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 50/100 ===
+Scramble: F U L U' D' F' D' L2 B F2 U2 R2 D' B2 L2 U2 B2 D B2 D B2
+Solution: R2 D' F2 D' L2 F' D2 B2 F L D L' D' L D L' D' L D L' D' L D L' D' y L D L' D y2 D L D' L' y' L D L' D2 y' L D L' D' y L D L' D' L D L' D' L D L' D' y L' D' L D y' L D L' D' y L D L' D' y L' D' L D F D L D' L' F' D y L y' L D L' D' y L' y' L D L' D L D2 L' D2 y' L D L' D L D2 L' D y' L D' R' D L' D' R D z2 y L D L' D' L D L' D' L D L' D' L D L' D' U2 L D L' D' L D L' D' U2
+Success!
+=== Test 51/100 ===
+Scramble: F' L D F2 D L2 D L2 D2 B2 U' L2 F2 U R B2 L' U L B R2
+Solution: D B2 D F' R F R F D' L2 F' R' F y L D L' D y2 L D L' D' L D L' D' L D L' D' y2 L D L' D2 y' L D L' D' y L D L' y L D L' D y' D L D' L' D2 y L' D' L D y' L D L' D y L D L' D' y L' D' L y2 L' D' L D y' L D L' D' y L y' L D L' D' y L' y' D L D L' D L D2 L' y L D L' D L D2 L' D L D' R' D L' D' R D y' L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' U'
+Success!
+=== Test 52/100 ===
+Scramble: D B2 D B2 L2 U F2 U F2 L2 F2 U2 B' D' F2 R' D' L' R' F D'
+Solution: F R' D' R F2 R2 B' D B L' D2 B2 L' D B2 y L D L' D' L D L' D y2 L D L' D' L D L' D' L D L' D y' D L D' L' D' y2 L D L' D' L D L' D' L D L2 D' L D y' L D L' D2 y2 L' D' L D y' L D L' D2 y2 L' D' L D y' L D L' D y L D L' D' y L' D' L y2 L D L' D L D2 L' D y L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U
+Success!
+=== Test 53/100 ===
+Scramble: B2 U2 L2 B2 L' B2 L B2 U2 R' U2 R2 U' F R2 F2 R B' U' L2 U'
+Solution: R2 D B2 F2 D R2 F L' F' B' D2 B F2 L D L' D2 y' L D L' D' L D L' D' L D L' D' y2 L D L' D2 y' L D L' D' L D L' D' L D L' D2 y2 L D L' D' L D L' D' L D L' D' y' L D L' D' y L' D' L y' L' D' L D y' L D L' D' y' L' D' L D y' L D L' D' y L D L' D' y L' D' L D F D L D' L' F' D y L D L' D L D2 L' D L D' R' D L' D' R D y L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U
+Success!
+=== Test 54/100 ===
+Scramble: U' D F R F R2 L D B2 U2 F R2 B R2 B' R2 B L2 U2
+Solution: B L' D' L B D2 F2 D R2 F D2 B2 F' L' y2 L D L' D y2 L D L' D' y' L D L' D2 y' D L D' L' D y' L D2 L' D' y L' D' L D' y L' D' L D y' L D L' y2 L D L' D' y L' D' L D2 y2 L D L' D' y L' D' L D y L y' L D L' D' y L' y2 L D L' D L D2 L' D L D' R' D L' D' R D z2 y2 L D L' D' L D L' D' L D L' D' L D L' D' U L D L' D' L D L' D' U'
+Success!
+=== Test 55/100 ===
+Scramble: U' F R U' L2 F' D B2 L' D' R2 L2 D' L2 F2 U B2 R2 L2 U2 D'
+Solution: B L U' R U B L D L' F2 y L D L' D2 y' L D L' D' L D L' D' L D L' D' y2 L D L' y D L D' L' D' y2 L D L' D' L D L' D' L D L' D' L D L' y D L D' L' y' L D L' D' L' D' L D y' L D L' D' y' L D L' D' y L' D' L y' L' D' L D y' L D L2 D' L D y' L D L' D2 F D L D' L' F' D2 y' L D L' D L D2 L' D L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U2 L D L' D' L D L' D' U2
+Success!
+=== Test 56/100 ===
+Scramble: R L U F D2 L D' B2 L' U2 F2 L U2 L' F2 D2 R' B2 L2 B' L'
+Solution: L2 D2 R2 D R F' R2 D2 L2 R L D2 B2 L' D B2 L D L' D2 y' L D L' D' L D L' D' L D L' D' y L D L' D y2 D L D' L' D2 y' L D L' D y' D L D' L' y L D L' D' y L' D' L y L D L' D' y L' D' L D y L' D' L D y' L D L' F D L D' L' F' D y' L D L' D L D2 L' D y' L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' U2 L D L' D' L D L' D' U'
+Success!
+=== Test 57/100 ===
+Scramble: U R' B2 R2 F2 U' L2 U' R F R2 B' D2 L2 B' D2 F L2 B' L2 U2
+Solution: B2 D L2 R F' R' D R2 D2 B2 y2 L D L' D y2 D L D' L' y2 L D L' D y' L D L' D' L D L' D' L D2 L' D' y L' D' L2 D L' D' y L' D' L D y L' D' L D y' L D L' y2 L' D' L D y' L D L' D2 L D L' D L D2 L' D y2 L D' R' D L' D' R D
+Success!
+=== Test 58/100 ===
+Scramble: D' R F2 B L D' R' F' L2 D F2 D' F2 L2 D' F2 D L2 F2 D B
+Solution: U' R U B L2 D F2 D L2 F' R F y L D L' D y2 D L D' L' D2 y2 D L D' L' y D L D' L' D' y2 D L D' L' D L D L' D' y L' D' L D' L D L' D' y L' D' L D y2 L' D' L D y' L D L' D y L' D' L D y' L D L' D' L' D' L D y' L D L' D y L' D' L D y' L D L' D F D L D' L' F' D' y L D L' D L D2 L' D y' L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U'
+Success!
+=== Test 59/100 ===
+Scramble: U2 L U R' B2 R' F D2 R D R2 B2 R2 D' R2 L2 D B2 D' L2 U2
+Solution: B' R' F' L U' R U B D' R F' R' D L' D L' y L D L' D' y2 L D L' y L D L' D y2 D L D' L' D' y L D L' y L' D' L D y' L D L' D y L D L' D' y L' D' L D y2 L' D' L D y' L D L' D' y' L D L' D' y L' D' L D y L' D' L D y' L D L' D' F D L D' L' F' D2 y' L D L' D L D2 L' D y L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' U2 L D L' D' L D L' D' U'
+Success!
+=== Test 60/100 ===
+Scramble: D' R' U R' U2 B L2 F' D2 L2 U L2 U L2 B2 L2 F2 D B2 L' B2
+Solution: D R' B R F L' F' R D2 R' F2 D F2 L D L' D2 y' L D L' D' y2 L D L' D' L D L' D2 y L D L' D2 y2 L D L' y' L D L' D' L D L' D' L D L' D' L D L' D' L D L' D' L D L' D' y L D L' D' L D L' D' L D L' D y L D L' D' y L' D' L D2 y2 L' D' L D y' L D L' D2 L' D' L D y' L D L' D' y2 L D L' D' y L' D' L D' y' L D L' D' y L' D' L D2 y L y' L D L' D' y L' y' L D L' D L D2 L' D2 y' L D L' D L D2 L' D L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 61/100 ===
+Scramble: R' L B' D B R F B2 D' B2 L2 D2 L2 U B2 L2 U' B2 D L U2
+Solution: F2 D2 B2 F' L F2 L2 R L D L' D y2 L D L' D y2 L D L' D' L D L' D' L D L' D' y L D L' D' L D L' D' L D L' D2 y2 D L D' L' D' y2 L D L' D' y L' D' L D2 y L D L' D' y L' D' L D2 y' L' D' L D y' L D L' D' y' L' D' L D y' L D L' D' y L D L' D L D2 L' D L D' R' D L' D' R D y' L D' R' D L' D' R D z2 y L D L' D' L D L' D' L D L' D' L D L' D' U L D L' D' L D L' D' U'
+Success!
+=== Test 62/100 ===
+Scramble: R' F' U2 B' R2 U' D' F' R U R2 D2 F2 R2 F2 R2 U' B2 U2 L2 U'
+Solution: R2 D' F2 L' B D' B' R2 B' L B R D R' B2 L D L' D2 y' L D L' D' L D L' D' L D L' D' y L D L' D y2 D L D' L' y2 L D L' y L D L' D' L D L' D' L D L' D y' L D L' D' L D L' D' L D L' D y2 L' D' L D y' L D L' D y L D L' D' y L' D' L D y L' D' L D y' L D L' D' y2 L' D' L D y' L D L' D y L' D' L D y' L D L' D' F D L D' L' F' D y L y' L D L' D' y L' y' L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' U2 L D L' D' L D L' D' U'
+Success!
+=== Test 63/100 ===
+Scramble: R2 D U F2 D' R2 U' F2 U L2 B2 F2 R B' L2 B' F' R' B U B'
+Solution: L' B' L' B D2 B' F2 R B D B' L2 y L D L' D y2 D L D' L' y2 L D L' y D L D' L' D2 y2 L D L' D2 y L D L' y L D L' D' y L' D' L D' y2 L' D' L D y' L D L' D y L D L' D' y L' D' L D2 y2 L' D' L D y' L D L' D' F D L D' L' F' D y L y' L D L' D' y L' y' D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' U2
+Success!
+=== Test 64/100 ===
+Scramble: D' U2 L' U2 F2 D2 L' F2 L2 B2 U2 L F2 D' R2 U' F' L2 B R B'
+Solution: L2 D F2 B' L B D2 R2 L D L' D2 y' D L D' L' y L D L' D' L D L' D2 y2 D L D' L' D y' L D L' D' L D L' D' L D L' D' y D L D' L' D L' D' L D y' L D L2 D' L D y' L D L' D L' D' L D y' L D L' D' L' D' L D y' L D L' D y L' D' L D y' L D L' y L y' L D L' D' y L' y' D' y L D L' D L D2 L' D y L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U2
+Success!
+=== Test 65/100 ===
+Scramble: F L F' B L2 D' B U2 D' L' D' L2 D' R2 F2 L2 B2 D L2 U' L2
+Solution: R B' D B L2 D R' B R L D L' y L D L' D' L D L' D' L D L' y L D L' D2 y D L D' L' D' y2 L D L' D' y L' D' L y2 L D L' D' y L' D' L D y' L' D' L D y' L D L' D L' D' L D y' L D L' D F D L D' L' F' D' y2 L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 66/100 ===
+Scramble: L' F U R2 F' R2 F2 B U2 L2 D' L2 D L2 U2 B2 U' F2 D' B2 L'
+Solution: L' B D' B' R2 B2 F R D' R' L2 D' L2 y2 L D L' D' L D L' D y' L D L' D' L D L' D' L D L' D y' L D L' D' L D L' D' L D L' D' y' D L D' L' D' y' L D L' D' y L' D' L y L D L' D' y L' D' L2 D L' D' y L' D' L D y L D L' D' y L' D' L D2 F D L D' L' F' y' L D L' D L D2 L' D L D' R' D L' D' R D y2 L D' R' D L' D' R D L D' R' D L' D' R D z2 y L D L' D' L D L' D' U L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 67/100 ===
+Scramble: U2 L' U2 L' D2 L D2 L2 B2 D2 L2 B2 U' F D2 B L2 U L D U
+Solution: B L' D' L B' R2 D2 L2 D R2 F' D2 B2 F' y L D L' y L D L' D' y L D L' D' L D L' D' L D L' D' L D L' D' y2 L D L' D2 y' L D L' D' L D L' D' L D L' D2 y L D L' D' L D L' D' L D L' D2 y L' D' L D y' L D L' D' y' L D L' D' y L' D' L D' y' L' D' L D y' L D L2 D' L D y' L D L' F D L D' L' F' D' y' L D L' D L D2 L' D z2 y L D L' D' L D L' D' L D L' D' L D L' D' U L D L' D' L D L' D' U'
+Success!
+=== Test 68/100 ===
+Scramble: D' F2 U2 R2 D' B2 D' F2 R2 F2 U' L2 R' U L D' L B R F' U2
+Solution: B2 D R F' R' L2 D' B2 L' B D2 B' F2 R F D' L2 F' R' F' R F L D L' y D L D' L' y L D L' D' L D L' y L D L' D y L D L' D' y' L D L' D' y L' D' L D2 L D L' D' y L' D' L D y L' D' L D y' L D L' D2 y2 L' D' L D y' L D L' D2 F D L D' L' F' y2 L D L' D L D2 L' D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U2
+Success!
+=== Test 69/100 ===
+Scramble: B R' B D' F' L' D R F' D L2 U D2 B2 R2 B2 U L2 U' F2
+Solution: R' F2 R F L2 D L' D2 y' D L D' L' y L D L' D y2 L D L' D' y' L D L' D' L D L' D' L D L' D' L D L' D' L D L' D' y L' D' L D' y' L D L' D' y L' D' L D y2 L' D' L D y' L D L' D y L D L' D' y L' D' L D' y' L' D' L D y' L D L' D2 F D L D' L' F' L D L' D L D2 L' y L D L' D L D2 L' D L D' R' D L' D' R D y L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' U'
+Success!
+=== Test 70/100 ===
+Scramble: F U2 F' R' U' F2 D R' U' R2 U F2 B2 U L2 D2 F2 U' L2 B2 F'
+Solution: B L' D' L B D' R2 F R' D' R F2 D' B2 R D' R' L2 D' L' D L' D y2 L D L' D' L D L' D' L D L' D' y L D L' y D L D' L' D2 y' L D L' D2 y2 D L D' L' y' L D L' D' y L' D' L y' L' D' L D y' L D L' D2 y' L D L' D' y L' D' L D2 y2 L D L' D' y L' D' L F D L D' L' F' D' y2 L D L' D L D2 L' D y2 L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U L D L' D' L D L' D' U'
+Success!
+=== Test 71/100 ===
+Scramble: U' L D' F' D' B' L2 U B' F2 L2 D2 F2 D' F2 U' R2 L2 B2 D2 B2
+Solution: B2 D' R2 D' L2 F2 R D R' B2 y L D L' D2 y' D L D' L' y2 L D L' y L D L' D y2 L D L' D' y L D L' D' L D L' D' L D L' D y2 L' D' L D y' L D L' D y L D L' D' y L' D' L y L D L' D' y L' D' L D' y' L' D' L D y' L D L' D2 y' L D L' D L D2 L' D y' L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U'
+Success!
+=== Test 72/100 ===
+Scramble: F2 U L F2 B L F' R' B2 U2 B2 R2 D L2 U' L2 U2 R2 U F2 R
+Solution: R' F' L' B D' B' R2 B' L B' y2 L D L' D2 y' L D L' D' L D L' D' L D L' D' y2 L D L' D' L D L' D' L D L' D' L D L' D2 y' D L D' L' D' y2 L D L' y' L D L' D' L D L' D' L D L' D' L D L' D' L D L' D' L D L' D' y L D L' D' L D L' D' L D2 L' D' y L' D' L D y L' D' L D y' L D L' y2 L' D' L D y' L D L' D y L D L' D' y L' D' L D2 F D L D' L' F' D L D L' D L D2 L' y L D L' D L D2 L' D y2 L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' U2
+Success!
+=== Test 73/100 ===
+Scramble: U D' R2 U2 R' D2 F' D B L2 B2 U R2 U2 R2 L2 U R2 L2 B2 D2
+Solution: B L' D' L B' R' F' D R2 B' L2 D L' D y2 L D L' D' L D L' D' L D L' D' y' L D L' D2 y' D L D' L' D y' L D L' D' L D L' D' y L' D' L D' y2 L D L' D' y L' D' L y' L' D' L D y' L D L' D' L' D' L D y' L D L' y L y' L D L' D' y L' y' D y2 L D L' D L D2 L' D y2 L D' R' D L' D' R D z2 y L D L' D' L D L' D' L D L' D' L D L' D' U2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 74/100 ===
+Scramble: F' R2 B' U2 B D2 B R2 D2 R2 U2 F2 U' R F2 L' F R2 D' R2 B2
+Solution: B L' D' L B D2 F' L' D F' R2 F D2 B2 F' L D L' D' y L D L' D' L D L' D' L D L' D' y L D L' D y L D L' D' L D L' D' L D L' D' y2 L' D' L D y' L D L' D' y2 L' D' L D y' L D L' D2 y2 L' D' L D y' L D L' D' y' L D L' D' y L' D' L D L D L' D L D2 L' D L D' R' D L' D' R D L D' R' D L' D' R D z2 y L D L' D' L D L' D' L D L' D' L D L' D' U L D L' D' L D L' D' U'
+Success!
+=== Test 75/100 ===
+Scramble: D' F U2 F B U2 L F U' B2 D' F2 U F2 U R2 F2 U R2 F2
+Solution: L' B D B' L2 R2 F' L' D' L B2 y' L D L' y L D L' D' L D L' D' L D L' D' y' L D L' D' L D L' D' L D L' D' L D L' D' y2 D L D' L' y D L D' L' y' L D L' D' y L' D' L D y L' D' L D y' L D L' D2 y2 L D L' D' y L' D' L D2 y2 L D L' D' y L' D' L D2 y L y' L D L' D' y L' y' D2 L D L' D L D2 L' D L D' R' D L' D' R D y L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' U'
+Success!
+=== Test 76/100 ===
+Scramble: F' D2 B L' F2 D L U' F' U2 F2 R L2 F2 L F2 U2 F2 U2 L F2
+Solution: B2 D' R' F D' L2 F' R2 B R2 F' R' y L D L' D2 y' L D L' D' L D L' D' L D L' D' y L D L' D y2 D L D' L' y2 L D L' y L D L' y' L D L' D' L D L' D' L D2 L' D' y L' D' L D2 L D L' D' y L' D' L D' y2 L' D' L D y' L D L' D y' L D L' D' y L' D' L F D L D' L' F' D L D L' D L D2 L' y L D L' D L D2 L' D y' L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 77/100 ===
+Scramble: U B' U2 R2 B2 U F2 R2 U' L2 B2 D L2 D B' R B' R' U' L' R2
+Solution: R2 D B2 F L' F' D F' R F y2 L D L' D' L D L' D' L D L' D' L D L' D' y L D L' D y2 L D L' D' y2 L D L' D' L D L' D' y L D L' D' L D L' D' L D L' D' L' D' L D y' L D L' y L D L' D' y L' D' L D y L D L' D' y L' D' L D y2 L D L' D' y L' D' L F D L D' L' F' D y L D L' D L D2 L' D L D' R' D L' D' R D z2 y L D L' D' L D L' D' U L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 78/100 ===
+Scramble: U F L2 U' L2 B' L' U' D F2 D2 L2 D2 R' F2 R B2 L' U2 B2 D2
+Solution: L2 D F2 D' R' B R F D F' R2 L' y L D L' D' L D L' D' L D L' D' L D L' D' y2 L D L' D2 y' L D L' D' L D L' D' L D L' D' y L D L' D' L D L' D' L D L' D' L D L' D' y L D L' D' L D L' D' L D L' D2 y L D L' D' y L' D' L D' y' L' D' L D y' L D L' D2 y2 L D L' D' y L' D' L D L D L' D' y L' D' L D' y' L D L' D' y L' D' L D F D L D' L' F' D L D L' D L D2 L' D2 y' L D L' D L D2 L' D y' L D' R' D L' D' R D z2 L D L' D' L D L' D' U2 L D L' D' L D L' D' U' L D L' D' L D L' D' U'
+Success!
+=== Test 79/100 ===
+Scramble: R' L F' D' R' B D F U' R' F2 R2 U2 L' U2 F2 D2 B2 R F2 D2
+Solution: D2 R D' R F' D2 B2 F' R D' R' L2 D' L2 y2 L D L' D2 y' L D L' D' y L D L' D' L D L' D' y L D L' y L D L' D' L D L' D' L D L' D' y' L D L' D' L D L' D' L D L' D' y' L' D' L D y' L D L' D y2 L D L' D' y L' D' L2 D L' D' y L' D' L y L D L' D' y L' D' L D2 F D L D' L' F' D L D L' D L D2 L' y L D L' D L D2 L' D
+Success!
+=== Test 80/100 ===
+Scramble: B L2 U2 F' L2 F' D2 F D2 U2 F' R2 D' R' D' L' U2 B2 R' B'
+Solution: B L' D' L R' B R F' R' F L' F' B y L D L' D2 y' L D L' D' y' L D L' D y2 D L D' L' y2 D L D' L' D2 y' L D L' D y2 L D L' D' y L' D' L D y L D L' D' y L' D' L D2 y2 L D L' D' y L' D' L D y2 L' D' L D y' L D L' D F D L D' L' F' D' L D L' D L D2 L' D y L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' U2
+Success!
+=== Test 81/100 ===
+Scramble: B U B2 L2 F' D B2 R' B F2 L2 U L2 U2 B2 R2 D2 F2 U B2
+Solution: R2 D B2 R2 D' F2 R2 D2 L2 B D' B' R2 L D L' D y2 D L D' L' y L D L' D y2 L D L' D' L D L' D' L D L' D' y' L D L' D2 y' L D L' D2 y L D L' y2 L' D' L D y' L D L' y2 L D L' D' y L' D' L D y2 L D L' D' y L' D' L D' y' L D L' D' y L' D' L D F D L D' L' F' L D L' D L D2 L' D L D' R' D L' D' R D y L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' U2 L D L' D' L D L' D' U'
+Success!
+=== Test 82/100 ===
+Scramble: L B2 D2 F D2 B R' L2 F2 U' L2 D' L2 U' B2 D2 L2 D2
+Solution: F' L' D2 R2 F D2 B2 F' L' D L F2 y L D L' D2 y' L D L' D' y2 L D L' y L D L' D' L D L' D' L D L' D y2 L D L' D' y L D L' D' L D L' D' y L' D' L D2 y2 L' D' L D y' L D L' D y' L D L' D' y L' D' L D y2 L' D' L D y' L D L' D y L' D' L D y' L D L' D' y L y' L D L' D' y L' y' L D L' D L D2 L' D L D' R' D L' D' R D z2 y L D L' D' L D L' D' L D L' D' L D L' D' U2 L D L' D' L D L' D' U2
+Success!
+=== Test 83/100 ===
+Scramble: U2 R U2 R2 B2 R' B2 D2 U2 L F2 R U R2 B U2 F' L D' B2
+Solution: L' B D' B' R2 F L' F' D R F' R' B D2 y2 L D L' D' L D L' D' L D L' D' y D L D' L' D' y2 L D L' D' L D L' D2 y' L D L' D' L D L' D' L D L' D y L D L' D y2 L D L' D' y L' D' L D' y' L' D' L D y' L D L' D y' L' D' L D y' L D L' D2 y2 L' D' L D y' L D L' y L y' L D L' D' y L' y' D2 L D L' D L D2 L' D y L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' U'
+Success!
+=== Test 84/100 ===
+Scramble: U2 L2 F2 U2 R' F2 L D2 R B2 L F' D2 U' R' B D U' F
+Solution: B2 D' R2 F2 D2 B2 L' B D B' L2 D R F' R' y L D L' D y2 L D L' D' y' L D L' D y2 L D L' D' L D L' D' L D L' D' y2 L D L' D' L D L' D' L D L' D' L D L' D' y' L D L' D' y' L' D' L D y' L D L' D y2 L D L' D' y L' D' L D' y' L' D' L D y' L D L' D' y2 L D L' D' y L' D' L D' y' L D L' D' y L' D' L F D L D' L' F' L D L' D L D2 L' y L D L' D L D2 L' D
+Success!
+=== Test 85/100 ===
+Scramble: F' B D' L' U R U L2 F R2 D2 R L' D2 B2 D2 L2 U2 R U2 D2
+Solution: F' B D2 B' F2 L2 D2 R2 L B' L' B' L B y L D L' D2 y' D L D' L' y L D L' D y2 L D L' D' L D L' D' L D L' D2 y' D L D' L' D2 y' L D L' D' L D L' D' L D L' D' y L D L' D' y L' D' L D L D L' D' y L' D' L D' y' L D L' D' y L' D' L D2 y L y' L D L' D' y L' y' D' L D' R' D L' D' R D y2 L D' R' D L' D' R D L D' R' D L' D' R D z2 y L D L' D' L D L' D' L D L' D' L D L' D' U2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 86/100 ===
+Scramble: U L F' R2 B' L2 D F L' B2 U2 F2 U' B2 U' R2 D' R2 D B2 D
+Solution: B2 D R F' R' F2 D R2 D R F' R2 B R F D' L2 F' L D L' D' L D L' D' L D L' D' L D L' D' y2 L D L' D2 y' L D L' D' L D L' D' L D L' D2 y2 L D L' y' D L D' L' y L D L' D' L D L' D' L D L' D2 y L D L' D' y L' D' L D2 y2 L' D' L D y' L D L' D' y2 L' D' L D y' L D L' D' y' L' D' L D y' L D L' D' y' L' D' L D y' L D L' y L y' L D L' D' y L' y' D2 y2 L D L' D L D2 L' D y L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' U2
+Success!
+=== Test 87/100 ===
+Scramble: F U F' B' D L2 F2 U' L' R2 D' R2 U2 D' B2 D' F2 L2 B2 D2 L2
+Solution: F R B2 F B' D B L' D L' D' L D L' D' L D L' D' L D L' D' y L D L' D' L D L' D' L D L' D' L D L' y D L D' L' y L D L' D' y' L D L' D' y L' D' L y2 L' D' L D y' L D L' D2 y' L D L' D' y L' D' L D y2 L' D' L D y' L D L' D y L' D' L D y' L D L' D2 F D L D' L' F' y L D' R' D L' D' R D
+Success!
+=== Test 88/100 ===
+Scramble: B' U B2 L2 U L2 U F2 D2 F2 D2 R2 U' B' D' R' B2 D F2 L2 D
+Solution: B2 D' R2 L2 D' B2 L2 D F2 L' y L D L' y L D L' D' L D L' D' L D L' D2 y' L D L' D' L D L' D' L D L' D y' L D L' D' L D L' D' L D L' D' y' L D L' D' y L D L' D' y L' D' L D2 y' L' D' L D y' L D L2 D' L D y' L D L' D' y' L D L' D' y L' D' L D' F D L D' L' F' D' y L D L' D L D2 L' D L D' R' D L' D' R D y L D' R' D L' D' R D z2 y L D L' D' L D L' D' U L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 89/100 ===
+Scramble: D F' B U' R2 B' L' U B2 R' U' R2 U' L2 F2 B2 D' B2 L2 U F2
+Solution: D' L2 R F' D R' B D' B R2 y L D L' D' L D L' D' L D L' D' L D L' y' L D L' D y' L D2 L' D' y L' D' L y2 L' D' L D y' L D L2 D' L D y' L D L' D' y' L' D' L D y' L D L' D2 F D L D' L' F' L D L' D L D2 L' y L D L' D L D2 L' D L D' R' D L' D' R D y L D' R' D L' D' R D z2 y2 L D L' D' L D L' D' L D L' D' L D L' D' U L D L' D' L D L' D' U'
+Success!
+=== Test 90/100 ===
+Scramble: B2 F2 D2 F2 D' F2 L2 B2 U R2 D F2 R' D2 B' L' D' L2 B L'
+Solution: F2 D' L2 D R' B R D' R F' R2 L D L' D2 y' L D L' D' L D L' D' L D L' D' y L D L' D y2 L D L' D' y2 L D L' y L D L' D' L D L' D' L D L' D' y' L D L' D' L D L' D' L D L' D' L D L' D2 y' L D L' D' y L' D' L D2 y L D L' D' y L' D' L D2 y2 L D L' D' y L' D' L D y L D L' D' y L' D' L D F D L D' L' F' D y L y' L D L' D' y L' y L D L' D L D2 L' D y L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U' L D L' D' L D L' D' U'
+Success!
+=== Test 91/100 ===
+Scramble: U2 B' U2 B2 L' U2 L D2 B2 R' U2 R' F2 L F' D B2 F R B R'
+Solution: F2 D2 B2 D F2 R F' D' F L2 y L D L' D2 y' L D L' D' L D L' D' L D L' D y' D L D' L' D' y2 D L D' L' D L D L' D' y L' D' L D2 y2 L D L' D' y L' D' L D F D L D' L' F' D2 L D L' D L D2 L' D y' L D' R' D L' D' R D L D' R' D L' D' R D z2 y L D L' D' L D L' D' L D L' D' L D L' D' U2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U'
+Success!
+=== Test 92/100 ===
+Scramble: D' F' D' L2 B2 D L2 D R2 B2 D' R2 D2 R D B2 L' F' L' U2
+Solution: F R' D' R F2 B2 L2 R y L D L' D' L D L' D' L D L' D' L D L' D' y L D L' D' L D L' D' y L D L' y L D L' D' L D L' D' L D L' y' L D L' D2 y2 L' D' L D y' L D L' y L D L' D' y L' D' L D y L D L' D' y L' D' L D2 F D L D' L' F' L D L' D L D2 L' y L D L' D L D2 L' D y2 L D' R' D L' D' R D z2 L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' U'
+Success!
+=== Test 93/100 ===
+Scramble: R F' U F B2 R B' L' F' R U D R2 U' B2 D' F2 U' B2 U2 F2
+Solution: L' B D' B' R2 L' B D2 B' F2 L' B D B' L2 F D2 B2 F' L D L' D2 y' L D L' D' y2 L D L' y L D L' D y2 D L D' L' D2 y L D L' D' L D L' D' L D L' D2 L D L' D' y L' D' L D y2 L D L' D' y L' D' L D y2 L' D' L D y' L D L' D2 y2 L' D' L D y' L D L2 D' L D y' L D L' D2 F D L D' L' F' y' L D L' D L D2 L' D y' L D' R' D L' D' R D L D' R' D L' D' R D z2 y L D L' D' L D L' D' U2 L D L' D' L D L' D' L D L' D' L D L' D' U2
+Success!
+=== Test 94/100 ===
+Scramble: R2 B L2 B L' F' R' F' B U' R2 B2 U' B2 R2 L2 D' R2 L2 D2 L
+Solution: F R F R' D' R F2 D2 L2 B' L D L' y L D L' D' y L D L' D y2 L D L' D' L D L' D' L D L' D y2 L D L2 D' L D y' L D L' D2 y' L' D' L D y' L D L' D y2 L' D' L D y' L D L' D' F D L D' L' F' D y L y' L D L' D' y L' y' D2 y L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U2 L D L' D' L D L' D' U2
+Success!
+=== Test 95/100 ===
+Scramble: D2 B2 L' D B U R2 D' R' U' F2 U F2 D' R2 B2 U F2 B2 U' L2
+Solution: L2 D2 R2 B2 F' D' F L' D L' D2 y' D L D' L' y L D L' D' L D L' D' L D L' D' L D L' D' y L D L' y L D L' D' L D L' D' L D L' D' y' L D L' D' L D L' D2 L D L' D' y L' D' L D y L' D' L D y' L D L' D' y L D L' D' y L' D' L D F D L D' L' F' D2 y' L D L' D L D2 L' D y' L D' R' D L' D' R D z2 L D L' D' L D L' D' U2 L D L' D' L D L' D' U' L D L' D' L D L' D' U'
+Success!
+=== Test 96/100 ===
+Scramble: L' D F2 L B2 L' D F' L U2 L2 F2 L2 F2 U2 R2 U F2 R2 U'
+Solution: B2 D' R2 D F2 L' D' L B2 L D L' D2 y' L D L' D' y2 L D L' D' L D L' D' L D L' D' L D L' D' y L D L' D y2 L D L' D' L D L' D' L D L' D2 y2 L D L' y' L D L' D' L D L' D' L D L' D' L D L' D' L D L' D' L D L' D' y L D L' D' L D L' D' L D L' y2 L D L' D' y L' D' L D y2 L' D' L D y' L D L' D' y' L D L' D' y L' D' L F D L D' L' F' D2 L D L' D L D2 L' D y' L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' U2 L D L' D' L D L' D' L D L' D' L D L' D' U2
+Success!
+=== Test 97/100 ===
+Scramble: L B' L2 U2 R2 B2 U2 F D2 L2 B R2 F D' F' R' D F' L U'
+Solution: L' B D B' L2 B R' B R' B R F L D L' y L D L' D' y L D L' D y2 D L D' L' y2 L D L' y D L D' L' D y' D L D' L' y' L D L' D' y L' D' L D L D L' D' y L' D' L2 D L' D' y L' D' L y L' D' L D y' L D L' y L y' L D L' D' y D L' D L D2 L' D y L D' R' D L' D' R D z2 y2 L D L' D' L D L' D' L D L' D' L D L' D' U L D L' D' L D L' D' U'
+Success!
+=== Test 98/100 ===
+Scramble: F B' D' R' L2 F' D B2 L' U F2 D2 L2 F2 U D' B2 L'
+Solution: B' R' F R' D' R F' L' F' B y L D L' D2 y' D L D' L' y L D L' D y2 L D L' D' L D L' D' L D L' D' y' L D L' D' L D L' D' L D L' D' L D L' D' y' D L D' L' D' L' D' L D y' L D L' D' y' L' D' L D y' L D L' D' y2 L' D' L D y' L D L' D y L' D' L D y' L D L' D F D L D' L' F' L D L' D L D2 L' D2 y' L D L' D L D2 L' D L D' R' D L' D' R D L D' R' D L' D' R D z2 L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U' L D L' D' L D L' D' L D L' D' L D L' D' U2
+Success!
+=== Test 99/100 ===
+Scramble: U2 L2 B2 R2 D' U' B2 U' F2 L2 F2 U2 F D F2 L2 F' D' L' R D'
+Solution: F2 D' L2 R' B R D' R F' R' B R' B' y L D L' D2 y' D L D' L' y2 L D L' D' L D L' D' L D L' D' L D L' D2 y' D L D' L' y2 L D L' D' L D L' D' L D L' D y2 L D L' D' y L' D' L y L' D' L D y' L D L' D' y' L' D' L D y' L D L' D' y' L D L' D' y L' D' L D2 y L y' L D L' D' y L' y' L D L' D L D2 L' D L D' R' D L' D' R D y' L D' R' D L' D' R D z2 y L D L' D' L D L' D' L D L' D' L D L' D' U2 L D L' D' L D L' D' U2
+Success!
+=== Test 100/100 ===
+Scramble: U2 F R U L' F L' D B2 R B2 R2 U2 B2 L' D2 B2 D2 R' B' L2
+Solution: B2 D R F' R' B L' D' L B' D L2 D R F' R' D2 B D' B R2 L D L' D' L D L' D y' L D L' D2 y2 L D L' D' L D L' y L D L' D' y' D L D' L' D L D L' D' y L' D' L D' y2 L D L' D' y L' D' L D' y' L' D' L D y' L D L' D y' L D L' D' y L' D' L F D L D' L' F' D y' L D L' D L D2 L' D L D' R' D L' D' R D y2 L D' R' D L' D' R D L D' R' D L' D' R D
+Success!
+----------------------------------------------------------
+RESULTS
+	Passed:100/100 | Failed:0/100

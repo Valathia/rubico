@@ -17,10 +17,8 @@ static const uint64_t down_corners_mask[ROT_SIZE] = {POS0, POS2, POS4};
 
 // ------------------------ STATIC INLINE -----------------
 
-static inline uint8_t check_n(const Cube * restrict cube, const uint64_t mask, const uint8_t rot_arr[], const uint8_t size)
-{
-    for (int i = 0; i < size; i++)
-    {
+static inline uint8_t check_n(const Cube * restrict cube, const uint64_t mask, const uint8_t rot_arr[], const uint8_t size) {
+    for (int i = 0; i < size; i++) {
         if (!check(cube->f[cube_orientation[rot_arr[i]]], cube_orientation[rot_arr[i]], mask))
             return 0;
     }
@@ -803,7 +801,7 @@ uint8_t solve_2nd_row(Cube *restrict cube_arr, Solution *sol) {
         print_cube(&cube_arr[0]);
     #endif
 
-    if (i == MAX_RECURSION && n) {
+    if (i == MAX_RECURSION & n) {
         print_solution(*sol);
         fprintf(stderr, "\nERROR %d: 2nd Row Solving Attempts exceeded, something went wrong \n ", ERR_MAX_REC_EXCEEDED);
         exit(ERR_MAX_REC_EXCEEDED);
@@ -921,43 +919,36 @@ uint8_t solve_3rd_row(Cube *restrict cube_arr, Solution *sol) {
 }
 // ------------------------ SOLVER ------------------------
 
-uint8_t solve_(Cube *restrict cube_arr, Solution *sol)
-{
+uint8_t solve_(Cube *restrict cube_arr, Solution *sol) {
     // cube solve is already being tested at loop entrance
 
-    if (!is1stRowSolved(cube_arr[0]))
-    {
-#if SOLVE
-        printf("------------------------------------ Solving 1st Row ------------------------------------\n");
-#endif
-        if (!solve_1st_row(cube_arr, sol))
-        {
+    if (!is1stRowSolved(cube_arr[0])) {
+        #if SOLVE
+            printf("------------------------------------ Solving 1st Row ------------------------------------\n");
+        #endif
+        if (!solve_1st_row(cube_arr, sol)) {
             fprintf(stderr, "ERROR %d: 1st Row Call FAILED - Recheck Algorithm\n", ERR_1ST_ROW);
             exit(ERR_1ST_ROW);
         }
     }
 
-    if (!is2ndRowSolved(cube_arr[0]))
-    {
-#if SOLVE
-        printf("------------------------------------ Solving 2nd Row ------------------------------------\n");
-        printf("- Calling 2nd Row Solver \n");
-#endif
-        if (!solve_2nd_row(cube_arr, sol))
-        {
+    if (!is2ndRowSolved(cube_arr[0])) {
+        #if SOLVE
+            printf("------------------------------------ Solving 2nd Row ------------------------------------\n");
+            printf("- Calling 2nd Row Solver \n");
+        #endif
+        if (!solve_2nd_row(cube_arr, sol)) {
             fprintf(stderr, "ERROR %d: 2nd Row Call FAILED - Recheck Algorithm\n", ERR_2ND_ROW);
             exit(ERR_2ND_ROW);
         }
     }
 
-    if (!isSolved(cube_arr[0]))
-    {
-#if SOLVE
-        printf("------------------------------------ Solving 3rd Row ------------------------------------\n");
-        printf("- Calling 3rd Row Solver \n");
-#endif
-        if (!solve_3rd_row(cube_arr, sol))
-        {
+    if (!isSolved(cube_arr[0])) {
+        #if SOLVE
+            printf("------------------------------------ Solving 3rd Row ------------------------------------\n");
+            printf("- Calling 3rd Row Solver \n");
+        #endif
+        if (!solve_3rd_row(cube_arr, sol)) {
             fprintf(stderr, "ERROR %d: 3rd Row Call FAILED - Recheck Algorithm\n", ERR_3RD_ROW);
             exit(ERR_3RD_ROW);
         }

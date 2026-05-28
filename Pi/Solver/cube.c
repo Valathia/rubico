@@ -2,47 +2,46 @@
 #include "solution.h"
 
 static const uint8_t ORIENTATION_LUT[6][6][6] = {
-    // ---- TOPO = FRONT (0) ----
+    // ---- TOP = FRONT (0) ----
    [FRONT] = {
       // Se Topo=FRONT, a Frente nunca pode ser FRONT (0) nem BACK (3)
-      [UP]    = {UP, LEFT, DOWN, RIGHT, FRONT, BACK}, // Exemplo de preenchimento (ajuste conforme o seu referencial)
+      [UP]    = {UP, LEFT, DOWN, RIGHT, FRONT, BACK}, 
       [RIGHT] = {RIGHT, UP, LEFT, DOWN, FRONT, BACK}, 
       [LEFT]  = {LEFT, DOWN, RIGHT, UP, FRONT, BACK},
       [DOWN]  = {DOWN, RIGHT, UP, LEFT, FRONT, BACK}
    },
-   // ---- TOPO = RIGHT (1) ----
+   // ---- TOP = RIGHT (1) ----
    [RIGHT] = {
       [UP]    = {UP, FRONT, DOWN, BACK, RIGHT, LEFT},
       [FRONT] = {FRONT, DOWN, BACK, UP, RIGHT, LEFT},
       [BACK]  = {BACK, UP, FRONT, DOWN,RIGHT, LEFT},
       [DOWN]  = {DOWN, BACK, UP, FRONT, RIGHT, LEFT}
    },
-   // ---- TOPO = LEFT (2) ----
+   // ---- TOP = LEFT (2) ----
    [LEFT] = {
       [UP]    = {UP, BACK, DOWN, FRONT, LEFT, RIGHT},
       [FRONT] = {FRONT, UP, BACK, DOWN, LEFT, RIGHT},
       [BACK]  = {BACK, DOWN, FRONT, UP, LEFT, RIGHT},
       [DOWN]  = {DOWN, FRONT, UP, BACK, LEFT, RIGHT}
    },
-   // ---- TOPO = BACK (3) ----
+   // ---- TOP = BACK (3) ----
    [BACK] = {
-      // Se Topo=FRONT, a Frente nunca pode ser FRONT (0) nem BACK (3)
-      [UP]    = {UP, RIGHT, DOWN, LEFT, BACK, FRONT}, // Exemplo de preenchimento (ajuste conforme o seu referencial)
+      [UP]    = {UP, RIGHT, DOWN, LEFT, BACK, FRONT}, 
       [RIGHT] = {RIGHT, DOWN, LEFT, UP, BACK, FRONT}, 
       [LEFT]  = {LEFT, UP, RIGHT, DOWN, BACK, FRONT},
       [DOWN]  = {DOWN, LEFT, UP, RIGHT, BACK, FRONT}
    },
-      // ---- TOPO = UP (4) ----
+      // ---- TOP = UP (4) ----
    [UP] = {
-      [FRONT] = {FRONT, RIGHT, BACK, LEFT, UP, DOWN},   // Esta é a sua orientação padrão inicial!
-      [RIGHT] = {RIGHT, BACK, LEFT, FRONT, UP, DOWN},   // Se rodar o cubo para a esquerda (U passa a ser fixo, R vira Frente)
+      [FRONT] = {FRONT, RIGHT, BACK, LEFT, UP, DOWN},   
+      [RIGHT] = {RIGHT, BACK, LEFT, FRONT, UP, DOWN},  
       [LEFT]  = {LEFT, FRONT, RIGHT, BACK, UP, DOWN},
       [BACK]  = {BACK, LEFT, FRONT, RIGHT, UP, DOWN}
    },
-   // ---- TOPO = DOWN (5) ----
+   // ---- TOP = DOWN (5) ----
    [DOWN] = {
-      [FRONT] = {FRONT, LEFT, BACK, RIGHT, DOWN, UP},   // Esta é a sua orientação padrão inicial!
-      [RIGHT] = {RIGHT, FRONT, LEFT, BACK, DOWN, UP},   // Se rodar o cubo para a esquerda (U passa a ser fixo, R vira Frente)
+      [FRONT] = {FRONT, LEFT, BACK, RIGHT, DOWN, UP},  
+      [RIGHT] = {RIGHT, FRONT, LEFT, BACK, DOWN, UP},   
       [LEFT]  = {LEFT, BACK, RIGHT, FRONT, DOWN, UP},
       [BACK]  = {BACK, RIGHT, FRONT, LEFT, DOWN, UP}
    },
