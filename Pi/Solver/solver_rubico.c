@@ -801,7 +801,7 @@ uint8_t solve_2nd_row(Cube *restrict cube_arr, Solution *sol) {
         print_cube(&cube_arr[0]);
     #endif
 
-    if (i == MAX_RECURSION & n) {
+    if (i == MAX_RECURSION && n) {
         print_solution(*sol);
         fprintf(stderr, "\nERROR %d: 2nd Row Solving Attempts exceeded, something went wrong \n ", ERR_MAX_REC_EXCEEDED);
         exit(ERR_MAX_REC_EXCEEDED);
