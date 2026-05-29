@@ -1,0 +1,256 @@
+import computer_vision as cv
+from arduino_interface import arduino_connection as ard_con
+import sys
+import subprocess
+import RPi.GPIO as GPIO
+from RPLCD.gpio import CharLCD
+import time
+import serial.tools.list_ports
+
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+
+GPIO.setup(21, GPIO.OUT)
+GPIO.output(21, GPIO.HIGH)
+
+lcd = CharLCD(pin_rs=22, pin_e=23, pins_data=[24, 25, 26, 27],
+                  numbering_mode=GPIO.BCM,
+                  cols=16, rows=2)
+
+# pode-se usar para mandar texto para o ecrã, substituir pelas nossas definições
+# from luma.core.interface.serial import i2c
+# from luma.core.render import canvas
+# from luma.oled.device import ssd1306
+
+SOLVER = "./Solver/rubik_solver"
+MAKE_RUBICO = "./Solver/make_rubico.sh"
+
+#pi serial config
+PORTA = "/dev/tty.usbmodem101"  #mudar para a porta de usb do raspberry pi
+BAUD_RATE = 115200
+
+seta_cima = "\u2191"
+seta_baixo = "\u2193"
+seta_dupla_vert = "\u2195"
+seta_esquerda = "\u2190"
+seta_direita = "\u2192"
+seta_dupla_hor = "\u2194"
+seta_curva_c = "\u21BB"
+seta_curva_cc = "\u21BA"
+
+back_moves = {
+    "L":    "L'",
+    "L'":   "L" ,
+    "L2":   "L2",
+    "D":    "D'",
+    "D'":   "D" ,
+    "D2":   "D2",
+    "U":    "U'",    
+    "U'":   "U" ,
+    "U2":   "U2",
+    "R":    "R'",  
+    "R'":   "R" ,
+    "R2":   "R2",
+    "B":    "B'",   
+    "B'":   "B" ,
+    "B2":   "B2",
+    "F":    "F'",   
+    "F'":   "F" ,
+    "F2":   "F2",
+    "y":    "y'",
+    "y'":   "y" ,
+    "y2":   "y2",
+    "x":    "x'",
+    "x'":   "x" ,
+    "x2":   "x2",
+    "z":    "z'",      
+    "z'":   "z" ,     
+    "z2":   "z2",     
+}
+
+move_to_human = {
+    "L":    "L",
+    "L'":   "L'" ,
+    "L2":   "L2",
+    "D":    "D",
+    "D'":   "D'" ,
+    "D2":   "D2",
+    "U":    "U",    
+    "U'":   "U'" ,
+    "U2":   "U2",
+    "R":    "R",  
+    "R'":   "R'" ,
+    "R2":   "R2",
+    "B":    "B",   
+    "B'":   "B'" ,
+    "B2":   "B2",
+    "F":    "F",   
+    "F'":   "F'" ,
+    "F2":   "F2",
+    "y":    f"Rotate Right Face to Front {seta_esquerda}",
+    "y'":   f"Rotate Left Face to Front {seta_direita}" ,
+    "y2":   f"Rotate Back Face to Front {seta_dupla_hor}",
+    "x":    f"Rotate Front Face to Up {seta_cima}",
+    "x'":   f"Rotate Back Face to Up {seta_baixo}" ,
+    "x2":   f"Rotate Down Face to Up {seta_dupla_vert}",
+    "z":    f"Rotate Left Face to Up {seta_curva_c}",      
+    "z'":   f"Rotate Right Face to Up {seta_curva_cc}" ,     
+    "z2":   f"Rotate Down Face to Up {seta_curva_c}{seta_curva_c}",     
+}
+
+COR_RESET    = "\033[0m"           #Volta à cor padrão
+COR_VERMELHO = "\033[31m"          #Texto Vermelho
+COR_VERDE    = "\033[32m"          #Texto Verde
+COR_AMARELO  = "\033[93m"          #Texto Amarelo
+COR_LARANJA  = "\033[38;5;208m"    #Texto Laranja 
+COR_CIANO    = "\033[36m"
+
+class solve_state:
+    def __init__(self,arduino_con:ard_con,cube_string:str,solution:str) -> None:
+        self.conn = arduino_con
+        self.cs = cube_string
+        self.sol = solution.split(" ")
+        self.cur_pos = 0
+        self.sol_len = len(self.sol)
+    
+    def forward(self):
+        if self.cur_pos<self.sol_len:
+            self.conn.send_comand(self.sol[self.cur_pos])
+            self.cur_pos += 1
+        else:
+            print("Todos os passos já foram executados\n")
+    
+    def backwards(self):
+        if(self.cur_pos>0): 
+            #undo last move
+            self.cur_pos-=1
+            self.conn.send_comand(back_moves[self.sol[self.cur_pos]])
+        else:
+            print("Já se encontra na posição inicial\n")
+    
+    def fast_solve(self):
+        while(self.cur_pos<self.sol_len):
+            self.forward()
+    
+    def fast_unsolve(self):
+        while(self.cur_pos>0):
+            self.backwards()
+
+    def forward_nsteps(self,steps):
+        end_pos = self.cur_pos+steps
+        while(self.cur_pos<self.sol_len and self.cur_pos<end_pos):
+            self.forward()
+
+    def backwards_nsteps(self,steps):
+        end_pos = self.cur_pos-steps 
+        while(self.cur_pos>0 and self.cur_pos>end_pos):
+            self.backwards
+
+def compile_rubico():
+    subprocess.run([MAKE_RUBICO],capture_output=True,
+        text=True)
+    
+def find_arduino_port():
+    ports = serial.tools.list_ports.comports()
+    for port in ports:
+        # Most Arduinos identify themselves by name, or via a specific VID/PID tracking number
+        if "Arduino" in port.description or "CH340" in port.description or "ACM" in port.device or "USB" in port.device:
+            return port.device
+    return None
+
+def run_solver(cube_string):
+
+    result = subprocess.run(
+        [SOLVER, cube_string],
+        capture_output=True,
+        text=True
+    )
+    
+    if result.returncode != 0:
+        
+        print(f"\n{COR_VERMELHO}Fail:{COR_RESET}")
+        print(result.stderr.strip())
+        sys.exit(result.returncode)
+
+    else:
+        solution = result.stdout.strip()
+        print("Solution: \n")
+        print(solution)
+        print("\n")
+        return solution 
+
+def main():
+    lcd.cursor_mode = 'hide' # Remove o quadrado piscante
+    lcd.clear()
+    lcd.write_string("Hello Rubico!")
+    lcd.cursor_pos = (1, 0)
+    lcd.write_string("Compiling...")
+
+    #compile_rubico()
+
+    lcd.clear()
+    lcd.cursor_pos = (0, 0)
+    lcd.write_string("Hello Rubico!")
+    lcd.cursor_pos = (1, 0)
+    lcd.write_string("Arduino...")
+
+    PORTA = find_arduino_port()
+
+    if PORTA:
+        print(f"Arduino detected dynamically at: {PORTA}")
+        #ser = serial.Serial(active_port, 9600, timeout=1)
+        arduino = ard_con(PORTA,BAUD_RATE)
+    else:
+        print("Error: No compatible serial devices detected!")
+
+    if(arduino.conn!=None):
+        lcd.clear()
+        lcd.cursor_pos = (0, 0)
+        lcd.write_string("Hello Rubico!")
+        lcd.cursor_pos = (1, 0)
+        lcd.write_string("Place cube!")
+
+        arduino.send_comand("g'")
+        time.sleep(5)
+        arduino.send_comand("g")
+
+        lcd.clear()
+        lcd.cursor_pos = (0, 0)
+        lcd.write_string("Hello Rubico!")
+        lcd.cursor_pos = (1, 0)
+        lcd.write_string("Scan cube...")
+        cube_string:str = cv.scan_cube(arduino)
+        
+        lcd.clear()
+        lcd.cursor_pos = (0, 0)
+        lcd.write_string("Hello Rubico!")
+        lcd.cursor_pos = (1, 0)
+        lcd.write_string("Solve...")
+        # with canvas(device) as draw:
+        #     draw.text((5, 0), "Running Solver..." , fill="white")
+        solution = run_solver(cube_string)
+        
+        #cria estado da aplicação
+        state = solve_state(arduino,cube_string,solution)
+
+        #algures por aqui isto tem que ter um loopzito para receber instruções da app
+        state.fast_solve()
+
+        lcd.clear()
+        lcd.cursor_pos = (0, 0)
+        lcd.write_string("Hello Rubico!")
+        lcd.cursor_pos = (1, 0)
+        lcd.write_string("Done!")
+
+        arduino.close_serial()
+    else:
+        print(f"Verificar {COR_VERMELHO}porta de conexão{COR_RESET} do Arduino\n")
+        lcd.clear()
+        lcd.cursor_pos = (0, 0)
+        lcd.write_string("Erro Rubico!")
+        lcd.cursor_pos = (1, 0)
+        lcd.write_string("Arduino...")
+
+
+if __name__ == "__main__":
+    sys.exit(main())
