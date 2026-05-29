@@ -46,7 +46,7 @@ const char* cores[4] = {COR_VERDE,COR_AMARELO,COR_LARANJA,COR_VERMELHO};
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("A iniciar servos...");
+  Serial.println(F("A iniciar servos..."));
 
   for (int i = 0; i < NUM_SERVOS; i++) {
     // Expandir os limites do PWM para os MG996
@@ -57,9 +57,9 @@ void setup() {
   
   delay(1000);
 
-  Serial.println("A iniciar sequencia de identificacao...");
+  Serial.println(F("A iniciar sequencia de identificacao..."));
   for (int i = 0; i < NUM_SERVOS; i++) {
-    Serial.print("A testar servo: ");
+    Serial.print(F("A testar servo: "));
     Serial.print(cores[i]);
     Serial.print(pinos[i]);
     Serial.println(COR_RESET);
@@ -75,12 +75,12 @@ void setup() {
   servos[0]->write(GRIP_LEFT_IDLE);
   servos[2]->write(GRIP_RIGHT_IDLE);
   Serial.print(COR_VERDE);
-  Serial.print("Pronto! ");
+  Serial.print(F("Pronto! "));
   Serial.print(COR_RESET);
   #ifdef TEST
-    Serial.println("Formato esperado: <pino>,<graus>");
+    Serial.println(F("Formato esperado: <pino>,<graus>"));
   #else 
-    Serial.println("Formato esperado: -<move>  Ex: -L -L' -L2 ");
+    Serial.println(F("Formato esperado: -<move>  Ex: -L -L' -L2 "));
   #endif
 }
 
@@ -109,19 +109,19 @@ void loop() {
             anguloAlvo = constrain(anguloAlvo, 0, 180); 
             if((i==0 || i==2) && (anguloAlvo>90)){
               anguloAlvo=90;
-              Serial.print("Aviso: Angulo de trabalho foi reduzido para 90.");
+              Serial.print(F("Aviso: Angulo de trabalho foi reduzido para 90."));
             }
             else if((i==0 || i==2) && (anguloAlvo<15)){
               anguloAlvo=15;
-              Serial.print("Aviso: Angulo de trabalho foi reduzido para 15.");
+              Serial.print(F("Aviso: Angulo de trabalho foi reduzido para 15."));
             }
             servos[i]->write(anguloAlvo);
             
-            Serial.print("OK: Pino ");
+            Serial.print(F("OK: Pino "));
             Serial.print(pinoAlvo);
-            Serial.print(" -> ");
+            Serial.print(F(" -> "));
             Serial.print(anguloAlvo);
-            Serial.println(" graus.");
+            Serial.println(F(" graus."));
             
             pinoEncontrado = true;
             break; 
@@ -130,9 +130,9 @@ void loop() {
         
         // Se não encontrou o pino mas o formato estava correto
         if (!pinoEncontrado) {
-          Serial.print("Aviso: Pino ignorado (");
+          Serial.print(F("Aviso: Pino ignorado ("));
           Serial.print(pinoAlvo);
-          Serial.println(")");
+          Serial.println(F(")"));
         }
       } 
     #else
@@ -295,14 +295,14 @@ void loop() {
 
 void print_aviso(){
     Serial.print(COR_AMARELO);
-    Serial.print("[Aviso]: ");
+    Serial.print(F("[Aviso]: "));
     Serial.print(COR_RESET);
 }
 
 void grip(Servo &g,uint8_t grip_strength) {
   if(grip_strength<GRIP_MAX) {  //se menor que o maximo assumir que queria agarrar
     print_aviso();
-    Serial.print("Angulo de trabalho foi aumentado para ");
+    Serial.print(F("Angulo de trabalho foi aumentado para "));
     Serial.print(COR_AMARELO);
     Serial.print(GRIP_SOLO);
     Serial.println(COR_RESET);
@@ -311,7 +311,7 @@ void grip(Servo &g,uint8_t grip_strength) {
   }
   else if(grip_strength>GRIP_MIN){  //se maior que o minimo assumir que queria abrir
     print_aviso();
-    Serial.print("Angulo de trabalho foi reduzido para ");
+    Serial.print(F("Angulo de trabalho foi reduzido para "));
     Serial.print(COR_AMARELO);
     Serial.print(GRIP_MIN);
     Serial.println(COR_RESET);
@@ -334,9 +334,9 @@ void ungrip(Servo &g){
       //usar a função grip para passar nas guardas
       grip(R_GRIP,GRIP_SOLO);
     }
-    Serial.print("Ungrip Garra Esquerda: ");
+    Serial.print(F("Ungrip Garra Esquerda: "));
     Serial.print(COR_VERDE);
-    Serial.print("Ok");
+    Serial.print(F("Ok"));
     Serial.println(COR_RESET);
   }
   else if(&g==&R_GRIP) {
@@ -344,14 +344,14 @@ void ungrip(Servo &g){
       grip(L_GRIP,GRIP_SOLO_LEFT);
     }
 
-    Serial.print("Ungrip Garra Direita: ");
+    Serial.print(F("Ungrip Garra Direita: "));
     Serial.print(COR_VERDE);
-    Serial.print("Ok");
+    Serial.print(F("Ok"));
     Serial.println(COR_RESET);
   }
   else {
     print_aviso();
-    Serial.println("Ungrip Ignorado - Servo escolhido não corresponde a um servo de 'grip' ");
+    Serial.println(F("Ungrip Ignorado - Servo escolhido não corresponde a um servo de 'grip' "));
     return;
   }
 
@@ -370,7 +370,7 @@ void iddle_grip_cube(){
 }
 
 void regrip(){
-  if((R_ROT.read()==POS_INICIAL) & (L_ROT.read()==POS_INICIAL)) {
+  if((R_ROT.read()==POS_INICIAL) && (L_ROT.read()==POS_INICIAL)) {
     iddle_grip_cube();
     grip_cube();
   }
@@ -382,10 +382,10 @@ void regrip(){
     to a minimum of 0
 */
 void write_rotation(Servo &rot, uint8_t rot_angle) {
-  if(&rot==&L_ROT | &rot==&R_ROT) {  
+  if((&rot==&L_ROT) | (&rot==&R_ROT)) {  
     if(rot_angle>ROT_MAX) {
       print_aviso();
-      Serial.print("Angulo de trabalho foi reduzido para ");
+      Serial.print(F("Angulo de trabalho foi reduzido para "));
       Serial.print(COR_AMARELO);
       Serial.print(ROT_MAX);
       Serial.println(COR_RESET);
@@ -399,7 +399,7 @@ void write_rotation(Servo &rot, uint8_t rot_angle) {
     return;
   }
   print_aviso();
-  Serial.println("Rotação Ignorada - Servo escolhido não corresponde a um servo de rotação ");
+  Serial.println(F("Rotação Ignorada - Servo escolhido não corresponde a um servo de rotação "));
 }
 
 /* reposition grip: se ismove->regrip no fim, se não, 
@@ -447,7 +447,7 @@ boolean pre_move(Servo &s,boolean ismove){
     }
 
     if(R_ROT.read()!=POS_INICIAL){
-      Serial.println("Pre-move: Repositioning Right Grip...");
+      Serial.println(F("Pre-move: Repositioning Right Grip..."));
       reposition(R_GRIP,R_ROT,GRIP_SOLO,POS_INICIAL,ismove);
       return true;
     }
@@ -457,49 +457,55 @@ boolean pre_move(Servo &s,boolean ismove){
   return false;
 }
 
+
 void move_l() {
   pre_move(L_ROT,true);
+  
   uint16_t pos = (uint16_t)L_ROT.read();
-  Serial.print("Current Pos L_ROT: ");
+
+  Serial.print(F("Current Pos L_ROT: "));
   Serial.print(pos);
-  Serial.print(" to ");
+  Serial.print(F(" to "));
+
   pos += POS_INICIAL;
+
   Serial.println(pos);
 
-  if(pos <= ROT_MAX) {
-    write_rotation(L_ROT,pos);
-  }
-  else {  //reposition
-    Serial.println("Repositioning...");
+  if(pos>ROT_MAX) {
+    //reposition
+    Serial.println(F("Repositioning..."));
     /*  ao reposicionar para 0, ao mover, move para 90 
         e já fica direito para o próximo move
     */ 
     reposition(L_GRIP,L_ROT,GRIP_MOVE_LEFT,ROT_MIN,true);
-    move_l();
-    return;
+    //just to be safe
+    pos = (uint16_t)L_ROT.read();
+    pos += POS_INICIAL;
   }
+  
+  write_rotation(L_ROT,pos);
   regrip();
 }
+
 
 void move_lp(){
   pre_move(L_ROT,true);
   int16_t pos = L_ROT.read();
-  Serial.print("Current Pos L_ROT: ");
+  Serial.print(F("Current Pos L_ROT: "));
   Serial.print(pos);
-  Serial.print(" to ");
+  Serial.print(F(" to "));
   pos -= POS_INICIAL;
   Serial.println(pos);
-  
-  if(pos >= ROT_MIN) {
-    write_rotation(L_ROT,pos);
-  }
-  else {  //reposition
-    Serial.println("Repositioning...");
+
+  if(pos<ROT_MIN) {
+    Serial.println(F("Repositioning..."));  
     reposition(L_GRIP,L_ROT,GRIP_MOVE_LEFT,ROT_MAX,true);
-    move_lp();
-    return;
+    int16_t pos = L_ROT.read();
+    pos -= POS_INICIAL;
   }
-  regrip();
+  
+  write_rotation(L_ROT,pos);
+  regrip();  
 }
 
 void move_l2(){
@@ -527,42 +533,42 @@ void move_d() {
   pre_move(R_ROT,true);
 
   uint16_t pos = R_ROT.read();
-  Serial.print("Current Pos R_ROT: ");
+  Serial.print(F("Current Pos R_ROT: "));
   Serial.print(pos);
-  Serial.print(" to ");
+  Serial.print(F(" to "));
   pos += POS_INICIAL;
   Serial.println(pos);
   
-  if(pos <= ROT_MAX) {
-    write_rotation(R_ROT,pos);
-  }
-  else {  //reposition
-    Serial.println("Repositioning...");
+  if(pos>ROT_MAX){
+    Serial.println(F("Repositioning...")); 
     reposition(R_GRIP,R_ROT,GRIP_MOVE_RIGHT,ROT_MIN,true);
-    move_d();
+    uint16_t pos = R_ROT.read();    
+    pos += POS_INICIAL;
   }
+  write_rotation(R_ROT,pos);
   regrip();
+
 }
 
 void move_dp() {
   pre_move(R_ROT,true);
   int16_t pos = R_ROT.read();
 
-  Serial.print("Current Pos R_ROT: ");
+  Serial.print(F("Current Pos R_ROT: "));
   Serial.print(pos);
-  Serial.print(" to ");
+  Serial.print(F(" to "));
   pos -= POS_INICIAL;
   Serial.println(pos);
   
-  if(pos>= ROT_MIN) {
-    write_rotation(R_ROT,pos);    
-  }
-  else {  //reposition
-    Serial.println("Repositioning...");
+  if(pos<ROT_MIN) {
+    Serial.println(F("Repositioning...")); 
     reposition(R_GRIP,R_ROT,GRIP_MOVE_RIGHT,ROT_MAX,true);
-    move_dp();
+    int16_t pos = R_ROT.read();
+    pos -= POS_INICIAL;
   }
-  regrip();
+
+  write_rotation(R_ROT,pos);
+  regrip();  
 }
 
 void move_d2(){
@@ -602,17 +608,17 @@ void rot_y() {
   }
 
   if(r_pos!=ROT_MAX) {
-    Serial.println("Repositioning Right...");
+    Serial.println(F("Repositioning Right..."));
     reposition(R_GRIP,R_ROT,GRIP_SOLO,ROT_MAX,true);  //right is gripped at the end
   }
 
-  Serial.println("Ungrip Left");
+  Serial.println(F("Ungrip Left"));
   ungrip(L_GRIP);
 
-  Serial.println("Rotating Right: Right face to Front");
+  Serial.println(F("Rotating Right: Right face to Front"));
   write_rotation(R_ROT,POS_INICIAL);
   
-  Serial.println("Grip Left");
+  Serial.println(F("Grip Left"));
   grip(L_GRIP,GRIP_MOVE_LEFT);
   regrip();
 }
@@ -631,17 +637,17 @@ void rot_yp() {
   }
 
   if(r_pos!=ROT_MIN) {
-    Serial.println("Repositioning Right...");
+    Serial.println(F("Repositioning Right..."));
     reposition(R_GRIP,R_ROT,GRIP_SOLO,ROT_MIN,true);  //right is gripped at the end
   }
 
-  Serial.println("Ungrip Left");
+  Serial.println(F("Ungrip Left"));
   ungrip(L_GRIP);
 
-  Serial.println("Rotating Right: Right face to Front");
+  Serial.println(F("Rotating Right: Right face to Front"));
   write_rotation(R_ROT,POS_INICIAL);
   
-  Serial.println("Grip Left");
+  Serial.println(F("Grip Left"));
   grip(L_GRIP,GRIP_MOVE_LEFT);
   regrip();
 }
@@ -654,28 +660,28 @@ void rot_y2(){
   uint8_t r_pos =  R_ROT.read();
   if(r_pos==POS_INICIAL) {
     pre_move(R_ROT,true);
-    Serial.println("Repositioning Right...");
+    Serial.println(F("Repositioning Right..."));
     reposition(R_GRIP,R_ROT,GRIP_SOLO,ROT_MAX,true);  //right is gripped at the end
     r_pos = ROT_MAX;
   }
 
-  Serial.println("Ungrip Left");
+  Serial.println(F("Ungrip Left"));
   ungrip(L_GRIP);
 
   if(r_pos==ROT_MAX) {
-    Serial.println("Rotating Right: Back face to Front");
+    Serial.println(F("Rotating Right: Back face to Front"));
     write_rotation(R_ROT,ROT_MIN);
   }
 
   if(r_pos==ROT_MIN) {
-    Serial.println("Rotating Right: Back face to Front");
+    Serial.println(F("Rotating Right: Back face to Front"));
     write_rotation(R_ROT,ROT_MAX);
   }
 
-  Serial.println("Grip Left");
+  Serial.println(F("Grip Left"));
   grip(L_GRIP,GRIP_SOLO_LEFT);
 
-  Serial.println("Reposition Right...");
+  Serial.println(F("Reposition Right..."));
   reposition(R_GRIP,R_ROT,GRIP_MOVE_RIGHT,POS_INICIAL,true);
   regrip();
 }
@@ -694,17 +700,17 @@ void rot_x(){
   }
 
   if(l_pos!=ROT_MAX) {
-    Serial.println("Repositioning Left...");
+    Serial.println(F("Repositioning Left..."));
     reposition(L_GRIP,L_ROT,GRIP_SOLO_LEFT,ROT_MAX,true);  //right is gripped at the end
   }
 
-  Serial.println("Ungrip Right");
+  Serial.println(F("Ungrip Right"));
   ungrip(R_GRIP);
 
-  Serial.println("Rotating Left: Front face to Up");
+  Serial.println(F("Rotating Left: Front face to Up"));
   write_rotation(L_ROT,POS_INICIAL);
   
-  Serial.println("Grip Right");
+  Serial.println(F("Grip Right"));
   grip(R_GRIP,GRIP_MOVE_RIGHT);
   regrip();
 }
@@ -723,17 +729,17 @@ void rot_xp(){
   }
 
   if(l_pos!=ROT_MIN_ROLL) {
-    Serial.println("Repositioning Left...");
+    Serial.println(F("Repositioning Left..."));
     reposition(L_GRIP,L_ROT,GRIP_SOLO_LEFT,ROT_MIN_ROLL,true);  //right is gripped at the end
   }
 
-  Serial.println("Ungrip Right");
+  Serial.println(F("Ungrip Right"));
   ungrip(R_GRIP);
 
-  Serial.println("Rotating Left: Front face to Up");
+  Serial.println(F("Rotating Left: Front face to Up"));
   write_rotation(L_ROT,POS_INICIAL);
   
-  Serial.println("Grip Right");
+  Serial.println(F("Grip Right"));
   grip(R_GRIP,GRIP_MOVE_RIGHT);
   regrip();
 }
@@ -747,28 +753,28 @@ void rot_x2(){
   uint8_t l_pos =  L_ROT.read();
   if(l_pos==POS_INICIAL) {
     pre_move(L_ROT,true);
-    Serial.println("Repositioning Left...");
+    Serial.println(F("Repositioning Left..."));
     reposition(L_GRIP,L_ROT,GRIP_SOLO_LEFT,ROT_MAX,true);  //right is gripped at the end
     l_pos = ROT_MAX;
   }
 
-  Serial.println("Ungrip Right");
+  Serial.println(F("Ungrip Right"));
   ungrip(R_GRIP);
 
   if(l_pos==ROT_MAX) {
-    Serial.println("Rotating Left: Down face to Up");
+    Serial.println(F("Rotating Left: Down face to Up"));
     write_rotation(L_ROT,ROT_MIN_ROLL);
   }
 
-  if(l_pos==ROT_MIN | l_pos==ROT_MIN_ROLL) {
-    Serial.println("Rotating Left: Down face to Up");
+  if((l_pos==ROT_MIN) | (l_pos==ROT_MIN_ROLL)) {
+    Serial.println(F("Rotating Left: Down face to Up"));
     write_rotation(L_ROT,ROT_MAX);
   }
 
-  Serial.println("Grip Right");
+  Serial.println(F("Grip Right"));
   grip(R_GRIP,GRIP_SOLO);
 
-  Serial.println("Reposition Left...");
+  Serial.println(F("Reposition Left..."));
   reposition(L_GRIP,L_ROT,GRIP_MOVE_LEFT,POS_INICIAL,true);
   regrip();
 }
@@ -790,6 +796,5 @@ void rot_zp(){
 //down to up 
 void rot_z2(){
   rot_x2();
-  regrip();
   rot_y2();
 }

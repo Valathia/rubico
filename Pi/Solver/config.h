@@ -108,28 +108,6 @@ typedef enum {
     #define CACHE_LINE_SIZE 64 // Fallback caso não venha do Makefile
 #endif
 
-// ------------------------ DEBUG FLAGS ------------------------
-
-#if DEBUGALL 
-    #define VALID 1
-    #define SOLVE 1
-    #define DEBUGSOLVE1STROW 1
-    #define DEBUGSOLVECORNERS1STROW 1
-    #define DEBUGSOLVECROSS 1
-    #define DEBUGSOLVE2NDROW 1
-    #define DEBUGSOLVE3RDROW 1
-    #define DEBUGFLIPEDGES 1
-    #define DEBUGFLIPCORNERS 1
-    #define DEBUGALIGNCORNERS 1
-#elif DEBUGSOLVE1STROW
-    #define DEBUGSOLVECORNERS1STROW 1
-    #define DEBUGSOLVECROSS 1
-#elif DEBUGSOLVE3RDROW
-    #define DEBUGFLIPEDGES 1
-    #define DEBUGFLIPCORNERS 1
-    #define DEBUGALIGNCORNERS 1
-#endif
-
 // ------------------------ ERRORS ------------------------
 
 

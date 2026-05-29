@@ -68,11 +68,6 @@ Solution* optimize_sol(Solution* restrict s) {
    Move cur_move = s->moves[0];
    push_move(new_sol,cur_move);
 
-   #if OPTSOL
-      printf("\t\tPushed move %s \n",move_to_str(s->moves[0]));
-      printf("\t\tMove on top of Stack: %s \n",move_to_str(new_sol->moves[0]));
-   #endif
-
    for(uint16_t i=1; i<len;i++){
       const Move top = new_sol->moves[new_sol->length-1];
       cur_move = s->moves[i];
@@ -82,11 +77,6 @@ Solution* optimize_sol(Solution* restrict s) {
 
       if((top_i!=cur_move_i)) {
          push_move(new_sol,cur_move);
-
-         #if OPTSOL
-            printf("\t\tTop move: %s Cur_move: %s \n",move_to_str(top),move_to_str(cur_move));
-            printf("\t\tPushed move %s into stack \n",move_to_str(cur_move));
-         #endif
       }
       else{
          uint8_t move_dif = move_opt_table[cur_move%3][top%3];
@@ -94,17 +84,9 @@ Solution* optimize_sol(Solution* restrict s) {
          if(move_dif!=UINT8_MAX) {
             push_move(new_sol,cur_move_i*3+move_dif);
 
-            #if OPTSOL
-               printf("\t\tTop move: %s Cur_move: %s \n",move_to_str(top),move_to_str(cur_move));
-               printf("\t\tPushed move %s into stack \n",move_to_str(cur_move_i*3+move_dif));
-            #endif
          }
       }
    }
-
-   #if SOLVE
-      printf("\n\t-------Solution optimized in: %d moves - total moves: %d \n",s->length-new_sol->length,new_sol->length);
-   #endif
 
    return new_sol;
 }

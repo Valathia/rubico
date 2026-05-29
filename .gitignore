@@ -2,3 +2,4 @@
 rubik_solver
 *.txt
 .DS_Store
+*.s

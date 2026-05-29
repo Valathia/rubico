@@ -183,10 +183,6 @@ uint8_t edge_perms(const Cube* restrict c){
 uint8_t permutations(const Cube* restrict c){
    uint8_t edge_swaps = edge_perms(c);
    uint8_t corner_swaps = corner_perms(c);
-   #if VALID
-      printf(" \tEdge Swaps: %d\n",edge_swaps);
-      printf(" \tCorner Swaps: %d\n\n",corner_swaps);
-   #endif
    if( (corner_swaps+edge_swaps) & 1) {
       fprintf(stderr, "\nERROR %d: Invalid Cube Configuration \n\t\tOdd Permutation Parity\n",ERR_INVALID_CUBE);
       exit(ERR_INVALID_CUBE);
@@ -219,9 +215,7 @@ int8_t get_corner_validity(const Cube* restrict c) {
 //There should be a mod3 number of "wrong edges"
 uint8_t corner_parity(const Cube* restrict c) {
    int8_t par = get_corner_validity(c);
-   #if VALID
-      printf(" \tCorner Parity: %d Parity: %d\n",par,par%3);
-   #endif
+
    if(par % 3){ //if par%3!=0
       fprintf(stderr, "\nERROR %d: Invalid Cube Configuration \n\t\tOdd Corner Parity\n",ERR_INVALID_CUBE);
       exit(ERR_INVALID_CUBE);
@@ -260,9 +254,7 @@ uint8_t get_edge_validity(const Cube* restrict c) {
 uint8_t edge_parity(const Cube* restrict c) {
    uint8_t par = get_edge_validity(c);
       
-   #if VALID
-      printf(" \tEdge Parity: %d Parity: %d\n",par,par&1);
-   #endif
+
    if(par & 1){
       fprintf(stderr, "\nERROR %d: Invalid Cube Configuration \n\t\tOdd Edge Parity\n",ERR_INVALID_CUBE);
       exit(ERR_INVALID_CUBE);
@@ -293,9 +285,6 @@ uint8_t validate_colors(const Cube* restrict c) {
 
 uint8_t valid_cube_config(const Cube* restrict c) {
 
-   #if VALID 
-      printf("------------------------------------ Checking Cube Configuration ------------------------------------\n");
-   #endif
     // Fail fast: every invariant must pass for config to be trusted.
    return validate_colors(c) & edge_parity(c) & corner_parity(c) & permutations(c);
 }

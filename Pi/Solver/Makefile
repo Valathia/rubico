@@ -51,6 +51,7 @@ SRC := 	main.c\
 		config.c\
 
 OBJFLS := $(SRC:.c=.o)
+ASMFLS := $(SRC:.c=.s)
 
 # *  Define the rules.                                                       *
 
@@ -60,6 +61,12 @@ $(TARGET): $(OBJFLS)
 #o comando $< captura o .c como input e o $@ define o .o como output
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
+
+%.s: %.c
+	$(CC) $(CFLAGS) -S -fno-asynchronous-unwind-tables $< -o $@
+
+# TARGET ADICIONADO: Compila todos os fontes para assembly de uma vez
+asm: $(ASMFLS)
 
 all:
 	make -f $(MAKNAM) clean
